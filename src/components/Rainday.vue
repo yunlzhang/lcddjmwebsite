@@ -10,6 +10,8 @@ export default {
 
 <style scope lang="scss">
     #rainyday{
+        display: block;
+        visibility:hidden;
         width: 100%;
         height: 100%;
     }
