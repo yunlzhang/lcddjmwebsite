@@ -143,6 +143,7 @@ export default {
             background:#00d5a0;
             justify-content: center;
             cursor: pointer;
+            color:#fff;
         }
     }
 

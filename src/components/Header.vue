@@ -14,7 +14,7 @@
 </template>
 <script>
     export default {
-        name:'Head',
+        name:'Header',
         data(){
             return{
                 loginStatus:false

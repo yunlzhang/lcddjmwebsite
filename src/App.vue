@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <Head></Head>
+    <HeaderTop></HeaderTop>
     <router-view/>
   </div>
 </template>
 
 <script>
-  import Head from './components/Header';
+  import HeaderTop from './components/Header';
   export default {
     name: 'app',
     mounted(){
     },
-    components:{Head}
+    components:{HeaderTop}
   }
 </script>
 
