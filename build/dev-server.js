@@ -10,6 +10,9 @@ const opn = require('opn')
 const path = require('path')
 const express = require('express')
 const webpack = require('webpack')
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
+
 const proxyMiddleware = require('http-proxy-middleware')
 const webpackConfig = (process.env.NODE_ENV === 'testing' || process.env.NODE_ENV === 'production')
   ? require('./webpack.prod.conf')
@@ -33,7 +36,18 @@ const route = require('../routes/index');
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: false })); // for parsing application/x-www-form-urlencoded
-// app.use(multer()); // for parsing multipart/form-data
+app.use(session({
+  name: config.dev.session.key,// 设置 cookie 中保存 session id 的字段名称
+  secret: config.dev.session.secret,// 通过设置 secret 来计算 hash 值并放在 cookie 中，使产生的 signedCookie 防篡改
+  resave: true,// 强制更新 session
+  saveUninitialized: false,// 设置为 false，强制创建一个 session，即使用户未登录
+  cookie: {
+    maxAge: config.dev.session.maxAge// 过期时间，过期后 cookie 中的 session id 自动删除
+  },
+  store: new MongoStore({// 将 session 存储到 mongodb
+    url: config.dev.mongodb// mongodb 地址
+  })
+}));
 
 
 const devMiddleware = require('webpack-dev-middleware')(compiler, {

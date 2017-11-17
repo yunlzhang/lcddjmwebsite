@@ -55,11 +55,12 @@ export default {
     },
     mounted: function () {
         this.$nextTick(function () {
-            console.log(rainyDay)
             var pic = document.querySelector('#rainyday');
             pic.onload = function(){
                 var engine = new rainyDay({
-                        image: this
+                        image: this,
+                        height:window.innerHeight,
+                        width:window.innerWidth
                     });
                 // engine.rain([ [1, 2, 8000] ]);
                 engine.rain([ [3, 3, 0.88], [5, 5, 0.9], [6, 2, 1] ], 100);

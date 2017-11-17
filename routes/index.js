@@ -3,5 +3,6 @@ module.exports = function (app) {
     //     res.sendFile('index.html')
     // });
     app.use('/api/signup', require('./signup'));
+    app.use('/api/signin', require('./signin'));
     app.use('/api/gettoken',require('./gettoken'));
 };

@@ -11,10 +11,10 @@ router.post('/',function(req,res,next){
         repassword = req.body.repassword,
         intro = req.body.intro;
     //校验
-    if(name.length < 1 || name.length > 10){
+    if(!name){
         return res.json({
             code:'100',
-            message:'昵称长度应该在1-10之间'
+            message:'昵称不能为空'
         });
     }
     if(!reg.test(password)){
