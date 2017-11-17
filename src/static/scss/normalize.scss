@@ -1,0 +1,97 @@
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li,
+dl,
+dd,
+dt,
+table,
+thead,
+tbody,
+tr,
+th,
+td,
+input,
+form,
+button,
+textarea,
+p,
+div {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
+    min-width: 960px;
+    padding-top: 56px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    color: #242729;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    /* Firefox */
+    -webkit-box-sizing: border-box;
+    /* Safari */
+    position: relative;
+    background: #fff;
+    padding-bottom: 120px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+}
+
+img {
+    border: 0;
+}
+
+i,
+em {
+    font-style: normal
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+input,
+textarea,
+button {
+    outline: none;
+    color: #242729;
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
+    border: 0;
+}
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+    display: inline-block;
+}
+
+a {
+    text-decoration: none;
+    outline: none;
+    color:#242729;
+}
+
+img {
+    max-width: 100%;
+}

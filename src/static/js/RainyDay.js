@@ -88,7 +88,7 @@
     RainyDay.prototype.setResizeHandler = function() {
         // use setInterval if oneresize event already use by other.
         if (window.onresize !== null) {
-            window.setInterval(this.checkSize.bind(this), 100);
+            window.setTimeout(this.checkSize.bind(this), 100);
         } else {
             window.onresize = this.checkSize.bind(this);
             window.onorientationchange = this.checkSize.bind(this);
@@ -116,10 +116,10 @@
             this.glass.height = this.canvas.height;
             this.prepareReflections();
         }
-        if (canvasOffsetLeft !== clientOffsetLeft || canvasOffsetTop !== clientOffsetTop) {
-            this.canvas.offsetLeft = clientOffsetLeft;
-            this.canvas.offsetTop = clientOffsetTop;
-        }
+        // if (canvasOffsetLeft !== clientOffsetLeft || canvasOffsetTop !== clientOffsetTop) {
+        //     this.canvas.offsetLeft = clientOffsetLeft;
+        //     this.canvas.offsetTop = clientOffsetTop;
+        // }
     };
 
     /**

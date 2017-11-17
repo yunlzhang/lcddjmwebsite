@@ -15,11 +15,8 @@
   }
 </script>
 
-<style>
-    *{
-      margin: 0;
-      padding: 0;
-    }
+<style lang="scss">
+    @import './static/scss/normalize';
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -27,6 +24,6 @@
         text-align: center;
         color: #2c3e50;
         width: 100vw;
-        height: 100vh;
+        height: calc(100vh - 56px);
     }
 </style>

@@ -100,7 +100,7 @@ export default {
         border:1px solid #dee0e1;
         border-radius: 6px;
         font-size:16px;
-        position: absolute;
+        position: fixed;
         top: 50%;
         left: 50%;
         z-index:1;
