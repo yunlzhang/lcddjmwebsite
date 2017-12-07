@@ -1,9 +1,10 @@
 <template>
     <header>
         <div class="right">
-            <div class="userinfo" v-if="isLogin">
-                <span class="avatar"><img src="" alt="" ></span>
-                <span class="nickname">{{userInfo.name}}</span>
+            <div class="user" v-if="isLogin">
+                <span class="avatar" @click="showInfo"><img src="/static/img/20171010-DSC_2223.jpg" alt="" ></span>
+                <!--<span class="nickname">{{userInfo.name}}</span>-->
+                <User :userInfo="userInfo"></User>
             </div>
             <div class="nologin" v-else>
                 <router-link to="signup">注册</router-link> |
@@ -13,6 +14,7 @@
     </header>
 </template>
 <script>
+    import User from './User';
     export default {
         name:'Header',
         data(){
@@ -24,7 +26,13 @@
         mounted(){
             console.log(this)
             console.log('header');
-        }
+        },
+        components:{User} ,
+        methods:{
+            showInfo(e){
+                this.$children[0].$el.style.display = this.$children[0].$el.style.display === 'block' ? 'none' : 'block';
+            }
+        }       
     }
 </script>
 <style scope lang="scss">
@@ -42,6 +50,16 @@
         .right{
             float:right;
             margin-right:40px;
+            .avatar{
+                display:block;
+                background:#ccc;
+                width:40px;
+                height:40px;
+                margin-top:8px;
+                border-radius:50%;
+                overflow:hidden;
+                cursor:pointer;
+            }
         }
     }
 </style>

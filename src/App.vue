@@ -1,13 +1,11 @@
 <template>
   <div id="app">
-    <HeaderTop :isLogin="isLogin" :userInfo="userInfo"></HeaderTop>
-    <router-view/>
+    <router-view :isLogin="isLogin" :userInfo="userInfo"/>
     <Rain></Rain>
   </div>
 </template>
 
 <script>
-import HeaderTop from './components/Header';
 import Rain from './components/Rainday';
 import $ from 'jquery';
 var rainyDay = require('./static/js/RainyDay').RainyDay;
@@ -91,7 +89,7 @@ var engine;
             }
         }
     },
-    components:{HeaderTop,Rain}
+    components:{Rain}
   }
 </script>
 

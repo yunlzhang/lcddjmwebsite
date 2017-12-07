@@ -1,4 +1,6 @@
 <template>
+<div>
+<HeaderTop :isLogin="isLogin" :userInfo="userInfo"></HeaderTop>
 <div  class="signup-wrap">
     <div class="signup">
             <div class="username">
@@ -20,9 +22,13 @@
             <div class="confirm"  @click="signup">注册</div>
         </div>
     </div>
+</div>
+
 </template>
 
 <script>
+import HeaderTop from './Header';
+
 import $ from 'jquery';
 export default {
     name: 'Signup',
@@ -39,6 +45,7 @@ export default {
     mounted: function () {
         console.log(this);
     },
+    props:['isLogin','userInfo'],
     methods:{
         signup(){
             $.ajax({
@@ -51,7 +58,8 @@ export default {
                 }
             })
         }
-    }
+    },
+    components:{HeaderTop},
 
 }
 </script>

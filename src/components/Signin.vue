@@ -1,20 +1,25 @@
 <template>
+<div>
+<HeaderTop :isLogin="isLogin" :userInfo="userInfo"></HeaderTop>
 <div  class="signin-wrap">
     <div class="signin">
-            <div class="username">
-                <div class="l">昵称</div>
-                <div class="r"><input type="text" v-model="signinData.name" placeholder="请输入昵称" name="nickname"></div>
-            </div>
-            <div class="username">
-                <div class="l">密码</div>
-                <div class="r"><input type="password" v-model="signinData.password" name="password" placeholder="请输入密码，6-10位"></div>
-            </div>
-            <div class="confirm"  @click="signin">登陆</div>
+        <div class="username">
+            <div class="l">昵称</div>
+            <div class="r"><input type="text" v-model="signinData.name" placeholder="请输入昵称" name="nickname"></div>
         </div>
+        <div class="username">
+            <div class="l">密码</div>
+            <div class="r"><input type="password" v-model="signinData.password" name="password" placeholder="请输入密码，6-10位"></div>
+        </div>
+        <div class="confirm"  @click="signin">登陆</div>
     </div>
+</div>
+</div>
+
 </template>
 
 <script>
+import HeaderTop from './Header';
 import $ from 'jquery';
 export default {
     name: 'Signin',
@@ -26,7 +31,7 @@ export default {
             }
         }
     },
-    
+    props:['isLogin','userInfo'],
     mounted: function () {
         
     },
@@ -42,8 +47,8 @@ export default {
                 }
             })
         }
-    }
-
+    },
+    components:{HeaderTop},
 }
 </script>
 
