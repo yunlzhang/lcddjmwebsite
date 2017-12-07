@@ -54,7 +54,11 @@ export default {
                 data:this.$data.signupData,
                 dataType:'json',
                 success:res => {
-                    console.log(res)
+                    if(res.code === 200){
+                        this.$router.push('/signin');
+                    }else{
+                        alert(res.message)
+                    }
                 }
             })
         }

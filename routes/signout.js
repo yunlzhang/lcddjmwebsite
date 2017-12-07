@@ -6,10 +6,10 @@ var UserModel = require('../models/users');
 
 router.get('/',function(req, res, next) {
     if(req.session.user){
+        req.session.user = null;
         return res.json({
             code:200,
-            data:req.session.user,
-            message:''
+            message:'退出登录成功'
         })
     }else{
         return res.json({

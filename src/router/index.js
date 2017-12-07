@@ -4,10 +4,17 @@ import Signup from '@/components/Signup';
 import Signin from '@/components/Signin';
 import User from '@/components/User';
 import Main from '@/components/Main';
+import Notfind from '@/components/Notfind';
+
+
 Vue.use(Router)
 let router = new Router({
 	mode: 'history',
 	routes: [{
+		path:'*',
+		name:'',
+		component:Notfind
+	},{
 		path: '/',
 		name: 'index',
 		component: Main
@@ -23,8 +30,9 @@ let router = new Router({
 });
 router.beforeEach((to, from, next) => {
 	if (sessionStorage.getItem('isLogin') && ~['signin', 'signup'].indexOf(to.name)) {
-		next(false);
-		return;
+		next({
+			path:'/'
+		});
 	}
 	next();
 })

@@ -10,9 +10,10 @@ export default {
 
 <style scope lang="scss">
     #rainyday{
-        display: none;
         visibility:hidden;
         width: 100%;
         height: 100%;
+        position:absolute;
+        left:-10000000px;
     }
 </style>

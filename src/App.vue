@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view :isLogin="isLogin" :userInfo="userInfo"/>
+    <router-view :isLogin="isLogin" :userInfo="userInfo" @getUserInfo="getUserInfo"/>
     <Rain></Rain>
   </div>
 </template>
@@ -37,27 +37,12 @@ var engine;
             isLogin:false
         }
     },
+    created(){
+
+    },
     mounted(){
         //看用户session 是否过期
-        $.ajax({
-            url:'/api/get_user_info',
-            type:'get',
-            success:res =>{
-                if(res.code === 200){
-                    this.userInfo = res.data;
-                    this.isLogin = true;
-                    sessionStorage.setItem('isLogin','1');
-                }else{
-                    this.userInfo = '';
-                    this.isLogin = false;
-                    sessionStorage.removeItem('isLogin');                    
-                }
-            },
-            error:err=>{
-                console.log(err)
-            }
-        })
-
+        this.getUserInfo();
         this.$nextTick(function () {
             var _this = this;
             var pic = document.querySelector('#rainyday');
@@ -82,10 +67,35 @@ var engine;
              
         })
     },
+    methods:{
+        getUserInfo(){
+            $.ajax({
+                url:'/api/get_user_info',
+                type:'get',
+                success:res =>{
+                    if(res.code === 200){
+                        this.userInfo = res.data;
+                        this.isLogin = true;
+                        sessionStorage.setItem('isLogin','1');
+                    }else{
+                        this.userInfo = '';
+                        this.isLogin = false;
+                        sessionStorage.removeItem('isLogin');                    
+                    }
+                },
+                error:err=>{
+                    console.log(err)
+                }
+            })
+        }
+    },
     watch:{
         '$route':function(){
+            console.log(111);
             if(~['signin','signup'].indexOf(this.$route.name)){
                 engine.canvas.style.display = 'block';
+            }else{
+                engine.canvas.style.display = 'none';                
             }
         }
     },

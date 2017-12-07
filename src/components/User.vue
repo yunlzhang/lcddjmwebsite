@@ -26,7 +26,11 @@ export default {
                 type:'get',
                 dataType:'json',
                 success:res => {
-                    console.log(res)
+                    if(res.code === 200){
+                        location.reload();
+                    }else{
+                        alert(res.message);
+                    }
                 }
             })
         }

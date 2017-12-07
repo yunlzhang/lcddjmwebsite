@@ -7,8 +7,8 @@
                 <User :userInfo="userInfo"></User>
             </div>
             <div class="nologin" v-else>
-                <router-link to="signup">注册</router-link> |
-                <router-link to="signin">登陆</router-link>                
+                <router-link to="/signup">注册</router-link> |
+                <router-link to="/signin">登陆</router-link>                
             </div>
         </div>
     </header>
