@@ -1,9 +1,9 @@
 <template>
     <header>
         <div class="right">
-            <div class="userinfo" v-if="loginStatus">
+            <div class="userinfo" v-if="isLogin">
                 <span class="avatar"><img src="" alt="" ></span>
-                <span class="nickname"></span>
+                <span class="nickname">{{userInfo.name}}</span>
             </div>
             <div class="nologin" v-else>
                 <router-link to="signup">注册</router-link> |
@@ -17,11 +17,13 @@
         name:'Header',
         data(){
             return{
-                loginStatus:false
+                
             };
         },
-        mouted(){
-
+        props:["isLogin","userInfo"],
+        mounted(){
+            console.log(this)
+            console.log('header');
         }
     }
 </script>

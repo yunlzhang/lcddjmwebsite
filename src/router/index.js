@@ -3,8 +3,7 @@ import Router from 'vue-router'
 import Signup from '@/components/Signup';
 import Signin from '@/components/Signin';
 Vue.use(Router)
-
-export default new Router({
+let router = new Router({
   mode:'history',
   routes: [
     {
@@ -17,4 +16,12 @@ export default new Router({
       component: Signin
     }
   ]
+});
+router.beforeEach((to, from, next) => {
+  if(sessionStorage.getItem('isLogin') && ~['signin','signup'].indexOf(to.name)){
+    next(false);
+    return ;
+  }
+  // ...
 })
+export default router;

@@ -9,7 +9,7 @@ router.post('/',function(req, res, next) {
     var password = req.body.password;
   
     UserModel.getUserByName(name)
-      .then(function (user) {
+    .then(function (user) {
         if (!user) {
             return res.json({
                 'code':100,
@@ -24,16 +24,16 @@ router.post('/',function(req, res, next) {
             })
         }
         delete user.password;
-         // 用户信息写入 session
-         req.session.user = user;        
+        // 用户信息写入 session
+        req.session.user = user;        
         return res.json({
             'code':200,
             'message':'登陆成功',
             'data':user
         })
        
-      })
-      .catch(next);
+    })
+    .catch(next);
   });
   
   module.exports = router;
