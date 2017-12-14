@@ -31,7 +31,7 @@ var bodyParser = require('body-parser');
 const app = express()
 const compiler = webpack(webpackConfig)
 
-const route = require('../routes/index');
+const route = require('../server/routes/index');
 
 
 app.use(bodyParser.json()); // for parsing application/json

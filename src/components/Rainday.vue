@@ -13,7 +13,7 @@ export default {
         visibility:hidden;
         width: 100%;
         height: 100%;
-        position:absolute;
+        position:fixed;
         left:-10000000px;
     }
 </style>

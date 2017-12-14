@@ -2,8 +2,8 @@ var path = require('path');
 var express = require('express');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
-var config = require('config-lite')(__dirname);
-var routes = require('./routes');
+var config = require('config-lite')(__dirname + '/server');
+var routes = require('./server/routes');
 var pkg = require('./package');
 var winston = require('winston');
 var expressWinston = require('express-winston');
@@ -15,11 +15,20 @@ var bodyParser = require('body-parser');
 var app = express();
 
 // handle fallback for HTML5 history API
-app.use(require('connect-history-api-fallback')());
+//api接口不rewrite
+app.use(require('connect-history-api-fallback')({
+  rewrites: [
+    {
+      from: /^\/api\/.*$/,
+      to: function(context) {
+        return context.parsedUrl.pathname;
+      }
+    }
+  ]
+}));
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-// app.use(multer()); // for parsing multipart/form-data
 
 
 // 设置静态文件目录
@@ -43,13 +52,6 @@ app.use(session({
 //   keepExtensions: true// 保留后缀
 // }));
 
-// 设置模板全局常量
-app.locals.blog = {
-  title: pkg.name,
-  description: pkg.description
-};
-
-
 // 正常请求的日志
 app.use(expressWinston.logger({
   transports: [
@@ -58,7 +60,7 @@ app.use(expressWinston.logger({
       colorize: true
     }),
     new winston.transports.File({
-      filename: 'logs/success.log'
+      filename: './server/logs/success.log'
     })
   ]
 }));
@@ -72,7 +74,7 @@ app.use(expressWinston.errorLogger({
       colorize: true
     }),
     new winston.transports.File({
-      filename: 'logs/error.log'
+      filename: './server/logs/error.log'
     })
   ]
 }));
@@ -86,3 +88,5 @@ app.use(function (err, req, res, next) {
 app.listen(config.port, function () {
   console.log(`${pkg.name} listening on port ${config.port}`);
 });
+
+

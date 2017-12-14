@@ -10,7 +10,7 @@ import Rain from './components/Rainday';
 import $ from 'jquery';
 var rainyDay = require('./static/js/RainyDay').RainyDay;
 var  bgCovers = {
-    path:'../static/img/',
+    path:'http://p0xvqdrqy.bkt.clouddn.com/',
     names:[
         '20171010-DSC_2019.jpg',
         '20171010-DSC_2020.jpg',
@@ -48,7 +48,7 @@ var engine;
             var pic = document.querySelector('#rainyday');
             pic.onload = function(){
                 engine = new rainyDay({
-                    image: this,
+                    image: pic,
                     height:window.innerHeight,
                     width:window.innerWidth
                 });
@@ -63,8 +63,8 @@ var engine;
                 this.crossOrigin = 'anonymous';
                 this.style.visibility = "hidden";
             }
+            pic.crossOrigin = "Anonymous";
             pic.src = bgCovers.path + bgCovers.names[Math.floor(Math.random()*bgCovers.names.length)];            
-             
         })
     },
     methods:{
@@ -72,6 +72,7 @@ var engine;
             $.ajax({
                 url:'/api/get_user_info',
                 type:'get',
+                dataType:'json',
                 success:res =>{
                     if(res.code === 200){
                         this.userInfo = res.data;
@@ -91,7 +92,6 @@ var engine;
     },
     watch:{
         '$route':function(){
-            console.log(111);
             if(~['signin','signup'].indexOf(this.$route.name)){
                 engine.canvas.style.display = 'block';
             }else{
