@@ -17,7 +17,6 @@ export default {
     props:['isLogin','userInfo'],
     components:{HeaderTop},
     mounted: function () {
-        console.log(this);
     },
     methods:{
         

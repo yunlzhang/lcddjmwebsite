@@ -43,7 +43,6 @@ export default {
         }
     },   
     mounted: function () {
-        console.log(this);
     },
     props:['isLogin','userInfo'],
     methods:{

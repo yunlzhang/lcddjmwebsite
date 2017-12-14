@@ -24,8 +24,7 @@
         },
         props:["isLogin","userInfo"],
         mounted(){
-            console.log(this)
-            console.log('header');
+            
         },
         components:{User} ,
         methods:{
