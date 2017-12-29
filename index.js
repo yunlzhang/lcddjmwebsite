@@ -2,12 +2,11 @@ var path = require('path');
 var express = require('express');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
-var config = require('config-lite')(__dirname + '/server');
 var routes = require('./server/routes');
 var pkg = require('./package');
 var winston = require('winston');
 var expressWinston = require('express-winston');
-
+var config  = require('./config/production');
 var bodyParser = require('body-parser');
 // var multer = require('multer');
 

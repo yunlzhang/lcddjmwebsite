@@ -1,10 +1,15 @@
 <template>
     <header>
+        <ul class="nav">
+            <li><router-link to="/">blog</router-link></li>
+            <li>life</li>
+            <li>intro</li>
+        </ul>
         <div class="right">
             <div class="user" v-if="isLogin">
                 <span class="avatar" @click="showInfo"><img src="/static/img/20171010-DSC_2223.jpg" alt="" ></span>
                 <!--<span class="nickname">{{userInfo.name}}</span>-->
-                <User :userInfo="userInfo"></User>
+                <User :userInfo="userInfo" ref="userInfo"></User>
             </div>
             <div class="nologin" v-else>
                 <router-link to="/signup">注册</router-link> |
@@ -29,7 +34,7 @@
         components:{User} ,
         methods:{
             showInfo(e){
-                this.$children[0].$el.style.display = this.$children[0].$el.style.display === 'block' ? 'none' : 'block';
+                this.$refs.userInfo.$el.style.display = this.$refs.userInfo.$el.style.display === 'block' ? 'none' : 'block';
             }
         }       
     }
@@ -39,13 +44,21 @@
         height:56px;
         width:100%;
         position:fixed;
-        left:50%;
+        left:0;
         top:0;
-        min-width:960px;
         line-height:56px;
-        transform:translateX(-50%);
         z-index:10000;
         box-shadow: 0 1px 0 rgba(12,13,14,0.15), 0 0 0 transparent, 0 0 0 transparent, 0 0 0 transparent;
+        .nav{
+            float:left;
+            li{
+                float:left;
+                width:100px;
+            }
+            a{
+                
+            }
+        }
         .right{
             float:right;
             margin-right:40px;

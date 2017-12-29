@@ -69,24 +69,22 @@ var engine;
     },
     methods:{
         getUserInfo(){
-            $.ajax({
-                url:'/api/get_user_info',
-                type:'get',
-                dataType:'json',
-                success:res =>{
-                    if(res.code === 200){
-                        this.userInfo = res.data;
-                        this.isLogin = true;
-                        sessionStorage.setItem('isLogin','1');
-                    }else{
-                        this.userInfo = '';
-                        this.isLogin = false;
-                        sessionStorage.removeItem('isLogin');                    
-                    }
-                },
-                error:err=>{
-                    console.log(err)
+            fetch('/api/get_user_info',{
+                credentials: 'include'
+            }).then(response=>{
+                return response.json();
+            }).then(res=>{
+                if(res.code === 200){
+                    this.userInfo = res.data;
+                    this.isLogin = true;
+                    sessionStorage.setItem('isLogin','1');
+                }else{
+                    this.userInfo = '';
+                    this.isLogin = false;
+                    sessionStorage.removeItem('isLogin');                    
                 }
+            }).catch(err=>{
+                console.log(err);
             })
         }
     },
@@ -113,6 +111,7 @@ var engine;
         padding-top: 56px;
         color: #2c3e50;
         width: 100vw;
-        height: calc(100vh - 56px);
+        font-size:16px;
+        // height: calc(100vh - 56px);
     }
 </style>

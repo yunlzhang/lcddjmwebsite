@@ -29,7 +29,6 @@
 <script>
 import HeaderTop from './Header';
 
-import $ from 'jquery';
 export default {
     name: 'Signup',
     data() {
@@ -43,22 +42,25 @@ export default {
         }
     },   
     mounted: function () {
+        document.title = '注册';
     },
     props:['isLogin','userInfo'],
     methods:{
         signup(){
-            $.ajax({
-                url:'/api/signup',
-                type:'POST',
-                data:this.$data.signupData,
-                dataType:'json',
-                success:res => {
-                    if(res.code === 200){
-                        this.$router.push('/signin');
-                    }else{
-                        alert(res.message)
-                    }
+            fetch('/api/signup',{
+                method:'post',
+                credentials: 'include',
+                body:new URLSearchParams(this.$data.signupData)
+            }).then(response=>{
+                return response.json();
+            }).then(res=>{
+                if(res.code === 200){
+                    this.$router.push('/signin');
+                }else{
+                    alert(res.message)
                 }
+            }).catch(err=>{
+                console.log(err);
             })
         }
     },

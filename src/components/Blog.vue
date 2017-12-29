@@ -1,6 +1,7 @@
 <template>
     <div class="main">
         <HeaderTop :isLogin="isLogin" :userInfo="userInfo"></HeaderTop>
+        <div class="mainwrap"></div>
     </div>
 </template>
 
@@ -8,7 +9,7 @@
 import HeaderTop from './Header';
 import $ from 'jquery';
 export default {
-    name: 'Main',
+    name: 'Blog',
     data() {
         return {
             
@@ -17,6 +18,7 @@ export default {
     props:['isLogin','userInfo'],
     components:{HeaderTop},
     mounted: function () {
+        document.title = 'lcddjm\'s blog';
     },
     methods:{
         

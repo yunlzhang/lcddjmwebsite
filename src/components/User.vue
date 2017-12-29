@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import $ from 'jquery';
 export default {
     name: 'User',
     data() {
@@ -21,17 +20,18 @@ export default {
     },
     methods:{
         signout(){
-            $.ajax({
-                url:'/api/signout',
-                type:'get',
-                dataType:'json',
-                success:res => {
-                    if(res.code === 200){
-                        location.reload();
-                    }else{
-                        alert(res.message);
-                    }
+            fetch('/api/signout',{
+                credentials: 'include'
+            }).then(response=>{
+                return response.json();
+            }).then(res=>{
+                if(res.code === 200){
+                    location.reload();
+                }else{
+                    alert(res.message);
                 }
+            }).catch(err=>{
+                console.log(err);
             })
         }
     }

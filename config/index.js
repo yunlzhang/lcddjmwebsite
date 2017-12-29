@@ -4,7 +4,8 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-
+var devConfig = require('./development');
+const merge = require('webpack-merge')
 module.exports = {
   build: {
     env: require('./prod.env'),
@@ -25,7 +26,7 @@ module.exports = {
     // Set to `true` or `false` to always turn it on or off
     bundleAnalyzerReport: process.env.npm_config_report
   },
-  dev: {
+  dev: merge({
     env: require('./dev.env'),
     port: process.env.PORT || 8080,
     autoOpenBrowser: true,
@@ -37,12 +38,6 @@ module.exports = {
     // (https://github.com/webpack/css-loader#sourcemaps)
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
-    cssSourceMap: false,
-    session: {
-      secret: 'myblog',
-      key: 'myblog',
-      maxAge: 2592000000
-    },
-    mongodb: 'mongodb://localhost:27017/myblog'
-  }
+    cssSourceMap: false
+  },devConfig)
 }

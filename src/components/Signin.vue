@@ -20,7 +20,6 @@
 
 <script>
 import HeaderTop from './Header';
-import $ from 'jquery';
 export default {
     name: 'Signin',
     data() {
@@ -33,23 +32,26 @@ export default {
     },
     props:['isLogin','userInfo'],
     mounted: function () {
-        
+        document.title = '登陆';
+
     },
     methods:{
         signin(){
-            $.ajax({
-                url:'/api/signin',
-                type:'POST',
-                data:this.$data.signinData,
-                dataType:'json',
-                success:res => {
-                    if(res.code === 200){
-                        this.$emit('getUserInfo');
-                        this.$router.replace('/');
-                    }else{
-                        alert(res.message)
-                    }
+            fetch('/api/signin',{
+                method:'post',
+                credentials: 'include',
+                body:new URLSearchParams(this.$data.signinData)
+            }).then(response=>{
+                return response.json();
+            }).then(res=>{
+                if(res.code === 200){
+                    this.$emit('getUserInfo');
+                    this.$router.replace('/');
+                }else{
+                    alert(res.message)
                 }
+            }).catch(err=>{
+                console.log(err);
             })
         }
     },

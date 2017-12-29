@@ -1,8 +1,9 @@
-var config = require('config-lite')(__dirname);
+var config = require('../../config/production')
 var Mongolass = require('mongolass');
 var mongolass = new Mongolass();
-mongolass.connect(config.mongodb);
 
+
+mongolass.connect(config.mongodb);
 var moment = require('moment');
 var objectIdToTimestamp = require('objectid-to-timestamp');
 
