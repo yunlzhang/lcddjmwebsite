@@ -1,11 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Signup from '@/components/Signup';
+/* import Signup from '@/components/Signup';
 import Signin from '@/components/Signin';
 import User from '@/components/User';
 import Blog from '@/components/Blog';
 import Notfind from '@/components/Notfind';
-import Edit from '@/components/Edit';
+import Edit from '@/components/Edit'; */
+
+const Signup = r => require.ensure([],()=>r(require('@/components/Signup')),'Signup');
+const Signin = r => require.ensure([],()=>r(require('@/components/Signin')),'Signin');
+const User = r => require.ensure([],()=>r(require('@/components/User')),'User');
+const Blog = r => require.ensure([],()=>r(require('@/components/Blog')),'Blog');
+const Notfind = r => require.ensure([],()=>r(require('@/components/Notfind')),'Notfind');
+const Edit = r => require.ensure([],()=>r(require('@/components/Edit')),'Edit');
 
 
 Vue.use(Router)

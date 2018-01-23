@@ -7,10 +7,11 @@
 
 <script>
 import Rain from './components/Rainday';
+import './static/iconfont/iconfont';
 import $ from 'jquery';
 var rainyDay = require('./static/js/RainyDay').RainyDay;
 var  bgCovers = {
-    path:'http://p0xvqdrqy.bkt.clouddn.com/',
+    path:'http://image.lcddjm.com/qnimg/',
     names:[
         '20171010-DSC_2019.jpg',
         '20171010-DSC_2020.jpg',
@@ -90,6 +91,7 @@ var engine;
     },
     watch:{
         '$route':function(){
+            if(!engine) return;
             if(~['signin','signup'].indexOf(this.$route.name)){
                 engine.canvas.style.display = 'block';
             }else{

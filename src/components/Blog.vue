@@ -18,7 +18,7 @@ export default {
     props:['isLogin','userInfo'],
     components:{HeaderTop},
     mounted: function () {
-        document.title = 'lcddjm\'s blog';
+        document.title = 'lcddjm\'s website';
     },
     methods:{
         

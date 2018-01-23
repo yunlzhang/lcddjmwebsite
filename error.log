@@ -1,0 +1,160 @@
+2017/12/29 15:27:33 [emerg] 13052#0: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2017/12/29 15:27:33 [emerg] 13052#0: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2017/12/29 15:27:33 [emerg] 13052#0: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2017/12/29 15:27:33 [emerg] 13052#0: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2017/12/29 15:27:33 [emerg] 13052#0: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2017/12/29 15:27:33 [emerg] 13052#0: still could not bind()
+2018/01/02 15:41:06 [error] 12720#0: *6 open() "/usr/local/nginx/html/favicon.ico" failed (2: No such file or directory), client: 172.104.115.143, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "47.94.16.175"
+2018/01/02 17:12:43 [error] 12720#0: *8 open() "/usr/local/nginx/html/ccvv" failed (2: No such file or directory), client: 71.6.202.198, server: localhost, request: "GET /ccvv HTTP/1.1", host: "47.94.16.175"
+2018/01/02 17:24:48 [error] 12720#0: *10 open() "/usr/local/nginx/html/rs-status" failed (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /rs-status HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 17:25:42 [error] 12720#0: *11 open() "/usr/local/nginx/html/ganglia/index.php" failed (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /ganglia/index.php HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 17:25:44 [error] 12720#0: *12 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:25:44 [error] 12720#0: *13 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "POST /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:25:44 [error] 12720#0: *14 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:25:44 [error] 12720#0: *15 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "POST /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:25:44 [error] 12720#0: *16 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:25:44 [error] 12720#0: *17 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "POST /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:25:44 [error] 12720#0: *18 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:25:44 [error] 12720#0: *19 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "POST /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:25:44 [error] 12720#0: *20 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:25:45 [error] 12720#0: *21 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "POST /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:25:45 [error] 12720#0: *22 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:25:45 [error] 12720#0: *23 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "POST /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:25:45 [error] 12720#0: *24 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:25:45 [error] 12720#0: *25 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "POST /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:25:45 [error] 12720#0: *26 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:25:45 [error] 12720#0: *27 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "POST /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:25:45 [error] 12720#0: *28 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:25:45 [error] 12720#0: *29 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "POST /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:25:45 [error] 12720#0: *30 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:25:45 [error] 12720#0: *31 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "POST /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:29:37 [error] 12720#0: *32 open() "/usr/local/nginx/html/index.php" failed (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /index.php HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 17:33:23 [error] 12720#0: *33 "/usr/local/nginx/html/jobs/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /jobs/ HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 17:41:38 [error] 12720#0: *35 open() "/usr/local/nginx/html/lzfoujxktcqd" failed (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "POST /lzfoujxktcqd HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:41:38 [error] 12720#0: *36 open() "/usr/local/nginx/html/lzfoujxktcqd" failed (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /lzfoujxktcqd HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 17:57:04 [error] 12720#0: *40 "/usr/local/nginx/html/hwi/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /hwi/ HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 18:22:57 [error] 12720#0: *44 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "GET /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:22:57 [error] 12720#0: *45 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "POST /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:22:57 [error] 12720#0: *46 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "GET /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:22:57 [error] 12720#0: *47 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "POST /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:22:57 [error] 12720#0: *48 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "GET /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:22:57 [error] 12720#0: *49 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "POST /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:22:57 [error] 12720#0: *50 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "GET /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:22:57 [error] 12720#0: *51 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "POST /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:22:57 [error] 12720#0: *52 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "GET /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:22:57 [error] 12720#0: *53 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "POST /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:22:57 [error] 12720#0: *54 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "GET /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:22:58 [error] 12720#0: *55 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "POST /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:22:58 [error] 12720#0: *56 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "GET /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:22:58 [error] 12720#0: *57 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "POST /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:22:58 [error] 12720#0: *58 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "GET /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:22:58 [error] 12720#0: *59 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "POST /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:22:58 [error] 12720#0: *60 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "GET /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:22:58 [error] 12720#0: *61 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "POST /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:22:58 [error] 12720#0: *62 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "GET /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:22:58 [error] 12720#0: *63 "/usr/local/nginx/html/phpmyadmin/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "POST /phpmyadmin/ HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:23:41 [error] 12720#0: *64 open() "/usr/local/nginx/html/master-status" failed (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /master-status HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 18:25:52 [error] 12720#0: *65 open() "/usr/local/nginx/html/dfshealth.html" failed (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /dfshealth.html HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 18:29:54 [error] 12720#0: *66 open() "/usr/local/nginx/html/http:/47.94.16.175:8080" failed (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /http://47.94.16.175:8080 HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 18:31:45 [error] 12720#0: *67 open() "/usr/local/nginx/html/http:/47.94.16.175:8081" failed (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /http://47.94.16.175:8081 HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 18:35:27 [error] 12720#0: *72 open() "/usr/local/nginx/html/http:/47.94.16.175:8090" failed (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /http://47.94.16.175:8090 HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 18:38:24 [error] 12720#0: *76 open() "/usr/local/nginx/html/clusters.jsf" failed (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /clusters.jsf HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 18:43:07 [error] 12720#0: *79 "/usr/local/nginx/html/about/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /about/ HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 18:48:39 [error] 12720#0: *81 "/usr/local/nginx/html/jenkins/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /jenkins/ HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 18:48:47 [error] 12720#0: *82 "/usr/local/nginx/html/zabbix/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /zabbix/ HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 18:48:50 [error] 12720#0: *84 "/usr/local/nginx/html/solr/index.html" is not found (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /solr/ HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 18:49:01 [error] 12720#0: *86 open() "/usr/local/nginx/html/info" failed (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /info HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 18:49:24 [error] 12720#0: *87 open() "/usr/local/nginx/html/warning" failed (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /warning HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 18:49:30 [error] 12720#0: *88 open() "/usr/local/nginx/html/pleasereadthis" failed (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /pleasereadthis HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 18:49:37 [error] 12720#0: *89 open() "/usr/local/nginx/html/please_read/_search" failed (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /please_read/_search HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 18:49:42 [error] 12720#0: *90 open() "/usr/local/nginx/html/dfshealth.jsp" failed (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /dfshealth.jsp HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 18:49:43 [error] 12720#0: *91 open() "/usr/local/nginx/html/hadoop/dfshealth.jsp" failed (2: No such file or directory), client: 140.205.225.183, server: localhost, request: "GET /hadoop/dfshealth.jsp HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 18:53:06 [error] 12720#0: *92 open() "/usr/local/nginx/html/adpwzhklgxsi" failed (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "POST /adpwzhklgxsi HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 18:53:06 [error] 12720#0: *93 open() "/usr/local/nginx/html/adpwzhklgxsi" failed (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "GET /adpwzhklgxsi HTTP/1.1", host: "47.94.16.175:80"
+2018/01/02 19:55:01 [error] 12720#0: *97 "/usr/local/nginx/html/zabbix/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "GET /zabbix/ HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 20:00:12 [error] 12720#0: *99 "/usr/local/nginx/html/solr/index.html" is not found (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "GET /solr/ HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 20:13:41 [error] 12720#0: *101 open() "/usr/local/nginx/html/info" failed (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "GET /info HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 20:21:14 [error] 12720#0: *102 open() "/usr/local/nginx/html/echo.php" failed (2: No such file or directory), client: 139.162.88.63, server: localhost, request: "GET http://clientapi.ipip.net/echo.php?info=1234567890 HTTP/1.1", host: "clientapi.ipip.net"
+2018/01/02 20:24:55 [error] 12720#0: *103 open() "/usr/local/nginx/html/warning" failed (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "GET /warning HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 20:27:06 [error] 12720#0: *104 open() "/usr/local/nginx/html/pleasereadthis" failed (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "GET /pleasereadthis HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 20:27:14 [error] 12720#0: *105 open() "/usr/local/nginx/html/please_read/_search" failed (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "GET /please_read/_search HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 20:27:21 [error] 12720#0: *106 open() "/usr/local/nginx/html/dfshealth.jsp" failed (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "GET /dfshealth.jsp HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 20:27:24 [error] 12720#0: *107 open() "/usr/local/nginx/html/hadoop/dfshealth.jsp" failed (2: No such file or directory), client: 140.205.201.34, server: localhost, request: "GET /hadoop/dfshealth.jsp HTTP/1.1", host: "47.94.16.175:80", referrer: "http://47.94.16.175/"
+2018/01/02 21:14:45 [error] 2207#0: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 111.199.186.112, server: localhost, request: "GET / HTTP/1.1", upstream: "http://47.94.16.175:8080/", host: "47.94.16.175"
+2018/01/02 21:14:46 [error] 2207#0: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 111.199.186.112, server: localhost, request: "GET / HTTP/1.1", upstream: "http://47.94.16.175:8080/", host: "47.94.16.175"
+2018/01/02 21:14:46 [error] 2207#0: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 111.199.186.112, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "http://47.94.16.175:8080/favicon.ico", host: "47.94.16.175", referrer: "http://47.94.16.175/"
+2018/01/02 21:18:25 [emerg] 2351#0: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2018/01/02 21:18:25 [emerg] 2351#0: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2018/01/02 21:18:25 [emerg] 2351#0: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2018/01/02 21:18:25 [emerg] 2351#0: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2018/01/02 21:18:25 [emerg] 2351#0: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2018/01/02 21:18:25 [emerg] 2351#0: still could not bind()
+2018/01/02 21:18:45 [error] 2355#0: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 111.199.186.112, server: localhost, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "47.94.16.175"
+2018/01/02 21:18:45 [error] 2355#0: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 111.199.186.112, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "http://127.0.0.1:8080/favicon.ico", host: "47.94.16.175", referrer: "http://47.94.16.175/"
+2018/01/02 21:18:46 [error] 2355#0: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 111.199.186.112, server: localhost, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "47.94.16.175"
+2018/01/02 21:18:46 [error] 2355#0: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 111.199.186.112, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "http://127.0.0.1:8080/favicon.ico", host: "47.94.16.175", referrer: "http://47.94.16.175/"
+2018/01/02 21:18:47 [error] 2355#0: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 111.199.186.112, server: localhost, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "47.94.16.175"
+2018/01/02 21:18:47 [error] 2355#0: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 111.199.186.112, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "http://127.0.0.1:8080/favicon.ico", host: "47.94.16.175", referrer: "http://47.94.16.175/"
+2018/01/02 21:18:48 [error] 2355#0: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 111.199.186.112, server: localhost, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "47.94.16.175"
+2018/01/02 21:18:48 [error] 2355#0: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 111.199.186.112, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "http://127.0.0.1:8080/favicon.ico", host: "47.94.16.175", referrer: "http://47.94.16.175/"
+2018/01/08 19:07:03 [error] 2355#0: *2043 upstream prematurely closed connection while reading response header from upstream, client: 219.150.218.137, server: localhost, request: "ET /upgrade/src/version HTTP/1.1", upstream: "http://127.0.0.1:8080/upgrade/src/version", host: "www.wkmajiang.com"
+2018/01/08 20:12:17 [error] 2355#0: *2047 upstream prematurely closed connection while reading response header from upstream, client: 219.150.218.137, server: localhost, request: "ET /upgrade/src/version HTTP/1.1", upstream: "http://127.0.0.1:8080/upgrade/src/version", host: "www.wkmajiang.com"
+2018/01/12 14:20:54 [emerg] 14430#0: the "ssl" parameter requires ngx_http_ssl_module in /usr/local/nginx/conf/nginx.conf:103
+2018/01/12 14:24:06 [emerg] 14546#0: the "ssl" parameter requires ngx_http_ssl_module in /usr/local/nginx/conf/nginx.conf:103
+2018/01/12 16:57:31 [emerg] 22158#0: the "ssl" parameter requires ngx_http_ssl_module in /usr/local/nginx/conf/nginx.conf:103
+2018/01/12 17:08:50 [emerg] 25025#0: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2018/01/12 17:08:50 [emerg] 25025#0: bind() to 0.0.0.0:443 failed (98: Address already in use)
+2018/01/12 17:08:50 [emerg] 25025#0: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2018/01/12 17:08:50 [emerg] 25025#0: bind() to 0.0.0.0:443 failed (98: Address already in use)
+2018/01/12 17:08:50 [emerg] 25025#0: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2018/01/12 17:08:50 [emerg] 25025#0: bind() to 0.0.0.0:443 failed (98: Address already in use)
+2018/01/12 17:08:50 [emerg] 25025#0: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2018/01/12 17:08:50 [emerg] 25025#0: bind() to 0.0.0.0:443 failed (98: Address already in use)
+2018/01/12 17:08:50 [emerg] 25025#0: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2018/01/12 17:08:50 [emerg] 25025#0: bind() to 0.0.0.0:443 failed (98: Address already in use)
+2018/01/12 17:08:50 [emerg] 25025#0: still could not bind()
+2018/01/12 17:13:38 [emerg] 25221#0: "server" directive is not allowed here in /usr/local/nginx/conf/nginx.conf:102
+2018/01/12 17:22:05 [notice] 25515#0: signal process started
+2018/01/12 17:25:19 [emerg] 25642#0: bind() to 0.0.0.0:443 failed (98: Address already in use)
+2018/01/12 17:25:19 [emerg] 25642#0: bind() to 0.0.0.0:443 failed (98: Address already in use)
+2018/01/12 17:25:19 [emerg] 25642#0: bind() to 0.0.0.0:443 failed (98: Address already in use)
+2018/01/12 17:25:19 [emerg] 25642#0: bind() to 0.0.0.0:443 failed (98: Address already in use)
+2018/01/12 17:25:19 [emerg] 25642#0: bind() to 0.0.0.0:443 failed (98: Address already in use)
+2018/01/12 17:25:19 [emerg] 25642#0: still could not bind()
+2018/01/12 18:08:16 [emerg] 27112#0: pcre_compile() failed: nothing to repeat in "*\/qnimg\/" at "*\/qnimg\/" in /usr/local/nginx/conf/nginx.conf:124
+2018/01/12 18:08:54 [emerg] 27131#0: pcre_compile() failed: nothing to repeat in "*/qnimg/" at "*/qnimg/" in /usr/local/nginx/conf/nginx.conf:124
+2018/01/12 18:09:27 [notice] 27150#0: signal process started
+2018/01/12 18:18:38 [notice] 27455#0: signal process started
+2018/01/12 18:18:54 [notice] 27475#0: signal process started
+2018/01/12 18:24:03 [notice] 27650#0: signal process started
+2018/01/12 18:30:38 [emerg] 27871#0: directive "location" has no opening "{" in /usr/local/nginx/conf/nginx.conf:125
+2018/01/12 18:31:35 [notice] 27906#0: signal process started
+2018/01/12 18:35:07 [notice] 28027#0: signal process started
+2018/01/12 18:37:51 [notice] 28131#0: signal process started
+2018/01/12 18:43:24 [notice] 28321#0: signal process started
+2018/01/12 18:45:14 [notice] 28394#0: signal process started
+2018/01/12 18:56:42 [notice] 28761#0: signal process started
+2018/01/12 18:57:31 [notice] 28800#0: signal process started
+2018/01/12 18:57:35 [notice] 28803#0: signal process started
+2018/01/12 18:57:40 [notice] 28806#0: signal process started
+2018/01/12 18:58:14 [notice] 28842#0: signal process started
+2018/01/13 12:32:34 [emerg] 31531#0: "upstream" directive is not allowed here in /usr/local/nginx/conf/nginx.conf:43
+2018/01/13 12:34:37 [emerg] 31597#0: unexpected "}" in /usr/local/nginx/conf/nginx.conf:36
+2018/01/13 12:35:15 [emerg] 31631#0: unexpected "}" in /usr/local/nginx/conf/nginx.conf:36
+2018/01/13 12:35:50 [notice] 31650#0: signal process started
+2018/01/13 12:39:04 [notice] 31755#0: signal process started
+2018/01/13 16:13:00 [emerg] 6486#0: invalid number of arguments in "set" directive in /usr/local/nginx/conf/nginx.conf:127
+2018/01/13 16:13:37 [emerg] 6505#0: invalid number of arguments in "proxy_set_header" directive in /usr/local/nginx/conf/nginx.conf:134
+2018/01/13 16:14:07 [notice] 6524#0: signal process started
+2018/01/13 16:14:20 [error] 6525#0: send() failed (111: Connection refused) while resolving, resolver: 127.0.0.1:53
+2018/01/13 16:14:24 [error] 6525#0: send() failed (111: Connection refused) while resolving, resolver: 127.0.0.1:53
+2018/01/13 16:14:57 [error] 6525#0: send() failed (111: Connection refused) while resolving, resolver: 127.0.0.1:53
+2018/01/13 16:15:52 [notice] 6596#0: signal process started
+2018/01/13 16:15:55 [error] 6597#0: send() failed (111: Connection refused) while resolving, resolver: 127.0.0.1:53
+2018/01/13 16:15:55 [error] 6597#0: send() failed (111: Connection refused) while resolving, resolver: 127.0.0.1:53
+2018/01/13 16:15:56 [error] 6597#0: send() failed (111: Connection refused) while resolving, resolver: 127.0.0.1:53
+2018/01/13 16:15:57 [error] 6597#0: send() failed (111: Connection refused) while resolving, resolver: 127.0.0.1:53
+2018/01/13 16:15:58 [error] 6597#0: send() failed (111: Connection refused) while resolving, resolver: 127.0.0.1:53
+2018/01/13 16:17:37 [emerg] 6651#0: unknown log format "main" in /usr/local/nginx/conf/nginx.conf:25
+2018/01/13 16:18:15 [notice] 6687#0: signal process started
+2018/01/13 16:18:17 [error] 6688#0: send() failed (111: Connection refused) while resolving, resolver: 127.0.0.1:53

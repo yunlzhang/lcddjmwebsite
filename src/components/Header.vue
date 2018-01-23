@@ -5,17 +5,6 @@
             <li>life</li>
             <li>intro</li>
         </ul>
-        <div class="right">
-            <div class="user" v-if="isLogin">
-                <span class="avatar" @click="showInfo"><img src="/static/img/20171010-DSC_2223.jpg" alt="" ></span>
-                <!--<span class="nickname">{{userInfo.name}}</span>-->
-                <User :userInfo="userInfo" ref="userInfo"></User>
-            </div>
-            <div class="nologin" v-else>
-                <router-link to="/signup">注册</router-link> |
-                <router-link to="/signin">登陆</router-link>                
-            </div>
-        </div>
     </header>
 </template>
 <script>

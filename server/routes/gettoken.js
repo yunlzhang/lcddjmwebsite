@@ -14,7 +14,7 @@ router.get('/',function(req,res,next){
     var uploadToken=putPolicy.uploadToken(mac);
     res.json({
         code:200,
-        token:uploadToken
+        uptoken:uploadToken
     })
 })
 module.exports = router;
