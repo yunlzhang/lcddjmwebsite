@@ -8,7 +8,7 @@
     } else {
       root.ajax = factory()
     }
-  })(this, function () {
+  })(window, function () {
     'use strict'
   
     function ajax (options) {

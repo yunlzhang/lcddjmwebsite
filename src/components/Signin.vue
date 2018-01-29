@@ -37,6 +37,17 @@ export default {
     },
     methods:{
         signin(){
+            ajax({
+                url:'/api/signin',
+                method:'POST'
+            }).then(res => {
+                if(res.code === 200){
+                    this.$emit('getUserInfo');
+                    this.$router.replace('/');
+                }else{
+                    alert(res.message)
+                }
+            })
             fetch('/api/signin',{
                 method:'post',
                 credentials: 'include',
@@ -44,12 +55,7 @@ export default {
             }).then(response=>{
                 return response.json();
             }).then(res=>{
-                if(res.code === 200){
-                    this.$emit('getUserInfo');
-                    this.$router.replace('/');
-                }else{
-                    alert(res.message)
-                }
+                
             }).catch(err=>{
                 console.log(err);
             })

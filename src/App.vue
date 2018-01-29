@@ -8,7 +8,7 @@
 <script>
 import Rain from './components/Rainday';
 import './static/iconfont/iconfont';
-import $ from 'jquery';
+import "./static/js/ajax"
 var rainyDay = require('./static/js/RainyDay').RainyDay;
 var  bgCovers = {
     path:'http://image.lcddjm.com/qnimg/',
@@ -59,7 +59,6 @@ var engine;
                 }else{
                     engine.canvas.style.display = 'none';
                 }
-                // engine.rain([ [1, 2, 8000] ]);
                 engine.rain([ [3, 3, 0.88], [5, 5, 0.9], [6, 2, 1] ], 100);
                 this.crossOrigin = 'anonymous';
                 this.style.visibility = "hidden";
@@ -70,11 +69,11 @@ var engine;
     },
     methods:{
         getUserInfo(){
-            fetch('/api/get_user_info',{
-                credentials: 'include'
-            }).then(response=>{
-                return response.json();
-            }).then(res=>{
+
+            ajax({
+                url:'/api/get_user_info',
+                method:'get'
+            }).then(res => {
                 if(res.code === 200){
                     this.userInfo = res.data;
                     this.isLogin = true;
@@ -84,8 +83,6 @@ var engine;
                     this.isLogin = false;
                     sessionStorage.removeItem('isLogin');                    
                 }
-            }).catch(err=>{
-                console.log(err);
             })
         }
     },

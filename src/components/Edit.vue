@@ -48,7 +48,6 @@ export default {
     // components:{HeaderTop},
     mounted: function () {
         document.title = '编辑';
-        console.log();
         this.uploadImg();
     },
 

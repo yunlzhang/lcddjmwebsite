@@ -7,7 +7,6 @@
 
 <script>
 import HeaderTop from './Header';
-import $ from 'jquery';
 export default {
     name: 'Blog',
     data() {
