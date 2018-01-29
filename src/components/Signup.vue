@@ -47,12 +47,9 @@ export default {
     props:['isLogin','userInfo'],
     methods:{
         signup(){
-            fetch('/api/signup',{
-                method:'post',
-                credentials: 'include',
-                body:new URLSearchParams(this.$data.signupData)
-            }).then(response=>{
-                return response.json();
+            ajax({
+                url:'/api/signup',
+                method:'post'
             }).then(res=>{
                 if(res.code === 200){
                     this.$router.push('/signin');

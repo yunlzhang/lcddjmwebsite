@@ -48,17 +48,6 @@ export default {
                     alert(res.message)
                 }
             })
-            fetch('/api/signin',{
-                method:'post',
-                credentials: 'include',
-                body:new URLSearchParams(this.$data.signinData)
-            }).then(response=>{
-                return response.json();
-            }).then(res=>{
-                
-            }).catch(err=>{
-                console.log(err);
-            })
         }
     },
     components:{HeaderTop},
