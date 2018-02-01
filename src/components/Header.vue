@@ -4,6 +4,7 @@
             <li><router-link to="/">blog</router-link></li>
             <li>life</li>
             <li>intro</li>
+            <li>about</li>            
         </ul>
     </header>
 </template>

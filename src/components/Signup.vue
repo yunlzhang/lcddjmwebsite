@@ -47,9 +47,8 @@ export default {
     props:['isLogin','userInfo'],
     methods:{
         signup(){
-            ajax({
-                url:'/api/signup',
-                method:'post'
+            this.$http.post('/api/signup',{
+                body:this.signupData
             }).then(res=>{
                 if(res.code === 200){
                     this.$router.push('/signin');

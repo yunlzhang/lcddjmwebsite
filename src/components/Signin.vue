@@ -37,9 +37,8 @@ export default {
     },
     methods:{
         signin(){
-            ajax({
-                url:'/api/signin',
-                method:'POST'
+            this.$http.post('/api/signin',{
+                body:this.signinData
             }).then(res => {
                 if(res.code === 200){
                     this.$emit('getUserInfo');

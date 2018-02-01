@@ -8,7 +8,6 @@
 <script>
 import Rain from './components/Rainday';
 import './static/iconfont/iconfont';
-import "./static/js/ajax"
 var rainyDay = require('./static/js/RainyDay').RainyDay;
 var  bgCovers = {
     path:'http://image.lcddjm.com/qnimg/',
@@ -69,11 +68,8 @@ var engine;
     },
     methods:{
         getUserInfo(){
-
-            ajax({
-                url:'/api/get_user_info',
-                method:'get'
-            }).then(res => {
+            console.log(this);
+            this.$http.get('/api/get_user_info').then(res => {
                 if(res.code === 200){
                     this.userInfo = res.data;
                     this.isLogin = true;
