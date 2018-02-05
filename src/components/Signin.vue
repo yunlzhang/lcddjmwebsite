@@ -37,14 +37,12 @@ export default {
     },
     methods:{
         signin(){
-            this.$http.post('/api/signin',{
-                body:this.signinData
-            }).then(res => {
-                if(res.code === 200){
+            this.$http.post('/api/signin',this.signinData).then(res => {
+                if(res.body.code === 200){
                     this.$emit('getUserInfo');
                     this.$router.replace('/');
                 }else{
-                    alert(res.message)
+                    alert(res.body.message)
                 }
             })
         }

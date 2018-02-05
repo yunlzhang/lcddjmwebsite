@@ -1,4 +1,4 @@
-var Posts = require('../lib/mongo').Post;
+var Post = require('../lib/mongo').Post;
 
 module.exports = {
   create: function create(article) {

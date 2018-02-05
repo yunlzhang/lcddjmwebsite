@@ -47,16 +47,14 @@ export default {
     props:['isLogin','userInfo'],
     methods:{
         signup(){
-            this.$http.post('/api/signup',{
-                body:this.signupData
-            }).then(res=>{
-                if(res.code === 200){
+            this.$http.post('/api/signup',this.signupData).then(res=>{
+                if(res.body.code === 200){
                     this.$router.push('/signin');
                 }else{
-                    alert(res.message)
+                    alert(res.body.message)
                 }
             }).catch(err=>{
-                console.log(err);
+                // console.log(err);
             })
         }
     },

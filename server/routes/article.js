@@ -4,18 +4,16 @@ var ArticleModel = require('../models/article');
 
 
 router.post('/save_article',function(req,res,next){
-    var author = req.session.user._id;
-    var title = req.body.title;
-    var cover = req.body.cover;
-    var content = req.fields.content;
-
-
-    if(!author){
+    if(!req.session.user){
         return res.json({
             code:100,
             message:'未登陆'
         })
-    }
+    }   
+    var author = req.session.user._id;
+    var title = req.body.title;
+    var cover = req.body.cover;
+    var content = req.body.content;
     if(!content){
         return res.json({
             code:100,

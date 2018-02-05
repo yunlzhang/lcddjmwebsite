@@ -68,10 +68,9 @@ var engine;
     },
     methods:{
         getUserInfo(){
-            console.log(this);
             this.$http.get('/api/get_user_info').then(res => {
-                if(res.code === 200){
-                    this.userInfo = res.data;
+                if(res.body.code === 200){
+                    this.userInfo = res.body.data;
                     this.isLogin = true;
                     sessionStorage.setItem('isLogin','1');
                 }else{

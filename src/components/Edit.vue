@@ -11,15 +11,17 @@
             <input type="file" id="qiniu-upload" accept=".jpg,.png,.gif">
         </div>
         <div class="title-input">
-            <input type="text" placeholder="输入标题">
+            <input type="text" @blur="setTitle" placeholder="输入标题">
         </div>
         <div class="editor">
             <quillEditor
                 v-model="content"
                 ref="quillEditor"
                 :options="editorOptions"
+                @blur="contentBlur"
             ></quillEditor>
         </div>
+        <div class="save" @click="save">保存</div>
     </div>
 </template>
 
@@ -40,6 +42,8 @@ export default {
     data() {
         return {
             content:'',
+            cover:'',
+            title:'',
             editorOptions : options,
             isUpload:false
         }
@@ -52,8 +56,13 @@ export default {
     },
 
     methods:{
-        editor(){
-            return this.$refs.quillEditor.quill;
+        showTxt(e){
+            if(this.isUpload) return;
+            if(e.type === 'mouseenter'){
+                this.$refs.txt.style.display = 'block';
+            }else{
+                this.$refs.txt.style.display = 'none';
+            }
         },
         uploadImg(){
             var _this = this;
@@ -63,9 +72,6 @@ export default {
                 browse_button: 'qiniu-upload', // 上传选择的点选按钮，**必需**
                 get_new_uptoken: true, // 设置上传文件的时候是否每次都重新获取新的 uptoken                
                 uptoken_url: '/api/gettoken',         // Ajax 请求 uptoken 的 Url，**强烈建议设置**（服务端提供）
-                // uptoken_func: function(data){    // 在需要获取 uptoken 时，该方法会被调用
-                //     // return data.uptoken;
-                // },
                 unique_names: false,
                 save_key: false,
                 domain: 'http://oy02r7jyx.bkt.clouddn.com', // bucket 域名，下载资源时用到，如：'http://xxx.bkt.clouddn.com/' **必需**
@@ -94,6 +100,7 @@ export default {
                         var res = JSON.parse(info.response);
                         var sourceLink = domain +'/'+ res.key; //获取上传成功后的文件的Url
                         _this.isUpload = true;
+                        _this.cover = sourceLink;
                         _this.$refs.coverbg.style.cssText += 'background:url('+sourceLink+') center center / cover no-repeat;'
                     },  
                     'Error': function (up, err, errTip) {
@@ -109,13 +116,26 @@ export default {
                 }
             });
         },
-        showTxt(e){
-            if(this.isUpload) return;
-            if(e.type === 'mouseenter'){
-                this.$refs.txt.style.display = 'block';
-            }else{
-                this.$refs.txt.style.display = 'none';
-            }
+        setTitle(e){
+            this.title = e.target.value;
+            console.log(this.title);
+        },
+        editor(){
+            return this.$refs.quillEditor.quill;
+        },
+        contentBlur(){
+            // console.log(this.editor())
+            // // this.content = this.editor().getContent();
+            // console.log(this.content)
+        },
+        save(){
+            this.$http.post('/api/article/save_article',{
+                content:this.content,
+                cover:this.cover,
+                title:this.title
+            }).then(res => {
+                alert(res.body.message)
+            })
         }
     },
     components: {
