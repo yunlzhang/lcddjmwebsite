@@ -1,7 +1,6 @@
 
-// var config = process.env.NODE_ENV === 'production' ? require('../../config/production') : require('../../config/development')
+var config = process.env.NODE_ENV === 'development' ? require('../../config/development') : require('../../config/production')
 
-var config = require('../../config/production');
 var Mongolass = require('mongolass');
 var mongolass = new Mongolass();
 
