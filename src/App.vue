@@ -106,6 +106,7 @@ var engine;
         color: #2c3e50;
         width: 100vw;
         font-size:16px;
+        line-height:1.5;
         // height: calc(100vh - 56px);
     }
 </style>

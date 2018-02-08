@@ -34,6 +34,7 @@
         height:56px;
         width:100%;
         position:fixed;
+        background:#fff;
         left:0;
         top:0;
         line-height:56px;

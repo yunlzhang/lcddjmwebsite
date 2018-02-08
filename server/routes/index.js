@@ -1,6 +1,3 @@
-const renderer = require('vue-server-renderer').createRenderer({
-    template: require('fs').readFileSync('index.template.html', 'utf-8')
-})
 module.exports = function (app) {
     // app.get('/', function (req, res) {
     //     // renderer.renderToString(app, (err, html) => {

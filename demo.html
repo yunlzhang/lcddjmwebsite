@@ -7,6 +7,10 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="txt">测试</div>
+
+
+
     <script>
         function Comment(obj){
             this.result = '';
@@ -127,6 +131,75 @@
 
         document.body.appendChild(document.createComment(personComment.get()))
         console.log(personComment.get());
+    </script>
+
+    <script>
+        //通用事件绑定
+
+        var util = {
+            addHandler:function(ele,type,handler){
+                if(ele.attachEvent){
+                    //IE
+                    ele.attachEvent('on'+type,handler)                    
+                }else{
+                    ele.addEventListener(type,handler,false)
+                }
+            },
+            removeHandler:function(ele,type,cb){
+                if(ele.detachEvent){
+                    ele.detachEvent('on'+type,cb)
+                }else{
+                    ele.removeEventListener(type,cb,false);
+                }
+                ele['on'+type] = null;//防止内存泄漏
+            },
+            getEvent:function (event){
+                return event?event:window.event;
+            },
+            getTarget:function(event){
+                return event.target || event.srcElement;
+            },
+            preventDefault:function (event){
+                if(event.preventDefault){
+                    event.preventDefault();
+                }else{
+                    event.returnVauel=false;
+                }
+            },
+            stopPropagation:function (event){
+                if (event.stopPropagation){
+                    event.stopPropagation(); 
+                }else{
+                    event.cancleBubble=true;
+                }
+            }
+        }
+    
+    </script>
+
+    <script>
+        util.addHandler(document.querySelector('.txt'),'click',function(){
+            alert(111);
+        })
+        var str = '1239eiwiiw9392qiskskw3245035wpsld';
+
+        var tempArr = str.split('');
+        var tempObj = {};
+        for(var i =0,len = tempArr.length;i < len;i++ ){
+            if(tempObj[tempArr[i]]){
+                tempObj[tempArr[i]]++;
+            }else{
+                tempObj[tempArr[i]] = 1;
+            }
+        }
+        var max = 0,key = [];
+        for(var j  in tempObj){
+            if(tempObj[j] > max){
+                max = tempObj[j];
+                key.push(j);
+            }
+        }
+        console.log(key,max);
     </script>
 </body>
 </html>
