@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <HeaderTop :isLogin="isLogin" :userInfo="userInfo"></HeaderTop>
+        <HeaderTop :isLogin="isLogin" :active="'blog'" :userInfo="userInfo"></HeaderTop>
         <div class="main-wrap">
             <ul class="article_lists">
                 <li class="article_item" v-for="item in article">
@@ -35,6 +35,7 @@ export default {
     props:['isLogin','userInfo'],
     components:{HeaderTop},
     mounted: function () {
+        console.log(this);
         document.title = 'lcddjm\'s website';
         this.getArticleLength();
         this.getArticle({

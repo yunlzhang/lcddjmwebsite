@@ -1,6 +1,5 @@
 <template>
 <div>
-<HeaderTop :isLogin="isLogin" :userInfo="userInfo"></HeaderTop>
 <div  class="signup-wrap">
     <div class="signup">
             <div class="username">
@@ -22,13 +21,13 @@
             <div class="confirm"  @click="signup">注册</div>
         </div>
     </div>
+    <Rain></Rain>
 </div>
-
 </template>
 
 <script>
-import HeaderTop from './Header';
-
+import Rain from './Rainday';
+import {instantiationEngine} from '../static/js/rain_engine'
 export default {
     name: 'Signup',
     data() {
@@ -43,8 +42,10 @@ export default {
     },   
     mounted: function () {
         document.title = '注册';
+        this.$nextTick(function () {
+            instantiationEngine();      
+        })
     },
-    props:['isLogin','userInfo'],
     methods:{
         signup(){
             this.$http.post('/api/signup',this.signupData).then(res=>{
@@ -58,7 +59,7 @@ export default {
             })
         }
     },
-    components:{HeaderTop},
+    components:{Rain},
 
 }
 </script>

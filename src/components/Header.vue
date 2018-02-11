@@ -1,10 +1,10 @@
 <template>
     <header>
         <ul class="nav">
-            <li><router-link to="/">blog</router-link></li>
-            <li>life</li>
-            <li>intro</li>
-            <li>about</li>            
+            <li :class="active === 'blog' ? 'active' : ''"><router-link to="/">blog</router-link></li>
+            <li :class="active === 'life' ? 'active' : ''"><router-link to="/">life</router-link></li>
+            <li :class="active === 'intro' ? 'active' : ''"><router-link to="/">intro</router-link></li>
+            <li :class="active === 'about' ? 'active' : ''"><router-link to="/about">about</router-link></li>            
         </ul>
     </header>
 </template>
@@ -17,7 +17,7 @@
                 
             };
         },
-        props:["isLogin","userInfo"],
+        props:["isLogin","userInfo",'active'],
         mounted(){
             
         },
@@ -46,7 +46,15 @@
             li{
                 float:left;
                 width:100px;
+                text-align:center;
+                a:hover{
+                    color:#f00;
+                }
+                &.active a{
+                    color:green;
+                }
             }
+            
             a{
                 
             }
