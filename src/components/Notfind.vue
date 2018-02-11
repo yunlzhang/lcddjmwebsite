@@ -1,6 +1,5 @@
 <template>
     <div class="main">
-        <HeaderTop :isLogin="isLogin" :userInfo="userInfo"></HeaderTop>
         <img class="not" src="/static/img/404.jpg">
     </div>
 </template>
@@ -14,8 +13,6 @@ export default {
             
         }
     },
-    props:['isLogin','userInfo'],
-    components:{HeaderTop},
     mounted: function () {
     },
     methods:{
@@ -28,7 +25,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
     .not{
-        display:block;
-        margin:20px auto 0;
+        width:100%;
+        max-height:100vh;
     }
 </style>
