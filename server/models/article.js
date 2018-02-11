@@ -1,12 +1,12 @@
 var Post = require('../lib/mongo').Post;
 
 module.exports = {
-	create: function create(article) {
+	create: function(article) {
 		return Post.create(article).exec();
 	},
 
 	// 通过文章的id获取相关文章
-	getPostsById: function getPostById(id) {
+	getPostById: function(id) {
 		return Post
 			.findOne({
 				_id: id
@@ -14,7 +14,7 @@ module.exports = {
 			.addCreatedAt()
 			.exec();
 	},
-	getPosts: function getPosts(opts) {
+	getPosts: function(opts) {
 		opts = opts || {};
 		var page = Number(opts.page) || 1,
 			num = Number(opts.num) || 10;
@@ -34,7 +34,7 @@ module.exports = {
 			.find({})
 			.exec();
 	},
-	incPv: function incPv(postId) {
+	incPv: function(postId) {
 		return Post
 			.update({
 				_id: postId

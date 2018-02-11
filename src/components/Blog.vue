@@ -4,10 +4,12 @@
         <div class="main-wrap">
             <ul class="article_lists">
                 <li class="article_item" v-for="item in article">
-                    <div class="title" v-if="item.title">{{item.title}}</div>
-                    <div class="cover" v-if="item.cover"><img :src="item.cover" alt=""></div>
-                    <div class="des">{{item.des}}</div>
-                    <div class="create"><span class="l">发表于 {{item.created_at}}</span></div>
+                    <router-link :to="'/article/'+item._id">
+                        <div class="title" v-if="item.title">{{item.title}}</div>
+                        <div class="cover" v-if="item.cover"><img :src="item.cover" alt=""></div>
+                        <div class="des">{{item.des}}</div>
+                        <div class="create"><span class="l">发表于 {{item.created_at}}</span></div>
+                    </router-link>
                 </li>
             </ul>
             <el-pagination
@@ -71,6 +73,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+    .main{
+        margin-top:56px;
+    }
     .main-wrap{
         width:600px;
         margin:0 auto;
@@ -97,5 +102,6 @@ export default {
     }
     .el-pagination{
         margin:80px 0;
+        text-align:center;
     }
 </style>

@@ -41,31 +41,6 @@ router.post('/save_article',function(req,res,next){
     .catch(next);
 })
 
-router.get('/get_article',function(req,res){
-    var opts = req.query;
-    console.log(opts);
-    ArticleModel.getPosts(opts)
-    .then(function (result) {
-        result.forEach(function(item,index){
-            //截取部分内容
-            var tempStr = item.content.replace(/<[^>]*>/ig,'');
-            result[index]['des'] = tempStr.slice(0,200) + '...';
-            delete result[index]['content'];
-        })
-        res.json({
-            code:200,
-            data:result,
-            message:'获取列表成功'
-        });
-    }).catch(e =>{
-        console.log(e);
-        res.json({
-            code:100,
-            message:'获取失败'
-        });
-    })
-});
-
 router.get('/get_article_length',function(req,res){
     ArticleModel.getLength()
     .then(function (result) {
@@ -82,6 +57,44 @@ router.get('/get_article_length',function(req,res){
     })
 });
 
+router.get('/get_article',function(req,res){
+    var opts = req.query;
+    ArticleModel.getPosts(opts)
+    .then(function (result) {
+        result.forEach(function(item,index){
+            //截取部分内容
+            var tempStr = item.content.replace(/<[^>]*>/ig,'');
+            result[index]['des'] = tempStr.slice(0,200) + '...';
+            delete result[index]['content'];
+        })
+        res.json({
+            code:200,
+            data:result,
+            message:'获取列表成功'
+        });
+    }).catch(e =>{
+        res.json({
+            code:100,
+            message:'获取失败'
+        });
+    })
+});
+router.get('/get_article_detail',function(req,res){
+    var opts = req.query;
+    ArticleModel.getPostById(opts._id)
+    .then(function (result) {
+        res.json({
+            code:200,
+            data:result,
+            message:'获取文章信息成功'
+        });
+    }).catch(e =>{
+        res.json({
+            code:100,
+            message:'获取失败'
+        });
+    })
+});
 
 
 router.get('/:postId',function(req,res){

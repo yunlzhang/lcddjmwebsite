@@ -13,6 +13,7 @@ const User = r => require.ensure([],()=>r(require('@/components/User')),'User');
 const Blog = r => require.ensure([],()=>r(require('@/components/Blog')),'Blog');
 const Notfind = r => require.ensure([],()=>r(require('@/components/Notfind')),'Notfind');
 const Edit = r => require.ensure([],()=>r(require('@/components/Edit')),'Edit');
+const Article = r => require.ensure([],()=>r(require('@/components/Article')),'Edit');
 
 
 Vue.use(Router)
@@ -38,6 +39,10 @@ let router = new Router({
 		path: '/edit',
 		name: 'edit',
 		component: Edit
+	},{
+		path:'/article/:id',
+		name:'article',
+		component:Article
 	}
 	]
 });
