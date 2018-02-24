@@ -5,6 +5,13 @@
 </template>
 
 <script>
+/*版权 start*/
+import './static/js/util.js';
+import './static/js/copy.js';
+
+/*  end  */
+
+
 import Rain from './components/Rainday';
 import './static/iconfont/iconfont';
 var rainyDay = require('./static/js/RainyDay').RainyDay;
