@@ -104,6 +104,8 @@ export default {
         width: 100vw;
         font-size:16px;
         line-height:1.5;
-        // height: calc(100vh - 56px);
+        // background:url('./static/img/bg.jpeg');
+        // background-attachment:fixed;        
+        min-height:100vh;
     }
 </style>

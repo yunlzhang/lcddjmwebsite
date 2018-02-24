@@ -3,7 +3,7 @@ var router = express.Router();
 var ArticleModel = require('../models/article');
 
 
-router.post('/save_article',function(req,res,next){
+router.post('/deal_article',function(req,res,next){
     if(!req.session.user){
         return res.json({
             code:100,
@@ -14,6 +14,7 @@ router.post('/save_article',function(req,res,next){
         title = req.body.title,
         cover = req.body.cover,
         content = req.body.content,
+        id = req.body.id,
         tags = req.body.tags || '';
     if(!content){
         return res.json({
@@ -29,16 +30,25 @@ router.post('/save_article',function(req,res,next){
         content:content,
         tags:tags
     }
-
-    ArticleModel.create(article)
-    .then(function (result) {
-        res.json({
-            code:200,
-            message:'文章发表成功'
+    if(id){
+        ArticleModel.updateArticle(id,article)
+        .then(function(result){
+            res.json({
+                code:200,
+                message:'文章更新成功'
+            })
         })
-
-    })
-    .catch(next);
+        .catch(next);
+    }else{
+        ArticleModel.create(article)
+        .then(function (result) {
+            res.json({
+                code:200,
+                message:'文章发表成功'
+            })
+        })
+        .catch(next);
+    }
 })
 
 router.get('/get_article_length',function(req,res){
@@ -96,9 +106,9 @@ router.get('/get_article_detail',function(req,res){
     })
 });
 
-
-router.get('/:postId',function(req,res){
-
+router.post('/update_article_detail',function(){
+    var change
+    var id = req.body.id;
 
 })
 

@@ -40,6 +40,11 @@ let router = new Router({
 		name: 'edit',
 		component: Edit
 	},{
+		path: '/edit/:id',
+		name: 'editArticle',
+		component: Edit
+	}
+	,{
 		path:'/article/:id',
 		name:'article',
 		component:Article

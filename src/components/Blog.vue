@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <HeaderTop :isLogin="isLogin" :active="'blog'" :userInfo="userInfo"></HeaderTop>
-        <div class="main-wrap">
+        <div class="main-wrap" ref="main">
             <ul class="article_lists">
                 <li class="article_item" v-for="item in article">
                     <router-link :to="'/article/'+item._id">
@@ -35,12 +35,11 @@ export default {
     props:['isLogin','userInfo'],
     components:{HeaderTop},
     mounted: function () {
-        console.log(this);
         document.title = 'lcddjm\'s website';
         this.getArticleLength();
         this.getArticle({
             page:1,
-            num:10
+            num:5
         });
     },
     methods:{
@@ -64,7 +63,7 @@ export default {
             document.documentElement.scrollTop = 0            
             this.getArticle({
                 page:page,
-                num:10
+                num:5
             });
         }
     }
@@ -75,7 +74,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
     .main{
-        margin-top:56px;
+        padding-left:300px;
+        overflow:hidden;
+        transition:padding 1s linear;
     }
     .main-wrap{
         width:600px;

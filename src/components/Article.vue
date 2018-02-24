@@ -43,6 +43,7 @@ export default {
     .article-wrap{
         width:800px;
         margin:0 auto;
+        overflow:hidden;
         .title{
             font-size:30px;
             margin:20px 0;

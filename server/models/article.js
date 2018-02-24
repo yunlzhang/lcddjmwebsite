@@ -1,12 +1,12 @@
 var Post = require('../lib/mongo').Post;
 
 module.exports = {
-	create: function(article) {
+	create(article) {
 		return Post.create(article).exec();
 	},
 
 	// 通过文章的id获取相关文章
-	getPostById: function(id) {
+	getPostById(id) {
 		return Post
 			.findOne({
 				_id: id
@@ -14,27 +14,34 @@ module.exports = {
 			.addCreatedAt()
 			.exec();
 	},
-	getPosts: function(opts) {
+	getPosts(opts) {
 		opts = opts || {};
 		var page = Number(opts.page) || 1,
-			num = Number(opts.num) || 10;
+			num = Number(opts.num) || 5;
 
 		delete opts.page;
 		delete opts.num;
 		return Post
 			.find(opts)
-			.skip((page-1)*10)
+			.skip((page-1)*5)
 			.limit(num)
 			.addCreatedAt()
 			.sort({_id:-1})
 			.exec();
 	},
-	getLength:function(){
+	updateArticle(id,options){
+		return Post
+			.findOneAndUpdate({_id:id},{
+				$set:options
+			})
+			.exec();
+	},
+	getLength(){
 		return Post
 			.find({})
 			.exec();
 	},
-	incPv: function(postId) {
+	incPv(postId) {
 		return Post
 			.update({
 				_id: postId

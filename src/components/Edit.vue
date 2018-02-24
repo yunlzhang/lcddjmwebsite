@@ -1,8 +1,7 @@
 <template>
     <div class="edit-wrap">
-        <!--<HeaderTop :isLogin="isLogin" :userInfo="userInfo"></HeaderTop>-->
         <div class="upload-cover" id="QINIU" @mouseenter="showTxt" @mouseleave="showTxt">
-            <div class="bg" ref="coverbg" >
+            <div class="bg" ref="coverbg" :style="'background:url('+cover+') center center / cover no-repeat;'" >
                 <div class="img-prompt" v-if="!isUpload">
                     <div><svg class="icon" aria-hidden="true"><use xlink:href="#icon-image"></use></svg></div>
                     <div class="txt" ref="txt">添加题图</div>    
@@ -11,7 +10,7 @@
             <input type="file" id="qiniu-upload" accept=".jpg,.png,.gif">
         </div>
         <div class="title-input">
-            <input type="text" @blur="setTitle" placeholder="输入标题">
+            <input type="text" :value="title" @blur="setTitle" placeholder="输入标题">
         </div>
         <div class="editor">
             <quillEditor
@@ -26,7 +25,6 @@
 </template>
 
 <script>
-import HeaderTop from './Header';
 
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
@@ -45,17 +43,33 @@ export default {
             cover:'',
             title:'',
             editorOptions : options,
+            id:'',
             isUpload:false
         }
     },
-    props:['isLogin','userInfo'],
-    // components:{HeaderTop},
     mounted: function () {
         document.title = '编辑';
+        if(this.$route.params.id){
+            this.getArticleDetail();
+        }
         this.uploadImg();
     },
-
     methods:{
+        getArticleDetail(){
+            this.$http.get('/api/article/get_article_detail',{
+                params:{
+                    _id:this.$route.params.id
+                }
+            }).then(res => {
+                if(res.body.code == 200){
+                    this.content = res.body.data.content;
+                    this.cover = res.body.data.cover;  
+                    this.title = res.body.data.title
+                    this.isUpload =  this.cover ? true : false;
+                    document.title = '修改文章';    
+                }
+            })
+        },
         showTxt(e){
             if(this.isUpload) return;
             if(e.type === 'mouseenter'){
@@ -96,12 +110,13 @@ export default {
                         // 每个文件上传时,处理相关的事情
                     },
                     'FileUploaded': function (up, file, info) {
-                        var domain = up.getOption('domain');
+                        // var domain = up.getOption('domain');
+                        var domain = 'https://image.lcddjm.com'
                         var res = JSON.parse(info.response);
                         var sourceLink = domain +'/'+ res.key; //获取上传成功后的文件的Url
                         _this.isUpload = true;
                         _this.cover = sourceLink;
-                        _this.$refs.coverbg.style.cssText += 'background:url('+sourceLink+') center center / cover no-repeat;'
+                        _this.$refs.coverbg.style.cssText += ''
                     },  
                     'Error': function (up, err, errTip) {
                         console.log(up,err,errTip)
@@ -118,7 +133,6 @@ export default {
         },
         setTitle(e){
             this.title = e.target.value;
-            console.log(this.title);
         },
         editor(){
             return this.$refs.quillEditor.quill;
@@ -129,10 +143,11 @@ export default {
             // console.log(this.content)
         },
         save(){
-            this.$http.post('/api/article/save_article',{
+            this.$http.post('/api/article/deal_article',{
                 content:this.content,
                 cover:this.cover,
-                title:this.title
+                title:this.title,
+                id:this.$route.params.id
             }).then(res => {
                 alert(res.body.message)
             })
@@ -183,6 +198,7 @@ export default {
             left:50%;
             transform:translate(-50%,-50%);
             color:#bcbcbc;
+            text-align:center;
             .icon{
                 font-size:30px;
             }
@@ -201,6 +217,9 @@ export default {
                 font-size:24px;
                 text-align:left;
             }
+        }
+        .save{
+            text-align:center;
         }
     }
     .quill-editor .ql-toolbar .ql-formats{
