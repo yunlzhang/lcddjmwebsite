@@ -34,5 +34,10 @@ window.util = {
 		} else {
 			event.cancleBubble = true;
 		}
+	},
+	parseDom:function (str) {
+	　　 var objE = document.createElement("div");
+	　　 objE.innerHTML = str;
+	　　 return objE.childNodes;
 	}
 }

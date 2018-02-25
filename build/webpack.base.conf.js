@@ -10,7 +10,6 @@ function resolve(dir) {
 
 module.exports = {
 	entry: {
-		// fetch: 'whatwg-fetch',
 		app: './src/main.js'
 	},
 	output: {
@@ -27,7 +26,8 @@ module.exports = {
 		}
 	},
 	externals: {
-		'$': 'jquery'
+		'$': 'jquery',
+		'vue':'Vue'
 	},
 	module: {
 		rules: [{

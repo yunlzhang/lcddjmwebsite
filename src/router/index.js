@@ -1,11 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-/* import Signup from '@/components/Signup';
-import Signin from '@/components/Signin';
-import User from '@/components/User';
-import Blog from '@/components/Blog';
-import Notfind from '@/components/Notfind';
-import Edit from '@/components/Edit'; */
 
 const Signup = r => require.ensure([],()=>r(require('@/components/Signup')),'Signup');
 const Signin = r => require.ensure([],()=>r(require('@/components/Signin')),'Signin');

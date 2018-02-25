@@ -9,6 +9,9 @@
 </template>
 
 <script>
+import '../static/css/highlight.min.css'
+import '../static/js/highlight.min';
+console.log(hljs)
 export default {
     name: 'Article',
     data() {
@@ -19,6 +22,7 @@ export default {
     mounted: function () {
         // document.title = 'lcddjm\'s website';
         this.getArticleDetail();
+        
     },
     methods:{
         getArticleDetail(){
@@ -29,8 +33,22 @@ export default {
             }).then(res => {
                 if(res.body.code == 200){
                     this.articleData = res.body.data;
-                    document.title = res.body.data.title;    
+                    document.title = res.body.data.title; 
+                    this.dealPre();   
                 }
+            })
+        },
+        dealPre(){
+            this.$nextTick(function () {
+                //dom已更新
+                var pres = document.querySelectorAll('pre');
+                for(var i = 0,len = pres.length;i<len;i++){
+                    var str = pres[i].innerHTML;
+                    var newNode = util.parseDom('<pre><code>'+str+'</code></pre>');
+                    pres[i].parentNode.replaceChild(newNode[0],pres[i])
+                }
+                hljs.initHighlighting()
+                
             })
         }
     }

@@ -72,6 +72,13 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
     // keep module.id stable when vender modules does not change
     new webpack.HashedModuleIdsPlugin(),
+    //引用超过两次单独打包 多次引用的模块
+    new webpack.optimize.CommonsChunkPlugin({
+      async: 'used-twice',
+      minChunks: (module, count) => (
+        count >= 2
+      ),
+    }),
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
@@ -92,6 +99,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       name: 'manifest',
       chunks: ['vendor']
     }),
+    
     // copy custom static assets
     new CopyWebpackPlugin([
       {
