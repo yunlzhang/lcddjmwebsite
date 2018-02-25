@@ -15,6 +15,7 @@
             <el-pagination
                 background
                 layout="prev, pager, next"
+                page-size="5"
                 :total="articleLength"
                 @current-change="pageChange">
             </el-pagination>
