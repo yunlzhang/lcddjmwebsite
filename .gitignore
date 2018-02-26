@@ -16,3 +16,4 @@ selenium-debug.log
 *.sln
 /dist
 config/production.js
+server/routes/gettoken.js
