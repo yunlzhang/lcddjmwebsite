@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <HeaderTop :isLogin="isLogin" :active="'blog'" :userInfo="userInfo"></HeaderTop>
+        <HeaderTop :isLogin="isLogin" :active="'work'" :userInfo="userInfo"></HeaderTop>
         <div class="main-wrap" ref="main">
             <ul class="article_lists">
                 <li class="article_item" v-for="item in article">

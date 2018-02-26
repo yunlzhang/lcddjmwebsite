@@ -149,7 +149,17 @@ export default {
                 title:this.title,
                 id:this.$route.params.id
             }).then(res => {
-                alert(res.body.message)
+                if(res.body.code == 200){
+                    this.$message({
+                        message: res.body.message,
+                        type: 'success'
+                    });
+                }else{
+                    this.$message({
+                        message: res.body.message,
+                        type: 'warning'
+                    });
+                }
             })
         }
     },

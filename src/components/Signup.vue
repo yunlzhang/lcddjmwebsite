@@ -52,7 +52,10 @@ export default {
                 if(res.body.code === 200){
                     this.$router.push('/signin');
                 }else{
-                    alert(res.body.message)
+                    this.$message({
+                        message: res.body.message,
+                        type: 'info'
+                    });
                 }
             }).catch(err=>{
                 // console.log(err);

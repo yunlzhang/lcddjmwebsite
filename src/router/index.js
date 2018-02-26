@@ -9,7 +9,7 @@ const Notfind = r => require.ensure([],()=>r(require('@/components/Notfind')),'N
 const Edit = r => require.ensure([],()=>r(require('@/components/Edit')),'Edit');
 const Article = r => require.ensure([],()=>r(require('@/components/Article')),'Article');
 const About = r => require.ensure([],()=>r(require('@/components/About')),'About'); 
-
+const Life = r => require.ensure([],() =>r(require('@/components/Life')),'Life');
 Vue.use(Router)
 let router = new Router({
 	mode: 'history',
@@ -22,6 +22,11 @@ let router = new Router({
 		name: 'blog',
 		component: Blog
 	},{
+		path: '/life',
+		name: 'life',
+		component: Life
+	}
+	,{
 		path: '/signup',
 		name: 'signup',
 		component: Signup

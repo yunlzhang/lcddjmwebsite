@@ -44,7 +44,10 @@ export default {
                     this.$emit('getUserInfo');
                     this.$router.replace('/');
                 }else{
-                    alert(res.body.message)
+                    this.$message({
+                        message: res.body.message,
+                        type: 'info'
+                    });
                 }
             })
         }
