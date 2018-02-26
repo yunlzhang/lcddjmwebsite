@@ -15,3 +15,4 @@ selenium-debug.log
 *.njsproj
 *.sln
 /dist
+config/production.js
