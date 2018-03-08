@@ -6,7 +6,7 @@
                 <li class="article_item" v-for="item in article">
                     <router-link :to="'/article/'+item._id">
                         <div class="title" v-if="item.title">{{item.title}}</div>
-                        <div class="cover" v-if="item.cover"><img :src="item.cover" alt=""></div>
+                        <!--<div class="cover" v-if="item.cover"><img :src="item.cover" alt=""></div>-->
                         <div class="des">{{item.des}}</div>
                         <div class="create"><span class="l">发表于 {{item.created_at}}</span></div>
                     </router-link>
@@ -75,7 +75,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
     .main{
-        padding-left:300px;
+        // padding-left:300px;
         overflow:hidden;
         transition:padding 1s linear;
     }
@@ -84,10 +84,10 @@ export default {
         margin:0 auto;
         .article_lists{
             text-align:left;
-            margin:40px 0;
+            // margin:20px 0;
         }
         .article_item{
-            padding:30px 0;
+            padding:15px 0;
             border-bottom:1px solid #ccc;
             .title{
                 font-weight:700;
@@ -98,7 +98,7 @@ export default {
                 margin:10px 0;
             }
             .create{
-                margin:20px 0;
+                margin:10px 0;
                 color:#ababab;
             }
         }

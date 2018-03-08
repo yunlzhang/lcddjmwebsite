@@ -29,7 +29,7 @@ app.use(require('connect-history-api-fallback')({
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-
+app.disable('etag');
 // 设置静态文件目录
 app.use(express.static(path.join(__dirname, 'dist')));
 // session 中间件

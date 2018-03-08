@@ -34,10 +34,10 @@
             withdraw(){
                 if(this.packup){
                     this.$refs.nav.style.cssText += 'left:0;' 
-                    document.querySelector('.main').style.cssText += 'padding-left:300px;'
+                    // document.querySelector('.main').style.cssText += 'padding-left:300px;'
                 }else{
                     this.$refs.nav.style.cssText += 'left:-300px;' 
-                    document.querySelector('.main').style.cssText += 'padding-left:0;'                    
+                    // document.querySelector('.main').style.cssText += 'padding-left:0;'                    
                 }
                 this.packup = !this.packup;                
             }

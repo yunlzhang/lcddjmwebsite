@@ -73,7 +73,7 @@ router.get('/get_article',function(req,res){
     .then(function (result) {
         result.forEach(function(item,index){
             //截取部分内容
-            var tempStr = item.content.replace(/<[^>]*>/ig,'');
+            var tempStr = item.content.replace(/<[^>]*>/ig,'').replace(/\&nbsp;/g,'');
             result[index]['des'] = tempStr.slice(0,200) + '...';
             delete result[index]['content'];
         })

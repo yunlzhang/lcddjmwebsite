@@ -26,15 +26,16 @@
 
 <script>
 
-import 'quill/dist/quill.core.css'
+// import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
-import 'quill/dist/quill.bubble.css'
+// import 'quill/dist/quill.bubble.css'
 
 import '../static/js/plupload/plupload.full.min';
 import '../static/js/qiniu.min';
 
 import options from '../static/config/editor_config';
 import { quillEditor } from 'vue-quill-editor'
+console.log(quillEditor);
 export default {
     name: 'Edit',
     data() {

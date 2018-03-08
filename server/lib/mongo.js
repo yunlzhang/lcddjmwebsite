@@ -42,10 +42,6 @@ exports.Post = mongolass.model('Post', {
 exports.Post.index({ author: 1, _id: -1 }).exec();// 按创建时间降序查看用户的文章列表
 
 
-
-
-
-
 exports.Comment = mongolass.model('Comment', {
   	author: { type: Mongolass.Types.ObjectId },
   	content: { type: 'string' },

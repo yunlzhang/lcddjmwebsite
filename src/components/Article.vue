@@ -2,7 +2,7 @@
     <div class="article-wrap">
         <div class="title">{{articleData.title}}</div>
         <div class="cover" v-if="articleData.cover"><img :src="articleData.cover" alt=""></div>
-        <div class="content">
+        <div class="content rich-text">
             <div v-html="articleData.content"></div>
         </div>
     </div>
@@ -70,6 +70,39 @@ export default {
         }
         .cover{
             margin:20px 0;
+        }
+        
+    }
+</style>
+<style lang="scss">
+    .rich-text{     
+        line-height:1.75;
+        font-size:16px;
+        blockquote{
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-left: 6px solid #b3b3b3;
+            word-break: break-word;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 30px;
+            margin: 0 0 20px;
+        }
+        ul,ol{
+            margin:10px 0;
+            padding-left: 30px;
+            li{
+                list-style-position: outside;
+            }
+        }
+        ol li{
+            list-style-type: decimal;
+        }
+        ul li{
+            list-style-type: disc;
+        }
+        a{
+            color:#008cff;
         }
     }
 </style>
