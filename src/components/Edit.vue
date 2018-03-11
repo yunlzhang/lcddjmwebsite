@@ -1,5 +1,27 @@
 <template>
     <div class="edit-wrap">
+        <div class="top">
+            <div class="tags">
+                <el-select
+                    v-model="value"
+                    value-key="tags"
+                    name="tags"
+                    size="medium"
+                    multiple
+                    filterable
+                    allow-create
+                    default-first-option
+                    placeholder="请选择文章标签">
+                    <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                    </el-option>
+                </el-select>
+            </div>
+            <div class="save" @click="save">保存</div>
+        </div>
         <div class="upload-cover" id="QINIU" @mouseenter="showTxt" @mouseleave="showTxt">
             <div class="bg" ref="coverbg" :style="'background:url('+cover+') center center / cover no-repeat;'" >
                 <div class="img-prompt" v-if="!isUpload">
@@ -17,10 +39,9 @@
                 v-model="content"
                 ref="quillEditor"
                 :options="editorOptions"
-                @blur="contentBlur"
             ></quillEditor>
         </div>
-        <div class="save" @click="save">保存</div>
+        
     </div>
 </template>
 
@@ -35,7 +56,6 @@ import '../static/js/qiniu.min';
 
 import options from '../static/config/editor_config';
 import { quillEditor } from 'vue-quill-editor'
-console.log(quillEditor);
 export default {
     name: 'Edit',
     data() {
@@ -45,7 +65,15 @@ export default {
             title:'',
             editorOptions : options,
             id:'',
-            isUpload:false
+            isUpload:false,
+            options: [
+                {value: 'html',label: 'html'}, 
+                {value: 'css',label: 'css'},
+                {value: 'javascript',label: 'javascrip'},
+                {value:'node',label:'node'},
+                {value:'webpack',label:'webpack'}
+            ],
+            value: []
         }
     },
     mounted: function () {
@@ -54,6 +82,7 @@ export default {
             this.getArticleDetail();
         }
         this.uploadImg();
+        this.scrollHandle();
     },
     methods:{
         getArticleDetail(){
@@ -138,14 +167,9 @@ export default {
         editor(){
             return this.$refs.quillEditor.quill;
         },
-        contentBlur(){
-            // console.log(this.editor())
-            // // this.content = this.editor().getContent();
-            // console.log(this.content)
-        },
         save(){
             this.$http.post('/api/article/deal_article',{
-                content:this.content,
+                content:this.content.replace(/\s/ig,'&nbsp;'),
                 cover:this.cover,
                 title:this.title,
                 id:this.$route.params.id
@@ -162,6 +186,9 @@ export default {
                     });
                 }
             })
+        },
+        scrollHandle:function(){
+            console.log(util);
         }
     },
     components: {
@@ -179,6 +206,8 @@ export default {
     .edit-wrap{
         width:800px;
         margin:0 auto;
+        padding-top:60px;
+        position: relative;
         .upload-cover{
             height:200px;
             background:#f2f2f2;
@@ -229,8 +258,36 @@ export default {
                 text-align:left;
             }
         }
+        .top{
+            height:60px;
+            position:fixed;
+            top:0;
+            left:50%;
+            width:800px;
+            margin-left:-400px;
+            border-bottom:1px solid #dee0e1;
+        }
+        .tags{
+            float:left;
+            margin-top:10px;
+        }
         .save{
+            float:right;
+            width:120px;
+            height:40px;
+            margin:10px;
+            line-height:40px;
+            border:1px solid #dee0e1;
             text-align:center;
+            border-radius:3px;
+            &:hover{
+                color:#409EFF;
+                border-color:#409EFF;
+            }
+
+        }
+        .el-input__inner{
+            width:500px;
         }
     }
     .quill-editor .ql-toolbar .ql-formats{

@@ -1,9 +1,9 @@
 <template>
     <div class="main">
-        <HeaderTop :isLogin="isLogin" :active="'work'" :userInfo="userInfo"></HeaderTop>
+        <!--<HeaderTop :isLogin="isLogin" :active="'work'" :userInfo="userInfo"></HeaderTop>-->
         <div class="main-wrap" ref="main">
             <ul class="article_lists">
-                <li class="article_item" v-for="item in article">
+                <li class="article_item" v-for="item in article" v-bind:key="item._id">
                     <router-link :to="'/article/'+item._id">
                         <div class="title" v-if="item.title">{{item.title}}</div>
                         <!--<div class="cover" v-if="item.cover"><img :src="item.cover" alt=""></div>-->
@@ -15,7 +15,7 @@
             <el-pagination
                 background
                 layout="prev, pager, next"
-                page-size="5"
+                :page-size="5"
                 :total="articleLength"
                 @current-change="pageChange">
             </el-pagination>
@@ -96,6 +96,10 @@ export default {
             }
             .cover{
                 margin:10px 0;
+            }
+            .des{
+                word-wrap:break-word;
+                word-break:break-all;
             }
             .create{
                 margin:10px 0;

@@ -4,14 +4,15 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import $http from 'vue-resource'
-import { Pagination,Message} from 'element-ui'
+import { Pagination,Message,Select,Option } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 
 Vue.use($http);
 Vue.use(Pagination);
+Vue.use(Select);
+Vue.use(Option);
 Vue.prototype.$message = Message;
-
 
 Vue.config.productionTip = false;
 /* eslint-disable no-new */
