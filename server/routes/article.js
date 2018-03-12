@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var ArticleModel = require('../models/article');
+let arrayCurry  =  require('../common/public').arrayCurry;
 
 
 router.post('/deal_article',function(req,res,next){
@@ -95,7 +96,7 @@ router.get('/get_article_detail',function(req,res){
     .then(function (result) {
         res.json({
             code:200,
-            data:result,
+            data:arrayCurry(result),
             message:'获取文章信息成功'
         });
     }).catch(e =>{

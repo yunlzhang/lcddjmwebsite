@@ -3,7 +3,7 @@
         <div class="top">
             <div class="tags">
                 <el-select
-                    v-model="value"
+                    v-model="tags"
                     value-key="tags"
                     name="tags"
                     size="medium"
@@ -13,7 +13,7 @@
                     default-first-option
                     placeholder="请选择文章标签">
                     <el-option
-                    v-for="item in options"
+                    v-for="item in tagsOptions"
                     :key="item.value"
                     :label="item.label"
                     :value="item.value">
@@ -66,14 +66,14 @@ export default {
             editorOptions : options,
             id:'',
             isUpload:false,
-            options: [
+            tagsOptions: [
                 {value: 'html',label: 'html'}, 
                 {value: 'css',label: 'css'},
                 {value: 'javascript',label: 'javascrip'},
                 {value:'node',label:'node'},
                 {value:'webpack',label:'webpack'}
             ],
-            value: []
+            tags: []
         }
     },
     mounted: function () {
@@ -172,7 +172,8 @@ export default {
                 content:this.content.replace(/\s/ig,'&nbsp;'),
                 cover:this.cover,
                 title:this.title,
-                id:this.$route.params.id
+                id:this.$route.params.id,
+                tags:this.tags
             }).then(res => {
                 if(res.body.code == 200){
                     this.$message({
@@ -188,6 +189,9 @@ export default {
             })
         },
         scrollHandle:function(){
+            util.addHandler(window,'scroll',function(e){
+                console.log(e);
+            })
             console.log(util);
         }
     },
@@ -265,6 +269,7 @@ export default {
             left:50%;
             width:800px;
             margin-left:-400px;
+            z-index:100;
             border-bottom:1px solid #dee0e1;
         }
         .tags{
@@ -281,8 +286,8 @@ export default {
             text-align:center;
             border-radius:3px;
             &:hover{
-                color:#409EFF;
-                border-color:#409EFF;
+                color:#222c37;
+                border-color:#222c37;
             }
 
         }

@@ -1,4 +1,5 @@
 var Post = require('../lib/mongo').Post;
+
 var Promise = require("bluebird");
 module.exports = {
 	create(article) {
