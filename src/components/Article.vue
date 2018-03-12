@@ -58,8 +58,9 @@ export default {
                     var newNode = util.parseDom('<pre><code>'+str+'</code></pre>');
                     pres[i].parentNode.replaceChild(newNode[0],pres[i])
                 }
-                hljs.initHighlighting()
-                
+                document.querySelectorAll('pre code').forEach(function(item,index){
+                    hljs.highlightBlock(item);
+                })                
             })
         }
     }
