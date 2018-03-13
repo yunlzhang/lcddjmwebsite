@@ -9,12 +9,14 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 
-const env = process.env.NODE_ENV === 'testing'
-  ? require('../config/test.env')
-  : config.build.env
+const env = config.build.env
 
 const webpackConfig = merge(baseWebpackConfig, {
+  entry: {
+		app: './src/entry_client.js'
+	},
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
@@ -50,26 +52,6 @@ const webpackConfig = merge(baseWebpackConfig, {
         safe: true
       }
     }),
-    // generate dist index.html with correct asset hash for caching.
-    // you can customize output by editing /index.html
-    // see https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
-      filename: process.env.NODE_ENV === 'testing'
-        ? 'index.html'
-        : config.build.index,
-      template: 'index.html',
-      favicon:'favicon.ico',
-      inject: true,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true
-        // more options:
-        // https://github.com/kangax/html-minifier#options-quick-reference
-      },
-      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency'
-    }),
     // keep module.id stable when vender modules does not change
     new webpack.HashedModuleIdsPlugin(),
     //引用超过两次单独打包 多次引用的模块
@@ -99,7 +81,27 @@ const webpackConfig = merge(baseWebpackConfig, {
       name: 'manifest',
       chunks: ['vendor']
     }),
-    
+    // generate dist index.html with correct asset hash for caching.
+    // you can customize output by editing /index.html
+    // see https://github.com/ampedandwired/html-webpack-plugin
+    new VueSSRClientPlugin({
+      filename: process.env.NODE_ENV === 'testing'
+        ? 'index.html'
+        : config.build.index,
+      template: 'index.html',
+      favicon:'favicon.ico',
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+        // more options:
+        // https://github.com/kangax/html-minifier#options-quick-reference
+      },
+      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+      chunksSortMode: 'dependency'
+    }),
+    // new HtmlWebpackPlugin(),
     // copy custom static assets
     new CopyWebpackPlugin([
       {

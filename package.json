@@ -7,10 +7,8 @@
   "scripts": {
     "dev": "NODE_ENV=development node build/dev-server.js",
     "start": "npm run dev",
-    "build": " node build/build.js",
-    "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
-    "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e"
+    "build:server": " node build/build_server.js",
+    "build": " node build/build.js"
   },
   "dependencies": {
     "connect-history-api-fallback": "^1.5.0",
@@ -91,6 +89,7 @@
     "vue-loader": "^13.3.0",
     "vue-quill-editor": "^3.0.4",
     "vue-resource": "^1.3.5",
+    "vue-ssr-webpack-plugin": "^3.0.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",
@@ -98,6 +97,7 @@
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.18.2",
     "webpack-merge": "^4.1.0",
+    "webpack-node-externals": "^1.6.0",
     "whatwg-fetch": "^2.0.3"
   },
   "engines": {

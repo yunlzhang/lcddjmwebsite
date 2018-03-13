@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
+Vue.use(Router);
 const Signup = r => require.ensure([],()=>r(require('@/components/Signup')),'Signup');
 const Signin = r => require.ensure([],()=>r(require('@/components/Signin')),'Signin');
 const User = r => require.ensure([],()=>r(require('@/components/User')),'User');
@@ -10,7 +10,6 @@ const Edit = r => require.ensure([],()=>r(require('@/components/Edit')),'Edit');
 const Article = r => require.ensure([],()=>r(require('@/components/Article')),'Article');
 const About = r => require.ensure([],()=>r(require('@/components/About')),'About'); 
 const Life = r => require.ensure([],() =>r(require('@/components/Life')),'Life');
-Vue.use(Router)
 let router = new Router({
 	mode: 'history',
 	routes: [{
