@@ -1,8 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var ArticleModel = require('../models/article');
-let arrayCurry  =  require('../common/public').arrayCurry;
-
+const express = require('express');
+const router = express.Router();
+const ArticleModel = require('../models/article');
+const arrayCurry  =  require('../common/public').arrayCurry;
+const Promise = require("bluebird");
 
 router.post('/deal_article',function(req,res,next){
     if(!req.session.user){
@@ -11,7 +11,7 @@ router.post('/deal_article',function(req,res,next){
             message:'未登陆'
         })
     }   
-    var author = req.session.user._id,  
+    let author = req.session.user._id,  
         title = req.body.title,
         cover = req.body.cover,
         content = req.body.content,
@@ -24,7 +24,7 @@ router.post('/deal_article',function(req,res,next){
         })
     };
 
-    var article = {
+    let article = {
         author:author,
         title:title,
         cover:cover,
@@ -51,6 +51,29 @@ router.post('/deal_article',function(req,res,next){
         .catch(next);
     }
 })
+
+router.post('/get_index_data',function(req,res,next){
+    Promise.all([ArticleModel.getLength(),ArticleModel.getPosts(req.body)]).then(result=>{
+        result[1].forEach(function(item,index){
+            //截取部分内容
+            let tempStr = item.content.replace(/<[^>]*>/ig,'').replace(/\&nbsp;/g,'');
+            result[1][index]['des'] = tempStr.slice(0,200) + '...';
+            delete result[1][index]['content'];
+        })
+        res.json({
+            code:200,
+            article_length:result[0],
+            article_data:result[1],
+            message:'success'
+        });
+    }).catch(e =>{
+        console.log(e);
+        res.json({
+            code:100,
+            message:'获取失败'
+        });
+    })
+});
 
 router.get('/get_article_length',function(req,res){
     ArticleModel.getLength()
@@ -90,6 +113,10 @@ router.get('/get_article',function(req,res){
         });
     })
 });
+
+
+
+
 router.get('/get_article_detail',function(req,res){
     var opts = req.query;
     ArticleModel.getPostById(opts._id)
@@ -106,13 +133,6 @@ router.get('/get_article_detail',function(req,res){
         });
     })
 });
-
-router.post('/update_article_detail',function(){
-    var change
-    var id = req.body.id;
-
-})
-
 
 
 module.exports = router;

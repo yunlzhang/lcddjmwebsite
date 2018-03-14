@@ -38,7 +38,7 @@ module.exports = {
 	},
 	getLength(){
 		return Post
-			.find({})
+			.count()
 			.exec();
 	},
 	incPv(postId) {

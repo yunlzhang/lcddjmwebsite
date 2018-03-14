@@ -39,13 +39,18 @@ export default {
     },
     methods:{
         signin(){
-            this.$http.post('/api/signin',this.signinData).then(res => {
-                if(res.body.code === 200){
+            this.axios({
+                method:'post',
+                data:this.signinData,
+                url:'/api/signin'
+            })
+            .then(res => {
+                if(res.data.code === 200){
                     this.$emit('getUserInfo');
                     this.$router.replace('/');
                 }else{
                     this.$message({
-                        message: res.body.message,
+                        message: res.data.message,
                         type: 'info'
                     });
                 }

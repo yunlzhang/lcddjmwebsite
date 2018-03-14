@@ -15,26 +15,26 @@ function resolve(dir) {
 }
 
 module.exports = function (app) {
-    app.get('/', function (req, res) {
-        const s = Date.now()
+    // app.get('/', function (req, res) {
+    //     const s = Date.now()
 
-        res.setHeader("Content-Type", "text/html")
-        renderer.renderToStream()
-        .on('error', errorHandler)
-        .on('end', () => console.log(`whole request: ${Date.now() - s}ms`))
-        .pipe(res)
-        const errorHandler = err => {
-            console.log(err);
-            if (err && err.code === 404) {
-              res.status(404).end('404 | Page Not Found')
-            } else {
-              // Render Error Page or Redirect
-              res.status(500).end('500 | Internal Server Error')
-              console.error(`error during render : ${req.url}`)
-              console.error(err)
-            }
-        }
-    });
+    //     res.setHeader("Content-Type", "text/html")
+    //     renderer.renderToStream()
+    //     .on('error', errorHandler)
+    //     .on('end', () => console.log(`whole request: ${Date.now() - s}ms`))
+    //     .pipe(res)
+    //     const errorHandler = err => {
+    //         console.log(err);
+    //         if (err && err.code === 404) {
+    //           res.status(404).end('404 | Page Not Found')
+    //         } else {
+    //           // Render Error Page or Redirect
+    //           res.status(500).end('500 | Internal Server Error')
+    //           console.error(`error during render : ${req.url}`)
+    //           console.error(err)
+    //         }
+    //     }
+    // });
     
     app.use('/api/signup', require('./signup'));
     app.use('/api/signin', require('./signin'));

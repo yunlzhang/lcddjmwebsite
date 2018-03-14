@@ -41,32 +41,48 @@ export default {
     components:{HeaderTop},
     mounted: function () {
         document.title = 'lcddjm\'s website';
-        this.getArticleLength();
-        this.getArticle({
+        this.getIndexData({
             page:1,
             num:5
         });
         this.particle();
     },
     methods:{
-        getArticleLength(){
-            this.$http.get('/api/article/get_article_length').then(res => {
-                if(res.body.code == 200){
-                    this.articleLength = res.body.article_length;
+        getIndexData(data){
+            this.axios({
+                method: 'post',
+                data:data,
+                url: '/api/article/get_index_data'
+            }).then(res=>{
+                if(res.data.code == 200){
+                    this.articleLength = res.data.article_length;
+                    this.article = res.data.article_data;
+                }else{
+                    this.$message({
+                        message: res.data.message,
+                        type: 'warning'
+                    });
                 }
             })
         },
         getArticle(data){
-            this.$http.get('/api/article/get_article',{
-                params:data
-            }).then(res => {
-                if(res.body.code == 200){
-                    this.article = res.body.data;
+            this.axios({
+                method:'get',
+                data:data,
+                url:'/api/article/get_article'
+            }).then(res=>{
+                if(res.data.code == 200){
+                    this.article = res.data.data;
+                }else{
+                    this.$message({
+                        message: res.data.message,
+                        type: 'warning'
+                    });
                 }
             })
         },
         pageChange(page){
-            document.documentElement.scrollTop = 0            
+            this.scrollTopAnimate('.main-scroll');
             this.getArticle({
                 page:page,
                 num:5
@@ -161,6 +177,22 @@ export default {
                 },
                 retina_detect: !0
             });
+        },
+        scrollTopAnimate(selector){
+            let timer;
+            scrollTop();
+            function scrollTop(){
+                timer = setTimeout(function(){
+                    let top = document.querySelector(selector).scrollTop;
+                    let speed = Math.floor(-top / 7);
+                    document.querySelector(selector).scrollTop = top + speed;
+                    if(top == 0){
+                        clearTimeout(timer);
+                    }else{
+                        scrollTop();
+                    }
+                },30);
+            }   
         }
     }
 

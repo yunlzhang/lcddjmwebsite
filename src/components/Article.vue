@@ -35,18 +35,22 @@ export default {
     },
     methods:{
         getArticleDetail(id){
-            this.$http.get('/api/article/get_article_detail',{
-                params:{
+            this.axios({
+                method:'get',
+                data:{
                     _id:id
-                }
+                },
+                url:'/api/article/get_article_detail'
             }).then(res => {
-                if(res.body.code == 200){
-                    this.articleData = res.body.data[1];
-                    this.previous = res.body.data[0]._id  ? res.body.data[0] : '';
-                    this.next = res.body.data[2]._id ? res.body.data[2] : '';
-                    document.title = res.body.data[1].title; 
+                if(res.data.code == 200){
+                    this.articleData = res.data.data[1];
+                    this.previous = res.data.data[0]._id  ? res.data.data[0] : '';
+                    this.next = res.data.data[2]._id ? res.data.data[2] : '';
+                    document.title = res.data.data[1].title; 
                     this.dealPre();   
                 }
+            }).catch(e => {
+                console.log(e);
             })
         },
         dealPre(){

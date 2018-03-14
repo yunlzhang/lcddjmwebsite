@@ -168,21 +168,26 @@ export default {
             return this.$refs.quillEditor.quill;
         },
         save(){
-            this.$http.post('/api/article/deal_article',{
-                content:this.content.replace(/\s/ig,'&nbsp;'),
-                cover:this.cover,
-                title:this.title,
-                id:this.$route.params.id,
-                tags:this.tags
-            }).then(res => {
-                if(res.body.code == 200){
+            this.axios({
+                method:'post',
+                data:{
+                    content:this.content.replace(/\s/ig,'&nbsp;'),
+                    cover:this.cover,
+                    title:this.title,
+                    id:this.$route.params.id,
+                    tags:this.tags
+                },
+                url:'/api/article/deal_article'
+            })
+            .then(res => {
+                if(res.data.code == 200){
                     this.$message({
-                        message: res.body.message,
+                        message: res.data.message,
                         type: 'success'
                     });
                 }else{
                     this.$message({
-                        message: res.body.message,
+                        message: res.data.message,
                         type: 'warning'
                     });
                 }

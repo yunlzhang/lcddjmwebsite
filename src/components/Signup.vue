@@ -48,17 +48,20 @@ export default {
     },
     methods:{
         signup(){
-            this.$http.post('/api/signup',this.signupData).then(res=>{
-                if(res.body.code === 200){
+            this.axios({
+                method:'post',
+                data:this.signupData,
+                url:'/api/signup'
+            })
+            .then(res => {
+                if(res.data.code === 200){
                     this.$router.push('/signin');
                 }else{
                     this.$message({
-                        message: res.body.message,
+                        message: res.data.message,
                         type: 'info'
                     });
                 }
-            }).catch(err=>{
-                // console.log(err);
             })
         }
     },
