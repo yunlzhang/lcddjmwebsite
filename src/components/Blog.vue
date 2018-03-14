@@ -68,7 +68,7 @@ export default {
         getArticle(data){
             this.axios({
                 method:'get',
-                data:data,
+                params:data,
                 url:'/api/article/get_article'
             }).then(res=>{
                 if(res.data.code == 200){

@@ -3,14 +3,12 @@
 import Vue from 'vue'
 import axios from 'axios'
 import App from './App.vue'
-import $http from 'vue-resource'
 import { Pagination,Message,Select,Option } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import { createRouter } from './router'
 
 Vue.prototype.axios = axios
 
-Vue.use($http)
 Vue.use(Pagination);
 Vue.use(Select);
 Vue.use(Option);

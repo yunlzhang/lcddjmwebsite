@@ -37,7 +37,7 @@ export default {
         getArticleDetail(id){
             this.axios({
                 method:'get',
-                data:{
+                params:{
                     _id:id
                 },
                 url:'/api/article/get_article_detail'

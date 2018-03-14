@@ -9,7 +9,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 
 const env = config.build.env
 
@@ -84,10 +83,8 @@ const webpackConfig = merge(baseWebpackConfig, {
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
-    new VueSSRClientPlugin({
-      filename: process.env.NODE_ENV === 'testing'
-        ? 'index.html'
-        : config.build.index,
+    new HtmlWebpackPlugin({
+      filename: config.build.index,
       template: 'index.html',
       favicon:'favicon.ico',
       inject: true,

@@ -46,16 +46,16 @@ exports.Post = mongolass.model('Post', {
 		type: Mongolass.Types.ObjectId
 	},
 	title: {
-		type: 'string'
+		type: String
 	},
 	cover: {
-		type: 'string'
+		type: String
 	},
 	content: {
-		type: 'string'
+		type: String
 	},
 	tags: {
-		type: 'string'
+		type: Array
 	},
 	// pv: { type: 'number' }
 });
@@ -70,7 +70,7 @@ exports.Comment = mongolass.model('Comment', {
 		type: Mongolass.Types.ObjectId
 	},
 	content: {
-		type: 'string'
+		type: String
 	},
 	postId: {
 		type: Mongolass.Types.ObjectId

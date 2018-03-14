@@ -86,15 +86,19 @@ export default {
     },
     methods:{
         getArticleDetail(){
-            this.$http.get('/api/article/get_article_detail',{
+            this.axios({
+                type:'get',
+                method:'get',
+                url:'/api/article/get_article_detail',
                 params:{
                     _id:this.$route.params.id
                 }
             }).then(res => {
-                if(res.body.code == 200){
-                    this.content = res.body.data.content;
-                    this.cover = res.body.data.cover;  
-                    this.title = res.body.data.title
+                if(res.data.code == 200){
+                    let obj = res.data.data[1];
+                    this.content = obj.content;
+                    this.cover = obj.cover;  
+                    this.title = obj.title
                     this.isUpload =  this.cover ? true : false;
                     document.title = '修改文章';    
                 }
@@ -168,10 +172,11 @@ export default {
             return this.$refs.quillEditor.quill;
         },
         save(){
+            // .replace(/\s/ig,'&nbsp;')
             this.axios({
                 method:'post',
                 data:{
-                    content:this.content.replace(/\s/ig,'&nbsp;'),
+                    content:this.content,
                     cover:this.cover,
                     title:this.title,
                     id:this.$route.params.id,

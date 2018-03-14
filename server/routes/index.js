@@ -1,18 +1,18 @@
-const { createBundleRenderer } = require('vue-server-renderer')
-const path = require('path')
-const renderer = createBundleRenderer(resolve('dist/vue-ssr-server-bundle.json'), {
-  template:require('fs').readFileSync(resolve('index.template.html'), 'utf-8')
-});
-const WindowMock = require('window-mock').default;
+// const { createBundleRenderer } = require('vue-server-renderer')
+// const path = require('path')
+// const renderer = createBundleRenderer(resolve('dist/vue-ssr-server-bundle.json'), {
+//   template:require('fs').readFileSync(resolve('index.template.html'), 'utf-8')
+// });
+// const WindowMock = require('window-mock').default;
 
-let window = new WindowMock();
-global.window = window;
-global.localStorage = window.localStorage;
-global.document = window.document;
+// let window = new WindowMock();
+// global.window = window;
+// global.localStorage = window.localStorage;
+// global.document = window.document;
 
-function resolve(dir) {
-	return path.join(__dirname, '../..', dir)
-}
+// function resolve(dir) {
+// 	return path.join(__dirname, '../..', dir)
+// }
 
 module.exports = function (app) {
     // app.get('/', function (req, res) {
