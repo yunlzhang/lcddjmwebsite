@@ -74,9 +74,9 @@ export default {
     },
     methods:{
         getUserInfo(){
-            this.$http.get('/api/get_user_info').then(res => {
-                if(res.body.code === 200){
-                    this.userInfo = res.body.data;
+            this.axios.get('/api/get_user_info').then(res => {
+                if(res.data.code === 200){
+                    this.userInfo = res.data.data;
                     this.isLogin = true;
                     sessionStorage.setItem('isLogin','1');
                 }else{
