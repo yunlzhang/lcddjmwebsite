@@ -3,6 +3,10 @@ const router = express.Router();
 const ArticleModel = require('../models/article');
 const arrayCurry  =  require('../common/public').arrayCurry;
 const Promise = require("bluebird");
+const moment = require('moment');
+const objectIdToTimestamp = require('objectid-to-timestamp');
+
+
 
 router.post('/deal_article',function(req,res,next){
     if(!req.session.user){
@@ -58,6 +62,7 @@ router.post('/get_index_data',function(req,res,next){
             //截取部分内容
             let tempStr = item.content.replace(/<[^>]*>/ig,'').replace(/\&nbsp;/g,'');
             result[1][index]['des'] = tempStr.slice(0,200) + '...';
+            result[1][index]['created_at'] = moment(objectIdToTimestamp(item._id)).format('YYYY-MM-DD HH:mm')
             delete result[1][index]['content'];
         })
         res.json({
