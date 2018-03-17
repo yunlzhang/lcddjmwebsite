@@ -5,37 +5,52 @@
         <div class="content rich-text">
             <div v-html="articleData.content"></div>
         </div>
+        <div class="bottom">
+            <div class="previous" v-if="previous"><router-link :to="'/article/'+previous._id">上一篇  {{previous.title}}</router-link></div>
+            <div class="next" v-if="next"><router-link :to="'/article/'+next._id">下一篇  {{next.title}}</router-link></div>
+        </div>
     </div>
 </template>
 
 <script>
 import '../static/css/highlight.min.css'
 import '../static/js/highlight.min';
-console.log(hljs)
 export default {
     name: 'Article',
     data() {
         return {
-            articleData:{}
+            articleData:{},
+            previous:'',
+            next:''
         }
     },
     mounted: function () {
         // document.title = 'lcddjm\'s website';
-        this.getArticleDetail();
+        this.getArticleDetail(this.$route.params.id);
         
     },
+    beforeRouteUpdate (to,from,next){
+        this.getArticleDetail(to.params.id)
+        next();
+    },
     methods:{
-        getArticleDetail(){
-            this.$http.get('/api/article/get_article_detail',{
+        getArticleDetail(id){
+            this.axios({
+                method:'get',
                 params:{
-                    _id:this.$route.params.id
-                }
+                    _id:id
+                },
+                url:'/api/article/get_article_detail'
             }).then(res => {
-                if(res.body.code == 200){
-                    this.articleData = res.body.data;
-                    document.title = res.body.data.title; 
+                if(res.data.code == 200){
+                    this.articleData = res.data.data[1];
+                    this.previous = res.data.data[0]._id  ? res.data.data[0] : '';
+                    this.next = res.data.data[2]._id ? res.data.data[2] : '';
+                    document.title = res.data.data[1].title; 
                     this.dealPre();   
                 }
+            }).catch(e => {
+                console.log(e);
             })
         },
         dealPre(){
@@ -47,8 +62,9 @@ export default {
                     var newNode = util.parseDom('<pre><code>'+str+'</code></pre>');
                     pres[i].parentNode.replaceChild(newNode[0],pres[i])
                 }
-                hljs.initHighlighting()
-                
+                document.querySelectorAll('pre code').forEach(function(item,index){
+                    hljs.highlightBlock(item);
+                })                
             })
         }
     }
@@ -70,6 +86,16 @@ export default {
         }
         .cover{
             margin:20px 0;
+        }
+        .bottom{
+            overflow:hidden;
+            margin:20px 0;
+            .previous{
+                float:left;
+            }
+            .next{
+                float:right;
+            }
         }
         
     }

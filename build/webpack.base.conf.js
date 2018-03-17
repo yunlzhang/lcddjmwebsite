@@ -10,7 +10,7 @@ function resolve(dir) {
 
 module.exports = {
 	entry: {
-		app: './src/main.js'
+		app: './src/entry_client.js'
 	},
 	output: {
 		path: config.build.assetsRoot,
@@ -27,7 +27,7 @@ module.exports = {
 	},
 	externals: {
 		'$': 'jquery',
-		'vue':'Vue'
+		// 'vue':'Vue'
 	},
 	module: {
 		rules: [{

@@ -1,5 +1,27 @@
 <template>
     <div class="edit-wrap">
+        <div class="top">
+            <div class="tags">
+                <el-select
+                    v-model="tags"
+                    value-key="tags"
+                    name="tags"
+                    size="medium"
+                    multiple
+                    filterable
+                    allow-create
+                    default-first-option
+                    placeholder="请选择文章标签">
+                    <el-option
+                    v-for="item in tagsOptions"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                    </el-option>
+                </el-select>
+            </div>
+            <div class="save" @click="save">保存</div>
+        </div>
         <div class="upload-cover" id="QINIU" @mouseenter="showTxt" @mouseleave="showTxt">
             <div class="bg" ref="coverbg" :style="'background:url('+cover+') center center / cover no-repeat;'" >
                 <div class="img-prompt" v-if="!isUpload">
@@ -17,10 +39,9 @@
                 v-model="content"
                 ref="quillEditor"
                 :options="editorOptions"
-                @blur="contentBlur"
             ></quillEditor>
         </div>
-        <div class="save" @click="save">保存</div>
+        
     </div>
 </template>
 
@@ -35,7 +56,6 @@ import '../static/js/qiniu.min';
 
 import options from '../static/config/editor_config';
 import { quillEditor } from 'vue-quill-editor'
-console.log(quillEditor);
 export default {
     name: 'Edit',
     data() {
@@ -45,7 +65,15 @@ export default {
             title:'',
             editorOptions : options,
             id:'',
-            isUpload:false
+            isUpload:false,
+            tagsOptions: [
+                {value: 'html',label: 'html'}, 
+                {value: 'css',label: 'css'},
+                {value: 'javascript',label: 'javascrip'},
+                {value:'node',label:'node'},
+                {value:'webpack',label:'webpack'}
+            ],
+            tags: []
         }
     },
     mounted: function () {
@@ -54,18 +82,23 @@ export default {
             this.getArticleDetail();
         }
         this.uploadImg();
+        this.scrollHandle();
     },
     methods:{
         getArticleDetail(){
-            this.$http.get('/api/article/get_article_detail',{
+            this.axios({
+                type:'get',
+                method:'get',
+                url:'/api/article/get_article_detail',
                 params:{
                     _id:this.$route.params.id
                 }
             }).then(res => {
-                if(res.body.code == 200){
-                    this.content = res.body.data.content;
-                    this.cover = res.body.data.cover;  
-                    this.title = res.body.data.title
+                if(res.data.code == 200){
+                    let obj = res.data.data[1];
+                    this.content = obj.content;
+                    this.cover = obj.cover;  
+                    this.title = obj.title
                     this.isUpload =  this.cover ? true : false;
                     document.title = '修改文章';    
                 }
@@ -138,30 +171,38 @@ export default {
         editor(){
             return this.$refs.quillEditor.quill;
         },
-        contentBlur(){
-            // console.log(this.editor())
-            // // this.content = this.editor().getContent();
-            // console.log(this.content)
-        },
         save(){
-            this.$http.post('/api/article/deal_article',{
-                content:this.content,
-                cover:this.cover,
-                title:this.title,
-                id:this.$route.params.id
-            }).then(res => {
-                if(res.body.code == 200){
+            // .replace(/\s/ig,'&nbsp;')
+            this.axios({
+                method:'post',
+                data:{
+                    content:this.content,
+                    cover:this.cover,
+                    title:this.title,
+                    id:this.$route.params.id,
+                    tags:this.tags
+                },
+                url:'/api/article/deal_article'
+            })
+            .then(res => {
+                if(res.data.code == 200){
                     this.$message({
-                        message: res.body.message,
+                        message: res.data.message,
                         type: 'success'
                     });
                 }else{
                     this.$message({
-                        message: res.body.message,
+                        message: res.data.message,
                         type: 'warning'
                     });
                 }
             })
+        },
+        scrollHandle:function(){
+            util.addHandler(window,'scroll',function(e){
+                console.log(e);
+            })
+            console.log(util);
         }
     },
     components: {
@@ -179,6 +220,8 @@ export default {
     .edit-wrap{
         width:800px;
         margin:0 auto;
+        padding-top:60px;
+        position: relative;
         .upload-cover{
             height:200px;
             background:#f2f2f2;
@@ -229,8 +272,37 @@ export default {
                 text-align:left;
             }
         }
+        .top{
+            height:60px;
+            position:fixed;
+            top:0;
+            left:50%;
+            width:800px;
+            margin-left:-400px;
+            z-index:100;
+            border-bottom:1px solid #dee0e1;
+        }
+        .tags{
+            float:left;
+            margin-top:10px;
+        }
         .save{
+            float:right;
+            width:120px;
+            height:40px;
+            margin:10px;
+            line-height:40px;
+            border:1px solid #dee0e1;
             text-align:center;
+            border-radius:3px;
+            &:hover{
+                color:#222c37;
+                border-color:#222c37;
+            }
+
+        }
+        .el-input__inner{
+            width:500px;
         }
     }
     .quill-editor .ql-toolbar .ql-formats{

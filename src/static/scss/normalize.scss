@@ -98,4 +98,8 @@ pre{
     vertical-align: -0.15em;
     fill: currentColor;
     overflow: hidden;
- }
+}
+::-webkit-scrollbar{
+    width:0;
+    display:none;
+}

@@ -1,18 +1,19 @@
-var Post = require('../lib/mongo').Post;
+var Post = require('../lib/mongoose').Post;
+
+var Promise = require("bluebird");
+
 
 module.exports = {
 	create(article) {
 		return Post.create(article).exec();
 	},
-
 	// 通过文章的id获取相关文章
 	getPostById(id) {
-		return Post
-			.findOne({
-				_id: id
-			})
-			.addCreatedAt()
-			.exec();
+		return Promise.all([
+			Post.find({ '_id': { '$gt': id } }).sort({_id: 1}).limit(1).addCreatedAt().exec(),					
+			Post.findOne({_id: id}).addCreatedAt().exec(),
+			Post.find({'_id': { '$lt': id } }).sort({_id: -1}).limit(1).addCreatedAt().exec()
+		]).lean()
 	},
 	getPosts(opts) {
 		opts = opts || {};
@@ -25,8 +26,9 @@ module.exports = {
 			.find(opts)
 			.skip((page-1)*5)
 			.limit(num)
-			.addCreatedAt()
+			// .addCreatedAt()
 			.sort({_id:-1})
+			.lean()
 			.exec();
 	},
 	updateArticle(id,options){
@@ -38,7 +40,7 @@ module.exports = {
 	},
 	getLength(){
 		return Post
-			.find({})
+			.count()
 			.exec();
 	},
 	incPv(postId) {
