@@ -200,7 +200,15 @@ export default {
         },
         scrollHandle:function(){
             util.addHandler(window,'scroll',function(e){
-                console.log(e);
+                let toolbar = document.querySelector('.ql-toolbar ');
+                let winScrollTop = document.documentElement.scrollTop;
+                let offsetTop = toolbar.offsetTop;
+
+                if(offsetTop < winScrollTop){
+                    toolbar.classList.push('fixed');
+                }else{
+                    
+                }
             })
             console.log(util);
         }
@@ -250,6 +258,7 @@ export default {
             position:absolute;
             top:50%;
             left:50%;
+            height:57px;
             transform:translate(-50%,-50%);
             color:#bcbcbc;
             text-align:center;
@@ -275,11 +284,12 @@ export default {
         .top{
             height:60px;
             position:fixed;
+            background:#fff;
             top:0;
             left:50%;
             width:800px;
             margin-left:-400px;
-            z-index:100;
+            z-index:10000;
             border-bottom:1px solid #dee0e1;
         }
         .tags{
