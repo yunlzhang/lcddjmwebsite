@@ -200,17 +200,15 @@ export default {
         },
         scrollHandle:function(){
             util.addHandler(window,'scroll',function(e){
-                let toolbar = document.querySelector('.ql-toolbar ');
+                let toolbar = document.querySelector('.ql-toolbar');
                 let winScrollTop = document.documentElement.scrollTop;
-                let offsetTop = toolbar.offsetTop;
-
-                if(offsetTop < winScrollTop){
-                    toolbar.classList.push('fixed');
+                let offsetTop = toolbar.parentNode.offsetTop;
+                if(offsetTop < winScrollTop + 60){
+                    toolbar.classList.add('fixed');
                 }else{
-                    
+                    toolbar.classList.remove('fixed');                    
                 }
             })
-            console.log(util);
         }
     },
     components: {
@@ -325,8 +323,23 @@ export default {
         
     }
     .quill-editor{
+        padding-top:44px;
+        position: relative;
         .ql-toolbar{
             text-align:left;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background:#fff;
+            z-index:1;
+            &.fixed{
+                position: fixed;
+                width:800px;
+                top:61px;
+                left:50%;
+                transform:translateX(-50%);
+            }
         }
         .ql-picker{
             border:1px solid #dee0e1;

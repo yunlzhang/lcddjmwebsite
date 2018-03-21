@@ -2,26 +2,24 @@
     <div class="main">
         <!--<HeaderTop :isLogin="isLogin" :active="'work'" :userInfo="userInfo"></HeaderTop>-->
         <div id="particles-js"></div>
-        <div class="main-scroll">
-            <div class="main-wrap" ref="main">
-                <ul class="article_lists">
-                    <li class="article_item" v-for="item in article" v-bind:key="item._id">
-                        <router-link :to="'/article/'+item._id">
-                            <div class="title" v-if="item.title">{{item.title}}</div>
-                            <!--<div class="cover" v-if="item.cover"><img :src="item.cover" alt=""></div>-->
-                            <div class="des">{{item.des}}</div>
-                            <div class="create"><span class="l">发表于 {{item.created_at}}</span></div>
-                        </router-link>
-                    </li>
-                </ul>
-                <el-pagination
-                    background
-                    layout="prev, pager, next"
-                    :page-size="5"
-                    :total="articleLength"
-                    @current-change="pageChange">
-                </el-pagination>
-            </div>
+        <div class="main-wrap" ref="main">
+            <ul class="article_lists">
+                <li class="article_item" v-for="item in article" v-bind:key="item._id">
+                    <router-link :to="'/article/'+item._id">
+                        <div class="title" v-if="item.title">{{item.title}}</div>
+                        <!--<div class="cover" v-if="item.cover"><img :src="item.cover" alt=""></div>-->
+                        <div class="des">{{item.des}}</div>
+                        <div class="create"><span class="l">发表于 {{item.created_at}}</span></div>
+                    </router-link>
+                </li>
+            </ul>
+            <el-pagination
+                background
+                layout="prev, pager, next"
+                :page-size="5"
+                :total="articleLength"
+                @current-change="pageChange">
+            </el-pagination>
         </div>
     </div>
 </template>
@@ -46,6 +44,11 @@ export default {
             num:5
         });
         this.particle();
+    },
+    updated(){
+        this.$nextTick(()=>{
+            util.scrollTopAnimate('html');
+        })
     },
     methods:{
         getIndexData(data){
@@ -82,7 +85,6 @@ export default {
             })
         },
         pageChange(page){
-            this.scrollTopAnimate('.main-scroll');
             this.getArticle({
                 page:page,
                 num:5
@@ -177,22 +179,6 @@ export default {
                 },
                 retina_detect: !0
             });
-        },
-        scrollTopAnimate(selector){
-            let timer;
-            scrollTop();
-            function scrollTop(){
-                timer = setTimeout(function(){
-                    let top = document.querySelector(selector).scrollTop;
-                    let speed = Math.floor(-top / 7);
-                    document.querySelector(selector).scrollTop = top + speed;
-                    if(top == 0){
-                        clearTimeout(timer);
-                    }else{
-                        scrollTop();
-                    }
-                },30);
-            }   
         }
     }
 
@@ -206,17 +192,14 @@ export default {
         overflow:hidden;
         transition:padding 1s linear;
     }
-    .main-scroll{
-        max-height:100vh;
+    #particles-js{
+        position: fixed;
         width:100%;
-        position: absolute;
-        background:rgba(0,0,0,.02);
-        top:0;
-        left:0;
-        overflow-y:auto;
+        height:100%;
     }
     .main-wrap{
         width:600px;
+        position: relative;
         margin:0 auto;
         .article_lists{
             text-align:left;
@@ -247,4 +230,5 @@ export default {
         margin:80px 0;
         text-align:center;
     }
+    
 </style>

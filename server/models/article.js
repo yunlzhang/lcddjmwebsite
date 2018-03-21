@@ -10,10 +10,10 @@ module.exports = {
 	// 通过文章的id获取相关文章
 	getPostById(id) {
 		return Promise.all([
-			Post.find({ '_id': { '$gt': id } }).sort({_id: 1}).limit(1).exec(),					
-			Post.findOne({_id: id}).exec(),
-			Post.find({'_id': { '$lt': id } }).sort({_id: -1}).limit(1).exec()
-		]).lean()
+			Post.find({ '_id': { '$gt': id } }).sort({_id: 1}).limit(1).lean().exec(),					
+			Post.findOne({_id: id}).lean().exec(),
+			Post.find({'_id': { '$lt': id } }).sort({_id: -1}).limit(1).lean().exec()
+		])
 	},
 	getPosts(opts) {
 		opts = opts || {};

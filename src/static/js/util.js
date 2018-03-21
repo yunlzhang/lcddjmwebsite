@@ -39,5 +39,21 @@ window.util = {
 	　　 var objE = document.createElement("div");
 	　　 objE.innerHTML = str;
 	　　 return objE.childNodes;
+	},
+	scrollTopAnimate(selector){
+		let timer;
+		scrollTop();
+		function scrollTop(){
+			timer = setTimeout(function(){
+				let top = document.querySelector(selector).scrollTop;
+				let speed = Math.floor(-top / 7);
+				document.querySelector(selector).scrollTop = top + speed;
+				if(top == 0){
+					clearTimeout(timer);
+				}else{
+					scrollTop();
+				}
+			},30);
+		}   
 	}
 }
