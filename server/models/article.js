@@ -1,7 +1,5 @@
 const Post = require('../lib/mongoose').Post;
-
 const Promise = require("bluebird");
-
 
 module.exports = {
 	create(article) {
@@ -26,7 +24,6 @@ module.exports = {
 			.find(opts)
 			.skip((page-1)*5)
 			.limit(num)
-			// .addCreatedAt()
 			.sort({_id:-1})
 			.lean()
 			.exec();
