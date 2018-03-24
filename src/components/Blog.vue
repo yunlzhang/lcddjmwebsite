@@ -226,9 +226,31 @@ export default {
             }
         }
     }
-    .el-pagination{
+    
+</style>
+<style>
+.el-pagination{
         margin:80px 0;
         text-align:center;
     }
-    
+    .el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev, .el-pagination.is-background .el-pager li{
+        margin:0 10px;
+        min-width:40px;
+    }
+    .el-pager li{
+        height:40px;
+        line-height:40px;
+        font-size:16px;
+    }
+    .el-pagination button, .el-pagination span:not([class*=suffix]){
+        height:40px;
+        line-height:40px;
+        font-size:16px;
+    }
+    .el-pagination .btn-next .el-icon, .el-pagination .btn-prev .el-icon{
+        font-size:16px;
+    }
+    .el-pagination.is-background .el-pager li.active{
+        background:#3cdee8;
+    }
 </style>
