@@ -1,16 +1,16 @@
 const Post = require('../lib/mongoose').Post;
 const Promise = require("bluebird");
-
 module.exports = {
 	create(article) {
-		return Post.create(article).exec();
+		let newArticle = new Post(article);
+		return newArticle.save();
 	},
 	// 通过文章的id获取相关文章
 	getPostById(id) {
 		return Promise.all([
-			Post.find({ '_id': { '$gt': id } }).sort({_id: 1}).limit(1).lean().exec(),					
-			Post.findOne({_id: id}).exec(),
-			Post.find({'_id': { '$lt': id } }).sort({_id: -1}).limit(1).lean().exec()
+			Post.find({ '_id': { '$gt': id } }).sort({_id: 1}).limit(1).lean(),					
+			Post.findOne({_id: id}),
+			Post.find({'_id': { '$lt': id } }).sort({_id: -1}).limit(1).lean()
 		])
 	},
 	getPosts(opts) {
@@ -25,20 +25,17 @@ module.exports = {
 			.skip((page-1)*5)
 			.limit(num)
 			.sort({_id:-1})
-			.lean()
-			.exec();
+			.lean();
 	},
 	updateArticle(id,options){
 		return Post
 			.findOneAndUpdate({_id:id},{
 				$set:options
-			})
-			.exec();
+			});
 	},
 	getLength(){
 		return Post
-			.count()
-			.exec();
+			.count();
 	},
 	incPv(postId) {
 		return Post
@@ -48,7 +45,6 @@ module.exports = {
 				$inc: {
 					pv: 1
 				}
-			})
-			.exec();
+			});
 	},
 };

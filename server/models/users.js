@@ -3,14 +3,13 @@ var User = require('../lib/mongoose').User;
 module.exports = {
   // 注册一个用户
   create: function create(user) {
-    return User.create(user).exec();
+    let newUser = new User(user);
+    return User.save();
   },
 
   // 通过用户名获取用户信息
   getUserByName: function getUserByName(name) {
     return User
-      .findOne({ name: name })
-      // .addCreatedAt()
-      .exec();
+      .findOne({ name: name });
   }
 };

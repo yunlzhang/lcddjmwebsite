@@ -47,6 +47,7 @@ export default {
             .then(res => {
                 if(res.data.code === 200){
                     this.$emit('getUserInfo');
+                    document.querySelector('body').removeChild(document.querySelector('#rainCanvas'));
                     this.$router.replace('/');
                 }else{
                     this.$message({

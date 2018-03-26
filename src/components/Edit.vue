@@ -287,7 +287,7 @@ export default {
             left:50%;
             width:800px;
             margin-left:-400px;
-            z-index:10000;
+            z-index:1000;
             border-bottom:1px solid #dee0e1;
         }
         .tags{
