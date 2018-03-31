@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 
 app.disable('etag');
 // 设置静态文件目录
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'dist'),{maxAge:31536000000}));
 // session 中间件
 app.use(session({
   name: config.session.key,// 设置 cookie 中保存 session id 的字段名称

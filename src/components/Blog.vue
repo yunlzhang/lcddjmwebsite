@@ -6,7 +6,7 @@
             <ul class="article_lists">
                 <li class="article_item" v-for="item in article" v-bind:key="item._id">
                     <router-link :to="'/article/'+item._id">
-                        <div class="title" v-if="item.title">{{item.title}}</div>
+                        <div class="title" v-if="item.title"><span>{{item.title}}</span></div>
                         <!--<div class="cover" v-if="item.cover"><img :src="item.cover" alt=""></div>-->
                         <div class="des">{{item.des}}</div>
                         <div class="create"><span class="l">发表于 {{item.created_at}}</span></div>
@@ -47,7 +47,7 @@ export default {
     },
     updated(){
         this.$nextTick(()=>{
-            util.scrollTopAnimate('html');
+      
         })
     },
     methods:{
@@ -85,6 +85,7 @@ export default {
             })
         },
         pageChange(page){
+            this.article = [];
             this.getArticle({
                 page:page,
                 num:5
@@ -206,12 +207,42 @@ export default {
             // margin:20px 0;
         }
         .article_item{
-            padding:15px 0;
-            border-bottom:1px solid #ccc;
+            padding:15px;
+            border:1px solid #ccc;
+            border-radius:5px;
+            margin:20px 0;
+            &:hover{
+                box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
+            }
             .title{
                 font-weight:700;
                 font-size:24px;
                 line-height:1.75;
+                overflow:hidden;
+                text-overflow:ellipsis;
+                white-space:nowrap;
+                width:100%;
+                span{
+                    float:left;
+                    position:relative;
+                    &::after{
+                        content: " ";
+                        position: absolute;
+                        width: 100%;
+                        height: .1em;
+                        bottom: 0;
+                        left: 0;
+                        background: #26272b;
+                        transform: scaleX(0);
+                        transition: .3s ease-in-out;
+                        
+                    }
+                    &:hover{
+                        &::after{
+                            transform: scaleX(1);
+                        }
+                    }
+                }
             }
             .cover{
                 margin:10px 0;

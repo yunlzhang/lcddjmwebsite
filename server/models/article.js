@@ -9,7 +9,7 @@ module.exports = {
 	getPostById(id) {
 		return Promise.all([
 			Post.find({ '_id': { '$gt': id } }).sort({_id: 1}).limit(1).lean(),					
-			Post.findOne({_id: id}),
+			Post.findOne({_id: id}).lean(),
 			Post.find({'_id': { '$lt': id } }).sort({_id: -1}).limit(1).lean()
 		])
 	},

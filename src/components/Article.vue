@@ -30,8 +30,8 @@ export default {
         
     },
     beforeRouteUpdate (to,from,next){
+        this.articleData = {};
         this.getArticleDetail(to.params.id);
-        util.scrollTopAnimate('html');
         next();
     },
     methods:{
