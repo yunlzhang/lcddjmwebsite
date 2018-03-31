@@ -105,6 +105,7 @@ export default {
     .rich-text{     
         line-height:1.75;
         font-size:16px;
+        white-space: pre-wrap;//保留空格，正常换行
         blockquote{
             padding: 20px;
             background-color: #f2f2f2;
