@@ -69,7 +69,7 @@ export default {
             tagsOptions: [
                 {value: 'html',label: 'html'}, 
                 {value: 'css',label: 'css'},
-                {value: 'javascript',label: 'javascrip'},
+                {value: 'javascript',label: 'javascript'},
                 {value:'node',label:'node'},
                 {value:'webpack',label:'webpack'}
             ],
@@ -81,7 +81,11 @@ export default {
         if(this.$route.params.id){
             this.getArticleDetail();
         }
-        this.uploadImg();
+        this.uploadImg('QINIU','cover_pic/',function(obj,link){
+            obj.isUpload = true;
+            obj.cover = link;
+            obj.$refs.coverbg.style.cssText += ''
+        });
         this.scrollHandle();
     },
     methods:{
@@ -98,7 +102,8 @@ export default {
                     let obj = res.data.data[1];
                     this.content = obj.content;
                     this.cover = obj.cover;  
-                    this.title = obj.title
+                    this.title = obj.title;
+                    this.tags = obj.tags;
                     this.isUpload =  this.cover ? true : false;
                     document.title = '修改文章';    
                 }
@@ -112,7 +117,7 @@ export default {
                 this.$refs.txt.style.display = 'none';
             }
         },
-        uploadImg(){
+        uploadImg(id,path,cb){
             var _this = this;
             var uploader = Qiniu.uploader({
                 disable_statistics_report: false, // 禁止自动发送上传统计信息到七牛，默认允许发送
@@ -123,12 +128,12 @@ export default {
                 unique_names: false,
                 save_key: false,
                 domain: 'http://oy02r7jyx.bkt.clouddn.com', // bucket 域名，下载资源时用到，如：'http://xxx.bkt.clouddn.com/' **必需**
-                container: 'QINIU', // 上传区域 DOM ID，默认是 browser_button 的父元素，
+                container: id, // 上传区域 DOM ID，默认是 browser_button 的父元素，
                 max_file_size: '100mb', // 最大文件体积限制
                 flash_swf_url: '../static/js/plupload/Moxie.swf', //引入 flash,相对路径
                 max_retries: 3, // 上传失败最大重试次数
                 dragdrop: true, // 开启可拖曳上传
-                drop_element: 'QINIU', // 拖曳上传区域元素的 ID，拖曳文件或文件夹后可触发上传
+                drop_element: id, // 拖曳上传区域元素的 ID，拖曳文件或文件夹后可触发上传
                 chunk_size: '4mb', // 分块上传时，每块的体积
                 auto_start: true, // 选择文件后自动上传，若关闭需要自己绑定事件触发上传,
                 init: {
@@ -137,30 +142,17 @@ export default {
                             // 文件添加进队列后,处理相关的事情
                         });
                     },
-                    'BeforeUpload': function (up, file) {
-                        // 每个文件上传前,处理相关的事情
-                    },
-                    'UploadProgress': function (up, file) {
-                        // 每个文件上传时,处理相关的事情
-                    },
                     'FileUploaded': function (up, file, info) {
-                        // var domain = up.getOption('domain');
-                        var domain = 'https://image.lcddjm.com'
                         var res = JSON.parse(info.response);
-                        var sourceLink = domain +'/'+ res.key; //获取上传成功后的文件的Url
-                        _this.isUpload = true;
-                        _this.cover = sourceLink;
-                        _this.$refs.coverbg.style.cssText += ''
+                        var sourceLink = 'https://image.lcddjm.com' +'/'+ res.key; //获取上传成功后的文件的Url
+                        if(typeof cb == 'function'){
+                            cb(_this,sourceLink);
+                        }
                     },  
                     'Error': function (up, err, errTip) {
-                        console.log(up,err,errTip)
-                        
-                    },
-                    'UploadComplete': function () {
-                        //队列文件处理完毕后,处理相关的事情
                     },
                     'Key': function (up, file) {
-                        return 'cover_pic/'+file.name
+                        return path+file.name
                     }
                 }
             });

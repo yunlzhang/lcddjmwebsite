@@ -199,7 +199,7 @@ export default {
         height:100%;
     }
     .main-wrap{
-        width:600px;
+        width:800px;
         position: relative;
         margin:0 auto;
         .article_lists{
