@@ -9,10 +9,7 @@ const objectIdToTimestamp = require('objectid-to-timestamp');
 let User,Post,Comment;
 
 
-mongoose.connect(config.mongodb,{
-    server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
-    replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }
-});
+mongoose.connect(config.mongodb,{ socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } });
 
 /**
  * 

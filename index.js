@@ -60,7 +60,7 @@ app.use(expressWinston.logger({
       colorize: true
     }),
     new winston.transports.File({
-      filename: 'app/server/logs/success.log'
+      filename: __dirname + '/server/logs/success.log'
     })
   ]
 }));
@@ -74,7 +74,7 @@ app.use(expressWinston.errorLogger({
       colorize: true
     }),
     new winston.transports.File({
-      filename: 'app/server/logs/error.log'
+      filename: __dirname + '/server/logs/error.log'
     })
   ]
 }));
