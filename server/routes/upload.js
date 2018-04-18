@@ -14,7 +14,7 @@ var storage = multer.diskStorage({
         cb(null, uuidV1() + "." + fileFormat[fileFormat.length - 1]);
      }
 });  
-var upload = multer({storage: storage}).single('file');
+var upload = multer({storage: storage}).single('logo');
 router.post('/',function(req,res,next){
     upload(req, res, function (err) {
         if (err) {

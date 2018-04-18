@@ -41,7 +41,7 @@
                 :options="editorOptions"
             ></quillEditor>
         </div>
-        
+        <input type="file" id="upload-area" name="logo" accept="image/jpg,image/jpeg,image/png,image/gif" @change="fileChange">
     </div>
 </template>
 
@@ -51,11 +51,15 @@
 import 'quill/dist/quill.snow.css'
 // import 'quill/dist/quill.bubble.css'
 
+import { ImageImport} from '../static/js/image-import';
+
 import '../static/js/plupload/plupload.full.min';
 import '../static/js/qiniu.min';
 
 import options from '../static/config/editor_config';
-import { quillEditor } from 'vue-quill-editor'
+import { quillEditor } from 'vue-quill-editor';
+import Quill from 'quill'
+Quill.register('modules/imageImport', ImageImport)
 export default {
     name: 'Edit',
     data() {
@@ -77,6 +81,7 @@ export default {
         }
     },
     mounted: function () {
+        var _this = this;
         document.title = '编辑';
         if(this.$route.params.id){
             this.getArticleDetail();
@@ -87,6 +92,16 @@ export default {
             obj.$refs.coverbg.style.cssText += ''
         });
         this.scrollHandle();
+
+        //重写编辑器的上传图片
+
+        var imgHandler = function(f) {
+            _this.addImgRange = _this.$refs.quillEditor.quill.getSelection()
+            if (f) {
+               document.querySelector('#upload-area').click()
+            }
+        }
+        this.$refs.quillEditor.quill.getModule("toolbar").addHandler("image", imgHandler)
     },
     methods:{
         getArticleDetail(){
@@ -201,7 +216,39 @@ export default {
                     toolbar.classList.remove('fixed');                    
                 }
             })
+        },
+        fileChange(e){
+            let _this = this;
+            let uploadArea = e.target;
+            let formData = new FormData(uploadArea);
+            formData.append('logo',uploadArea.files[0])
+            
+            let up = this.upImg(formData);
+            up.then(res=>{
+                let data = res.data.data
+                if (data.img) { 
+                    let index = _this.addImgRange != null ? _this.addImgRange.index:0 // 获取插入时的位置索引，如果获取失败，则插入到最前面
+                    _this.$refs.quillEditor.quill.insertEmbed(index , 'image', data.img, Quill.sources.USER)
+                    _this.$refs.quillEditor.quill.setSelection(index+1)
+                    _this.$refs.quillEditor.quill.focus()
+                } else {
+                }
+            });
+
+            uploadArea.value = '';
+
+
+        },
+        upImg(formData){
+            return this.axios({
+                method:'post',
+                data:formData,
+                headers:{'Content-Type':'multipart/form-data'},
+                url:'/api/upload'
+            })
+            
         }
+
     },
     components: {
         quillEditor
@@ -303,6 +350,10 @@ export default {
         }
         .el-input__inner{
             width:500px;
+        }
+        #upload-area{
+            position: fixed;
+            left: -1000000px;
         }
     }
     .quill-editor .ql-toolbar .ql-formats{
