@@ -20,6 +20,11 @@
                 :total="articleLength"
                 @current-change="pageChange">
             </el-pagination>
+            <form action="/api/upload" method="post" enctype="multipart/form-data">
+                <h2>单图上传</h2>
+                <input type="file" name="logo">
+                <input type="submit" value="提交">
+            </form>
         </div>
     </div>
 </template>
