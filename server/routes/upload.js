@@ -5,5 +5,6 @@ var upload = multer({ dest: 'uploads/' })
 
 
 router.post('/upload', upload.array(),function(req,res,next){
-    console
+    console(req)
 });
+module.exports = router;
