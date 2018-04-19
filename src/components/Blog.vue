@@ -20,11 +20,6 @@
                 :total="articleLength"
                 @current-change="pageChange">
             </el-pagination>
-            <form action="/api/upload" method="post" enctype="multipart/form-data">
-                <h2>单图上传</h2>
-                <input type="file" name="logo">
-                <input type="submit" value="提交">
-            </form>
         </div>
     </div>
 </template>
@@ -235,7 +230,7 @@ export default {
                         position: absolute;
                         width: 100%;
                         height: .1em;
-                        bottom: 0;
+                        bottom: 5px;
                         left: 0;
                         background: #26272b;
                         transform: scaleX(0);
@@ -257,7 +252,7 @@ export default {
                 word-break:break-all;
             }
             .create{
-                margin:10px 0;
+                margin:10px 0 0;
                 color:#ababab;
             }
         }
