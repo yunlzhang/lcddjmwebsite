@@ -5,9 +5,21 @@
         <div class="content rich-text">
             <div v-html="articleData.content"></div>
         </div>
-        <div class="bottom">
+        <div class="previous-next" v-if="previous || next">
             <div class="previous" v-if="previous"><router-link :to="'/article/'+previous._id">上一篇  {{previous.title}}</router-link></div>
             <div class="next" v-if="next"><router-link :to="'/article/'+next._id">下一篇  {{next.title}}</router-link></div>
+        </div>
+        <div class="comment-area">
+            <div class="avatar"></div>
+            <textarea placeholder="期待你的评论...."></textarea>
+            <div class="button">
+                <span class="confirm">确认</span>
+                <span class="cancel" @click="comment(articleData)">取消</span>
+            </div>
+        </div>
+        <div class="comment">
+
+
         </div>
     </div>
 </template>
@@ -67,6 +79,9 @@ export default {
                     hljs.highlightBlock(item);
                 })                
             })
+        },
+        comment(data){
+            console.log(data)
         }
     }
 
@@ -88,7 +103,7 @@ export default {
         .cover{
             margin:20px 0;
         }
-        .bottom{
+        .previous-next{
             overflow:hidden;
             margin:20px 0;
             .previous{
@@ -99,6 +114,54 @@ export default {
             }
             a:hover{
                 color:aqua;
+            }
+        }
+
+        .comment-area{
+            height:200px;
+            padding: 20px 0 80px 60px;
+            box-sizing: border-box; 
+            position: relative;
+            .avatar{
+                position: absolute;
+                width:40px;
+                height:40px;
+                border-radius:50%;
+                left:10px;
+                top:20px;
+                border:1px solid #ccc;
+                box-sizing: border-box;
+
+            }
+            textarea{
+                display: block;
+                width: 100%;
+                height:100px;
+                padding:10px;
+                box-sizing: border-box;
+                border:1px solid #ccc;
+                border-radius:5px;
+                resize:none;
+            }
+            .button{
+                position: absolute;
+                height:40px;
+                bottom: 10px;
+                right: 0;
+                span{
+                    float:right;
+                    height:100%;
+                    line-height:40px;
+                    margin-left:20px;
+                    width:80px;
+                    text-align: center;
+                    cursor: pointer;
+                }
+                .confirm{
+                    background:aqua;
+                    color:#fff;
+                    border-radius:20px;
+                }
             }
         }
         

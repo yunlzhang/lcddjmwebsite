@@ -29,7 +29,7 @@ app.use(require('connect-history-api-fallback')({
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-app.disable('etag');
+// app.disable('etag');
 // 设置静态文件目录
 app.use('/qnimg',express.static(path.join(__dirname, 'qnimg')));
 app.use(express.static(path.join(__dirname, 'dist'),{maxAge:31536000000}));

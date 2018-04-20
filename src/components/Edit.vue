@@ -351,6 +351,9 @@ export default {
         .el-input__inner{
             width:500px;
         }
+        .el-select__tags{
+            flex-wrap:nowrap;
+        }
         #upload-area{
             position: fixed;
             left: -1000000px;

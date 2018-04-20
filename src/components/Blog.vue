@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import HeaderTop from './Header';
+// import HeaderTop from './Header';
 import '../static/js/particles';
 export default {
     name: 'Blog',
