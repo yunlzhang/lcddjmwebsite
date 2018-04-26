@@ -1,4 +1,4 @@
-var User = require('../lib/mongoose').User;
+let User = require('../lib/mongoose').User;
 
 module.exports = {
   // 注册一个用户

@@ -48,13 +48,12 @@ Post = mongoose.model('Post',PostSchema)
  * 
  */
 const CommentSchema = mongoose.Schema({
-    userId:mongoose.Schema.Types.ObjectId,
+    article_id:mongoose.Schema.Types.ObjectId,    
 	content:String,
-	articleId:mongoose.Schema.Types.ObjectId
+    parent_id:String,
+    user_id:String,    
 })
-CommentSchema.set('autoIndex', false);
-
-CommentSchema.index({postId: 1,author:1,_id: 1})
+CommentSchema.index({article_id: 1,user_id:1,_id: 1})
 Comment = mongoose.model('Comment', CommentSchema);
 
 
