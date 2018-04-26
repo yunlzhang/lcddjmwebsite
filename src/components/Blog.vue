@@ -36,7 +36,7 @@ export default {
         }
     },
     props:['isLogin','userInfo'],
-    components:{HeaderTop},
+    // components:{HeaderTop},
     mounted: function () {
         document.title = 'lcddjm\'s website';
         this.getIndexData({

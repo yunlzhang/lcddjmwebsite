@@ -16,3 +16,7 @@ selenium-debug.log
 *.sln
 *.log
 /dist
+static/baidu_verify_NYjMSNHRvr.html
+static/googlef3f4f654bed0a985.html
+static/sitemap.xml
+server/logs/
