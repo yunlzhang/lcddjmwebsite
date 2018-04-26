@@ -74,9 +74,8 @@ app.use(expressWinston.logger({
 		}),
 		new winston.transports.DailyRotateFile({
 			dirname:__dirname + '/server/logs/',
-			filename: 'success.log',
-			datePattern: 'YYYY-MM-DD-HH',			
-			
+			filename: 'success.%DATE%.log',
+			datePattern: 'YYYY-MM-DD-HH'				
 		})
 	]
 }));
@@ -89,7 +88,7 @@ app.use(expressWinston.errorLogger({
 		}),
 		new winston.transports.DailyRotateFile({
 			dirname:__dirname + '/server/logs/',
-			filename: 'error.log',
+			filename: 'error.%DATE%.log',
 			datePattern: 'YYYY-MM-DD-HH',			
 			
 		})
