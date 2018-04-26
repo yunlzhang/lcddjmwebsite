@@ -62,8 +62,7 @@ app.use(session({
 //   uploadDir: path.join(__dirname, 'public/img'),// 上传文件目录
 //   keepExtensions: true// 保留后缀
 // }));
-// 路由
-routes(app);
+
 
 // 正常请求的日志
 app.use(expressWinston.logger({
@@ -94,6 +93,9 @@ app.use(expressWinston.errorLogger({
 		})
 	]
 }));
+
+// 路由
+routes(app);
 
 app.listen(config.port, function () {
 	console.log(`${pkg.name} listening on port ${config.port}`);
