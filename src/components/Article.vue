@@ -2,7 +2,7 @@
     <div class="article-wrap">
         <div class="title">{{articleData.title}}</div>
         <div class="cover" v-if="articleData.cover"><img :src="articleData.cover" alt=""></div>
-        <div class="content rich-text">
+        <div class="content rich-text ql-editor">
             <div v-html="articleData.content"></div>
         </div>
         <div class="previous-next" v-if="previous || next">
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import 'quill/dist/quill.snow.css'
 import '../static/css/highlight.min.css'
 import '../static/js/highlight.min';
 export default {
@@ -184,19 +185,6 @@ export default {
             font-weight: 400;
             line-height: 30px;
             margin: 0 0 20px;
-        }
-        ul,ol{
-            margin:10px 0;
-            padding-left: 30px;
-            li{
-                list-style-position: outside;
-            }
-        }
-        ol li{
-            list-style-type: decimal;
-        }
-        ul li{
-            list-style-type: disc;
         }
         a{
             color:#008cff;
