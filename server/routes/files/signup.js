@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var sha1 = require('sha1');
-var UserModel = require('../models/users');
+var UserModel = require('../../models/users');
 
 router.post('/',function(req,res,next){
     var reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,10}$/;
