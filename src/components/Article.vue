@@ -13,8 +13,8 @@
             <div class="avatar"></div>
             <textarea placeholder="期待你的评论...."></textarea>
             <div class="button">
-                <span class="confirm">确认</span>
-                <span class="cancel" @click="comment(articleData)">取消</span>
+                <span class="confirm" @click="comment()">确认</span>
+                <span class="cancel" >取消</span>
             </div>
         </div>
         <div class="comment">
@@ -82,7 +82,23 @@ export default {
             })
         },
         comment(data){
-            console.log(data)
+            let commentData = {
+                article_id:'',    
+                content:'',
+                parent_id:'',
+                user_id:'', 
+                to_user_id:''
+            }
+            if(!data){
+                commentData.article_id = this.articleData._id;
+            }else{
+                commentData.article_id = data.article_id;
+            }
+            this.axios({
+                method:'post',
+                data:commentData,
+                url:'/api/comment'
+            })
         }
     }
 

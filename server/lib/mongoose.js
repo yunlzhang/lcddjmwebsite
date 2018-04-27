@@ -51,8 +51,8 @@ const CommentSchema = mongoose.Schema({
     article_id:mongoose.Schema.Types.ObjectId,    
 	content:String,
     parent_id:String,
-    user_id:String, 
-    sub_comments:[]   
+    user_id:mongoose.Schema.Types.ObjectId, 
+    to_user_id:mongoose.Schema.Types.ObjectId
 })
 CommentSchema.index({article_id: 1,user_id:1,_id: 1})
 Comment = mongoose.model('Comment', CommentSchema);

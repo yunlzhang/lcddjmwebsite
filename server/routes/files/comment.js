@@ -16,6 +16,7 @@ router.post('/',function(req,res,next){
     }
     let comment = {};
     comment.user_id = req.session.user._id;
+    comment.to_user_id = req.body.to_user_id;
     comment.content = req.body.content;
     comment.parent_id = req.body.parent_id || '';
     comment.content = req.body.content;
