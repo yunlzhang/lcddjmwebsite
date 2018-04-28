@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var qiniu  = require('qiniu');
-var accessKey = 'VJ5Q_6738zGTVaD17nknDaBvPUJUFyRAQ5TcQ6ON';
-var secretKey = 'MjbOM_W7pO_G0YPYV-jRAILE914Ip2Yyl_XbZxmo';
+var config = require('../../config');
+var accessKey = config.qiniu.accessKey;
+var secretKey = config.qiniu.secretKey;
 
 var options = {
     scope: 'pict',
