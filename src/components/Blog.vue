@@ -3,13 +3,18 @@
         <!--<HeaderTop :isLogin="isLogin" :active="'work'" :userInfo="userInfo"></HeaderTop>-->
         <div id="particles-js"></div>
         <div class="main-wrap" ref="main">
-            <ul class="article_lists">
+            <ul class="article_lists" v-if="article.length">
                 <li class="article_item" v-for="item in article" v-bind:key="item._id">
                     <router-link :to="'/article/'+item._id">
                         <div class="title" v-if="item.title"><span>{{item.title}}</span></div>
                         <!--<div class="cover" v-if="item.cover"><img :src="item.cover" alt=""></div>-->
                         <div class="des">{{item.des}}</div>
-                        <div class="create"><span class="l">发表于 {{item.created_at}}</span></div>
+                        <ul class="create">
+                            <li>发表于 {{item.created_at}}</li>
+                            <li v-if="item.tags.length"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cc-tag-more"></use></svg> {{item.tags.toString()}}</li>
+                            <li v-if="item.comment_count"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-iconfontpinglun"></use></svg> {{item.comment_count}}</li>
+                            <li v-if="item.pv"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fangwenliang"></use></svg> item.pv</li>                            
+                        </ul>
                     </router-link>
                 </li>
             </ul>
@@ -254,6 +259,11 @@ export default {
             .create{
                 margin:10px 0 0;
                 color:#ababab;
+                overflow: hidden;
+                li{
+                    float:left;
+                    margin-right:20px;
+                }
             }
         }
     }

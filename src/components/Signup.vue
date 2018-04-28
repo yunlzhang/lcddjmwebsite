@@ -2,6 +2,11 @@
 <div>
 <div  class="signup-wrap">
     <div class="signup">
+            <div class="avatar">
+                <svg v-if="!signupData.avatar" class="icon" aria-hidden="true"><use xlink:href="#icon-xiugaigerentouxiang-"></use></svg>
+                <img v-else :src="signupData.avatar" alt="">
+                <input type="file" name="" id="" title="上传喜欢的头像">
+            </div>
             <div class="username">
                 <div class="l">昵称</div>
                 <div class="r"><input type="text" v-model="signupData.name" placeholder="请输入昵称" name="nickname"></div>
@@ -16,7 +21,7 @@
             </div>
             <div class="intro">
                 <div class="l">简介</div>
-                <div class="r"><textarea name="intro" v-model="signupData.intro" max-length="100" placeholder="简单介绍一下～不要超过100字哦" id="" cols="30" rows="10"></textarea></div>
+                <div class="r"><textarea name="intro" v-model="signupData.intro" max-length="100" placeholder="简单介绍一下～不要超过100字哦" ></textarea></div>
             </div>
             <div class="confirm"  @click="signup">注册</div>
         </div>
@@ -36,7 +41,8 @@ export default {
                 name:'',
                 password:'',
                 repassword:'',
-                intro:''
+                intro:'',
+                avatar:''
             }
         }
     },   
@@ -119,10 +125,33 @@ export default {
         .r{
             flex:1;
         }
+        .avatar{
+            margin:0 auto 20px;
+            width:60px;
+            height:60px;
+            border-radius:50%;
+            position: relative;
+            overflow: hidden;
+            .icon{
+                font-size:60px;
+                text-align: center;
+                line-height: 60px;
+            }
+            input{
+                position: absolute;
+                opacity: 0;
+                top:0;
+                right:0;
+                bottom:0;
+                left:0;
+                cursor: pointer;
+            }
+        }
         .confirm{
             height:40px;
             text-align: center;
             line-height: 40px;
+            margin-bottom: 0;
             background:#00d5a0;
             justify-content: center;
             cursor: pointer;
