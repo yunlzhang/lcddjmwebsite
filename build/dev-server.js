@@ -96,8 +96,8 @@ app.use(devMiddleware)
 // serve pure static assets
 const staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
-app.use(express.static('./dist'));
-app.use('/qn',express.static('./qnimg'));
+app.use(express.static(path.join(__dirname, '../qnimg')));
+
 
 const uri = 'http://localhost:' + port
 

@@ -15,6 +15,14 @@ router.post('/',function(req,res,next){
             // An error occurred when uploading
             return;
         }
+        if(!req.file){
+            res.json({
+                code:'100',
+                message:'上传出错'
+            })
+            // An error occurred when uploading
+            return;
+        }
         // Everything went fine 
         let path = './qnimg/' + (req.body.path ? req.body.path + '/' :'') ;
         //创建文件夹
@@ -44,12 +52,13 @@ router.post('/',function(req,res,next){
                     })
                     return;
                 }
+                // fs.unlink('./qnimg/' + req.file.filename,err => {
+                //     console.log(err);
+                // });
                 res.json({
                     code:200,
                     message:'上传成功',
-                    data:{
-                        img:path + newName
-                    }
+                    img:`/${req.body.path}/${newName}`
                 });
             })
         }

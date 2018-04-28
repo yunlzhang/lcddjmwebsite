@@ -34,7 +34,7 @@ app.use(bodyParser.urlencoded({
 
 
 // 设置静态文件目录
-app.use('/qnimg', express.static(path.join(__dirname, 'qnimg')));
+app.use(express.static(path.join(__dirname, 'qnimg')));
 app.use(express.static(path.join(__dirname, 'dist'), {
 	maxAge: 31536000000
 }));

@@ -183,10 +183,10 @@ export default {
             let uploadArea = e.target;
             let formData = new FormData(uploadArea);
             formData.append('pic',uploadArea.files[0])
-            
+            formData.append('path','editor')
             let up = this.upImg(formData);
             up.then(res=>{
-                let data = res.data.data
+                let data = res.data
                 if (data.img) { 
                     let index = _this.addImgRange != null ? _this.addImgRange.index:0 // 获取插入时的位置索引，如果获取失败，则插入到最前面
                     _this.$refs.quillEditor.quill.insertEmbed(index , 'image', data.img, Quill.sources.USER)
@@ -215,10 +215,11 @@ export default {
             formData.append('path','cover');
             this.upImg(formData)
             .then(res => {
-                console.log(res)
+               
                 if(res.data.code == 200){
                     this.isUpload = true;
-                    this.cover = res.data.img;
+                    console.log(process.env)
+                    this.cover = (process.env.NODE_ENV  === 'development' ? 'http://localhost:8080' : 'https://image.lcddjm.com') + res.data.img ;
                     this.$refs.coverbg.style.cssText += ''
                 }else{
                     this.$message({
@@ -226,6 +227,7 @@ export default {
                         type: 'warning'
                     });
                 }
+                e.target.value = '';
                 
             });
         }
