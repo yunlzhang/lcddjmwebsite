@@ -97,12 +97,12 @@ router.get('/get_article_length',function(req,res){
 });
 
 router.get('/get_article',function(req,res){
-    var opts = req.query;
+    let opts = req.query;
     ArticleModel.getPosts(opts)
     .then(function (result) {
         result.forEach(function(item,index){
             //截取部分内容
-            var tempStr = item.content.replace(/<[^>]*>/ig,'').replace(/\&nbsp;/g,'');
+            let tempStr = item.content.replace(/<[^>]*>/ig,'').replace(/\&nbsp;/g,'');
             result[index]['des'] = tempStr.slice(0,200) + '...';
             result[index]['created_at'] = moment(objectIdToTimestamp(item._id)).format('YYYY-MM-DD HH:mm')
             delete result[index]['content'];
@@ -124,7 +124,7 @@ router.get('/get_article',function(req,res){
 
 
 router.get('/get_article_detail',function(req,res){
-    var opts = req.query;
+    let opts = req.query;
     ArticleModel.getPostById(opts._id)
     .then(function (result) {
         res.json({

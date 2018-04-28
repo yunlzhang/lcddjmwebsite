@@ -15,7 +15,7 @@ module.exports = {
 	},
 	getPosts(opts) {
 		opts = opts || {};
-		var page = Number(opts.page) || 1,
+		let page = Number(opts.page) || 1,
 			num = Number(opts.num) || 5;
 
 		delete opts.page;

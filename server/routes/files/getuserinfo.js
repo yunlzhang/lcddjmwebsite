@@ -1,7 +1,7 @@
-var sha1 = require('sha1');
-var express = require('express');
-var router = express.Router();
-var UserModel = require('../../models/users');
+let sha1 = require('sha1');
+let express = require('express');
+let router = express.Router();
+let UserModel = require('../../models/users');
 
 
 router.get('/',function(req, res, next) {

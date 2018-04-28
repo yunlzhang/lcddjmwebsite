@@ -1,18 +1,18 @@
-var express = require('express');
-var router = express.Router();
-var qiniu  = require('qiniu');
-var config = require('../../config');
-var accessKey = config.qiniu.accessKey;
-var secretKey = config.qiniu.secretKey;
+let express = require('express');
+let router = express.Router();
+let qiniu  = require('qiniu');
+let config = require('../../config');
+let accessKey = config.qiniu.accessKey;
+let secretKey = config.qiniu.secretKey;
 
-var options = {
+let options = {
     scope: 'pict',
 };
-var putPolicy = new qiniu.rs.PutPolicy(options);
+let putPolicy = new qiniu.rs.PutPolicy(options);
 
 router.get('/',function(req,res,next){
-    var mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
-    var uploadToken=putPolicy.uploadToken(mac);
+    let mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
+    let uploadToken=putPolicy.uploadToken(mac);
     res.json({
         code:200,
         uptoken:uploadToken

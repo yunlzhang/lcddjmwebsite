@@ -1,11 +1,11 @@
-var config = process.env.NODE_ENV === 'development' ? require('../../config/development') : require('../../config/production')
-// var config = require('../../config/production');
-var Mongolass = require('mongolass');
-var mongolass = new Mongolass();
-var mongoose = require('mongoose');
+let config = process.env.NODE_ENV === 'development' ? require('../../config/development') : require('../../config/production')
+// let config = require('../../config/production');
+let Mongolass = require('mongolass');
+let mongolass = new Mongolass();
+let mongoose = require('mongoose');
 mongolass.connect(config.mongodb);
-var moment = require('moment');
-var objectIdToTimestamp = require('objectid-to-timestamp');
+let moment = require('moment');
+let objectIdToTimestamp = require('objectid-to-timestamp');
 
 // 根据 id 生成创建时间 created_at
 mongolass.plugin('addCreatedAt', {

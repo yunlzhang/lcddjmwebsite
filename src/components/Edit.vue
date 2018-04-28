@@ -29,7 +29,7 @@
                     <div class="txt" ref="txt">添加题图</div>    
                 </div>
             </div>
-            <input type="file" id="qiniu-upload" accept=".jpg,.png,.gif">
+            <input type="file" id="qiniu-upload" @change="upCover" accept=".jpg,.png,.gif">
         </div>
         <div class="title-input">
             <input type="text" :value="title" @blur="setTitle" placeholder="输入标题">
@@ -39,6 +39,7 @@
                 v-model="content"
                 ref="quillEditor"
                 :options="editorOptions"
+                @change="contentChange"
             ></quillEditor>
         </div>
         <input type="file" id="upload-area" name="logo" accept="image/jpg,image/jpeg,image/png,image/gif" @change="fileChange">
@@ -46,7 +47,6 @@
 </template>
 
 <script>
-
 // import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 // import 'quill/dist/quill.bubble.css'
@@ -59,7 +59,6 @@ import '../static/js/qiniu.min';
 import options from '../static/config/editor_config';
 import { quillEditor } from 'vue-quill-editor';
 import Quill from 'quill'
-Quill.register('modules/imageImport', ImageImport)
 export default {
     name: 'Edit',
     data() {
@@ -86,13 +85,12 @@ export default {
         if(this.$route.params.id){
             this.getArticleDetail();
         }
-        this.uploadImg('QINIU','cover_pic/',function(obj,link){
-            obj.isUpload = true;
-            obj.cover = link;
-            obj.$refs.coverbg.style.cssText += ''
-        });
+        // this.uploadImg('QINIU','cover_pic/',function(obj,link){
+        //     obj.isUpload = true;
+        //     obj.cover = link;
+        //     obj.$refs.coverbg.style.cssText += ''
+        // });
         this.scrollHandle();
-
         //重写编辑器的上传图片
 
         var imgHandler = function(f) {
@@ -132,45 +130,8 @@ export default {
                 this.$refs.txt.style.display = 'none';
             }
         },
-        uploadImg(id,path,cb){
-            var _this = this;
-            var uploader = Qiniu.uploader({
-                disable_statistics_report: false, // 禁止自动发送上传统计信息到七牛，默认允许发送
-                runtimes: 'html5,flash,html4', // 上传模式,依次退化
-                browse_button: 'qiniu-upload', // 上传选择的点选按钮，**必需**
-                get_new_uptoken: true, // 设置上传文件的时候是否每次都重新获取新的 uptoken                
-                uptoken_url: '/api/gettoken',         // Ajax 请求 uptoken 的 Url，**强烈建议设置**（服务端提供）
-                unique_names: false,
-                save_key: false,
-                domain: 'http://oy02r7jyx.bkt.clouddn.com', // bucket 域名，下载资源时用到，如：'http://xxx.bkt.clouddn.com/' **必需**
-                container: id, // 上传区域 DOM ID，默认是 browser_button 的父元素，
-                max_file_size: '100mb', // 最大文件体积限制
-                flash_swf_url: '../static/js/plupload/Moxie.swf', //引入 flash,相对路径
-                max_retries: 3, // 上传失败最大重试次数
-                dragdrop: true, // 开启可拖曳上传
-                drop_element: id, // 拖曳上传区域元素的 ID，拖曳文件或文件夹后可触发上传
-                chunk_size: '4mb', // 分块上传时，每块的体积
-                auto_start: true, // 选择文件后自动上传，若关闭需要自己绑定事件触发上传,
-                init: {
-                    'FilesAdded': function (up, files) {
-                        plupload.each(files, function (file) {
-                            // 文件添加进队列后,处理相关的事情
-                        });
-                    },
-                    'FileUploaded': function (up, file, info) {
-                        var res = JSON.parse(info.response);
-                        var sourceLink = 'https://image.lcddjm.com' +'/'+ res.key; //获取上传成功后的文件的Url
-                        if(typeof cb == 'function'){
-                            cb(_this,sourceLink);
-                        }
-                    },  
-                    'Error': function (up, err, errTip) {
-                    },
-                    'Key': function (up, file) {
-                        return path+file.name
-                    }
-                }
-            });
+        contentChange(){
+            document.documentElement.scrollTop = document.documentElement.scrollHeight;
         },
         setTitle(e){
             this.title = e.target.value;
@@ -221,7 +182,7 @@ export default {
             let _this = this;
             let uploadArea = e.target;
             let formData = new FormData(uploadArea);
-            formData.append('logo',uploadArea.files[0])
+            formData.append('pic',uploadArea.files[0])
             
             let up = this.upImg(formData);
             up.then(res=>{
@@ -247,6 +208,26 @@ export default {
                 url:'/api/upload'
             })
             
+        },
+        upCover(e){
+            let formData = new FormData();
+            formData.append('pic',e.target.files[0]);
+            formData.append('path','cover');
+            this.upImg(formData)
+            .then(res => {
+                console.log(res)
+                if(res.data.code == 200){
+                    this.isUpload = true;
+                    this.cover = res.data.img;
+                    this.$refs.coverbg.style.cssText += ''
+                }else{
+                    this.$message({
+                        message: res.data.message,
+                        type: 'warning'
+                    });
+                }
+                
+            });
         }
 
     },

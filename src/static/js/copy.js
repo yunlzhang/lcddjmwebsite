@@ -1,12 +1,9 @@
 util.addHandler(document.querySelector('body'),'copy',function(){
-    if (typeof window.getSelection == "undefined") return; //IE8 or earlier...
-			
+    if (typeof window.getSelection == "undefined" || !location.href.match(/article/)) return; //IE8 or earlier...  not Article
     var body_element = document.getElementsByTagName('body')[0];
     var selection = window.getSelection();
-    
     //if the selection is short let's not annoy our users
     if (("" + selection).length < 30) return;
-
     //create a div outside of the visible area
     //and fill it with the selected text
     var newdiv = document.createElement('div');

@@ -1,20 +1,10 @@
-var express = require('express');
-var router = express.Router();
-var multer  = require('multer')
-var fs = require('fs');
-var uuidV1 = require('uuid/v1');
-
-var storage = multer.diskStorage({
-    //设置上传后文件路径，uploads文件夹会自动创建。
-    destination: function (req, file, cb) {
-        cb(null, './qnimg');    // 保存的路径，备注：需要自己创建
-    }, 
-    filename: function (req, file, cb) {
-        var fileFormat = (file.originalname).split(".");
-        cb(null, uuidV1() + "." + fileFormat[fileFormat.length - 1]);
-     }
-});  
-var upload = multer({storage: storage}).single('logo');
+let express = require('express');
+let router = express.Router();
+let multer  = require('multer')
+let fs = require('fs');
+let uuidV1 = require('uuid/v1');
+ 
+let upload = multer({ dest: './qnimg/' }).single('pic');
 router.post('/',function(req,res,next){
     upload(req, res, function (err) {
         if (err) {
@@ -25,14 +15,45 @@ router.post('/',function(req,res,next){
             // An error occurred when uploading
             return;
         }
-        // Everything went fine        
-        res.json({
-            code:200,
-            message:'上传成功',
-            data:{
-                img:'https://image.lcddjm.com/'+req.file.path
-            }
-        });
+        // Everything went fine 
+        let path = './qnimg/' + (req.body.path ? req.body.path + '/' :'') ;
+        //创建文件夹
+        if(fs.existsSync(path)){
+            rename()
+        }else{
+            fs.mkdir(path,err => {
+                if(err){
+                    res.json({
+                        code:'100',
+                        message:'服务器创建文件夹失败'
+                    })
+                    return;
+                }
+                rename()
+            })
+        }
+       
+        function rename(){
+            let  fileFormat = req.file.originalname.split(".");
+            let newName = uuidV1() + "." + fileFormat[fileFormat.length - 1];
+            fs.rename('./qnimg/' + req.file.filename , path + newName,err => {
+                if(err){
+                    res.json({
+                        code:'100',
+                        message:'文件重命名失败'
+                    })
+                    return;
+                }
+                res.json({
+                    code:200,
+                    message:'上传成功',
+                    data:{
+                        img:path + newName
+                    }
+                });
+            })
+        }
+        
     })
 });
 
