@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const CommentModal = require('../../models/comment');
-router.get('/',function(req,res,next){
-    console.log(req);
+router.get('/get_comment',function(req,res,next){
+    let opts = req.query;
 
+    CommentModal.getPostById(opts.id)
+    .then(result => {
+        console.log(result);
+    })
 })
 
 
@@ -15,10 +19,10 @@ router.post('/',function(req,res,next){
         })
     }
     let comment = {};
-    comment.user_id = req.session.user._id;
-    comment.to_user_id = req.body.to_user_id;
+    comment.user = req.session.user._id;
+    comment.to_user = req.body.to_user;
     comment.content = req.body.content;
-    comment.parent_id = req.body.parent_id || '';
+    comment.parent_id = req.body.parent_id;
     comment.content = req.body.content;
     comment.article_id = req.body.article_id;
     if(!comment.content){

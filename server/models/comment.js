@@ -1,15 +1,17 @@
-const Post = require('../lib/mongoose').Comment;
+const Comment = require('../lib/mongoose').Comment;
 const Promise = require("bluebird");
 
 module.exports = {
 	// 注册一个用户
 	create(data) {
-		let newComment = new comment(data);
+		let newComment = new Comment(data);
 		return newComment.save();
 	},
 	getPostById(id) {
-		return Post.find({
+		return Comment.find({
 			'article_id':id,
-		}).sort({_id: 1}).lean();
+		})
+		.populate('user')
+		.sort({_id: 1}).lean();
 	}
 };

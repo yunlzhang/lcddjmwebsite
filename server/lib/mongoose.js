@@ -4,7 +4,7 @@ const  config = process.env.NODE_ENV === 'development' ? require('../../config/d
 const mongoose = require('mongoose');
 const moment = require('moment');
 const objectIdToTimestamp = require('objectid-to-timestamp');
-
+const Schema = mongoose.Schema;
 //model
 let User,Post,Comment;
 
@@ -50,9 +50,22 @@ Post = mongoose.model('Post',PostSchema)
 const CommentSchema = mongoose.Schema({
     article_id:mongoose.Schema.Types.ObjectId,    
 	content:String,
-    parent_id:String,
-    user_id:mongoose.Schema.Types.ObjectId, 
-    to_user_id:mongoose.Schema.Types.ObjectId
+    parent_id:{
+        type:Schema.Types.Mixed,
+        ref:'User'
+    },
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    }, 
+    sub_comments:[{
+        type:Schema.Types.Mixed,
+        ref:'Comment'
+    }],
+    to_user:{
+        type:Schema.Types.Mixed,
+        ref:'User'
+    }
 })
 CommentSchema.index({article_id: 1,user_id:1,_id: 1})
 Comment = mongoose.model('Comment', CommentSchema);

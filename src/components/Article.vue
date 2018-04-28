@@ -11,7 +11,7 @@
         </div>
         <div class="comment-area">
             <div class="avatar"></div>
-            <textarea placeholder="期待你的评论...."></textarea>
+            <textarea placeholder="期待你的评论...." @focus="setActiveData(articleData)" v-model="commentContent"></textarea>
             <div class="button">
                 <span class="confirm" @click="comment()">确认</span>
                 <span class="cancel" >取消</span>
@@ -34,7 +34,9 @@ export default {
         return {
             articleData:{},
             previous:'',
-            next:''
+            next:'',
+            activeData:{},
+            commentContent:''
         }
     },
     mounted: function () {
@@ -81,24 +83,34 @@ export default {
                 })                
             })
         },
+        getComment(){
+
+        },
         comment(data){
             let commentData = {
                 article_id:'',    
-                content:'',
+                content:this.commentContent,
                 parent_id:'',
-                user_id:'', 
                 to_user_id:''
             }
-            if(!data){
-                commentData.article_id = this.articleData._id;
+            if(!this.activeData.article_id){
+                commentData.article_id = this.activeData._id;
             }else{
-                commentData.article_id = data.article_id;
+                //子评论
+                commentData.article_id = this.data.activeData.article_id;
+                commentData.parent_id = this.activeData._id,
+                commentData.to_user = this.activeData.to_user._id;
             }
             this.axios({
                 method:'post',
                 data:commentData,
                 url:'/api/comment'
+            }).then(res => {
+                console.log(res);
             })
+        },
+        setActiveData(data){
+            this.activeData = data;
         }
     }
 
