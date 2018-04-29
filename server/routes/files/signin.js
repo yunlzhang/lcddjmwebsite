@@ -16,6 +16,7 @@ router.post('/',function(req, res, next) {
                 'message':'用户不存在'
             })
         }
+        console.log(user.password);
         // 检查密码是否匹配
         if (sha1(password) !== user.password) {
             return res.json({

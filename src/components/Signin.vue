@@ -11,6 +11,7 @@
             <div class="r"><input type="password" v-model="signinData.password" name="password" placeholder="请输入密码，6-10位"></div>
         </div>
         <div class="confirm"  @click="signin">登陆</div>
+        <div class="go-register">没有账号？<router-link to="/signup">去注册</router-link></div>
     </div>
 </div>
 <Rain></Rain>
@@ -31,11 +32,24 @@ export default {
             }
         }
     },
+    beforeRouteEnter (to,from,next){
+        let userInfo = {};
+        try{
+            userInfo = JSON.parse(localStorage.getItem('userInfo'));
+        }catch(e){
+
+        }
+        if(userInfo._id){
+            history.go(-1);
+        }
+        next();
+    },
     mounted: function () {
         document.title = '登陆';
         this.$nextTick(function () {
             instantiationEngine();      
         })
+        
     },
     methods:{
         signin(){
@@ -48,7 +62,7 @@ export default {
                 if(res.data.code === 200){
                     this.$emit('getUserInfo');
                     document.querySelector('#rainCanvas') && document.querySelector('body').removeChild(document.querySelector('#rainCanvas'));
-                    this.$router.replace('/');
+                    history.length > 2 ? this.$router.go(-1) : this.$router.replace('/');
                 }else{
                     this.$message({
                         message: res.data.message,
@@ -119,6 +133,17 @@ export default {
             justify-content: center;
             cursor: pointer;
             color:#fff;
+        }
+        .go-register{
+            text-align: center;
+            border:0;   
+            justify-content: center;
+            margin:0;
+            height:20px;
+            line-height:20px;
+            a{
+                color:#0db4f9;
+            }
         }
     }
 

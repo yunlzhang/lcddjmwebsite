@@ -21,7 +21,7 @@ module.exports = {
 						path:'sub_comments',
 						options:{
 							sort:{_id:1},
-							imit:5
+							limit:5
 						},
 						populate:[
 							{

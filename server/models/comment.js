@@ -75,16 +75,16 @@ module.exports = {
 		])
 		.lean();
 	},
-	getSubComment(){
+	getSubComment(opts){
 		return Comment.find({
 			article_id:opts.article_id,
 			parent_id:opts.parent_id,
 			_id:{
-				$lt:opts.lastId
+				$gt:opts.last_id
 			}
 		})
 		.sort({_id:1})		
-		.limit(5)
+		// .limit(5)
 		.populate([
 			{
 				path:'user',

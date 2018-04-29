@@ -17,7 +17,7 @@
                 <span class="cancel" >取消</span>
             </div>
         </div> -->
-        <comment :userInfo="userInfo"  v-on:submitData="comment" ></comment>
+        <comment :userInfo="userInfo" :showAvatar="1"  v-on:submitData="comment" ></comment>
         <div class="comment" v-if="comments.length">
             <div class="tit">{{articleData.comments_count}}条评论</div>
             <div v-for="(item,index) in comments" :class="index == comments.length - 1 ? 'hidden comment-item' : 'comment-item ' "  :key="item._id">
@@ -37,7 +37,11 @@
                             <span>{{sub.created_at}}</span> <span class="reply" @click="showCommentArea(index,subIndex)"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-replycomment"></use></svg> 回复</span>
                         </div>
                     </div>
-
+                    <div class="add-comment" v-if="item.sub_comments.length" >
+                        <span class="add" @click="showCommentArea(index)"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-replycomment"></use></svg> 添加新评论</span>
+                        <span class="line" v-if="item.sub_comments.length != item.sub_comments_count">|</span>
+                        <span v-if="item.sub_comments.length != item.sub_comments_count">还有{{item.sub_comments_count - item.sub_comments.length}}条评论，<em @click="getMoreSubComments(item._id,item.last_id,index)">点击查看</em></span>
+                    </div>
                     <transition name="fade">
                         <comment v-if="item.show" :commentData="item.commentData" :index="index" v-on:submitData="comment" v-on:cancel="cancelComment"></comment>
                     </transition>
@@ -67,6 +71,7 @@ import '../static/css/highlight.min.css'
 import '../static/js/highlight.min';
 import * as moment from 'moment-timezone';
 
+
 /**
  * 
  * 评论组件
@@ -74,8 +79,8 @@ import * as moment from 'moment-timezone';
  */
 let Comment = {
     template:`<div class="comment-area" >
-                        <div class="avatar" v-if="userInfo"><img   :src="userInfo.avatar" alt=""></div>
-                        <textarea :placeholder="placeholder" autofocus v-model="content"></textarea>
+                        <div class="avatar" v-if="showAvatar"><img v-if="userInfo" :src="userInfo.avatar" alt=""></div>
+                        <textarea :placeholder="placeholder" @click="checkLogin" v-model="content"></textarea>
                         <div class="button">
                             <span class="confirm" @click="submitData">确认</span>
                             <span class="cancel" @click="cancel">取消</span>
@@ -90,7 +95,7 @@ let Comment = {
     mounted(){
         this.setPlaceholder();
     },
-    props:['commentData','userInfo','index'],
+    props:['commentData','showAvatar','userInfo','index'],
     methods:{
         submitData(){
             let data = {};
@@ -101,6 +106,20 @@ let Comment = {
             }
             data.content  = this.content;
             this.$emit('submitData',data);
+        },
+        checkLogin(){
+            if(!this.GLOBALDATA.isLogin){
+                this.$confirm('尚未登录，是否去登录', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    // 去登陆
+                    this.$router.push('/signin')
+                }).catch(() => {
+                    console.log(222);
+                });
+            }
         },
         cancel(){
             this.content = '';
@@ -156,17 +175,17 @@ export default {
                 if(res.data.code == 200){
                     let comments = res.data.data[1].comments
                     this.articleData = res.data.data[1];
-                    comments.length ? !function(){
+                    comments.length ? (
                         comments.forEach((item,index) => {
                             comments[index].commentData = '';
-                            comments[index].created_at = moment(item.created_at).tz('Asia/Shanghai').format('YYYY-MM-DD HH:mm');
+                            comments[index].created_at = this.dateFormat(item.created_at);
                             if(item.sub_comments.length){
                                 comments[index].sub_comments.forEach((val,idx) =>{
-                                    comments[index].sub_comments[idx].created_at = moment(val.created_at).tz('Asia/Shanghai').format('YYYY-MM-DD HH:mm');
+                                    comments[index].sub_comments[idx].created_at = this.dateFormat(val.created_at);
                                 })
+                                comments[index].last_id =  item.sub_comments[item.sub_comments.length-1]._id;
                             }
-                        })
-                    }() : '';
+                        })) : '';
                     this.comments = comments;
                     this.previous = res.data.data[0]._id  ? res.data.data[0] : '';
                     this.next = res.data.data[2]._id ? res.data.data[2] : '';
@@ -206,6 +225,7 @@ export default {
                         message: res.data.message,
                         type: 'success'
                     });
+                    res.data.data.created_at = this.dateFormat(res.data.data.created_at);
                     if(!res.data.data.parent_id){
                         this.comments.unshift(res.data.data);
                         this.articleData.comments_count =  ++this.articleData.comments_count;
@@ -218,7 +238,7 @@ export default {
                         type: 'warning'
                     });
                 }
-                console.log(res);
+                this.$set(this.comments[this.activeIndex],'show',0);
             })
         },
         cancelComment(index){
@@ -234,7 +254,50 @@ export default {
                 url:'/api/comment/get_more_comments'
             })
             .then(res => {
-
+                if(res.data.code == 200){
+                    let comments = res.data.comments;
+                    comments.forEach((item,index) => {
+                        comments[index].commentData = '';
+                        comments[index].created_at = this.dateFormat(item.created_at);
+                        if(item.sub_comments.length){
+                            comments[index].sub_comments.forEach((val,idx) =>{
+                                comments[index].sub_comments[idx].created_at = this.dateFormat(val.created_at);
+                            })
+                            comments[index].last_id =  item.sub_comments[item.sub_comments.length-1]._id;
+                        }
+                    })
+                    this.comments = comments;
+                }else{
+                    this.$message({
+                        message: res.data.message,
+                        type: 'warning'
+                    });
+                }
+            })
+        },
+        getMoreSubComments(parent_id,last_id,index){
+            this.axios({
+                method:'get',
+                params:{
+                    article_id:this.$route.params.id,
+                    parent_id:parent_id,
+                    last_id:last_id
+                },
+                url:'/api/comment/get_more_sub_comments'
+            })
+            .then(res => {
+                if(res.data.code == 200){
+                    let subComments = res.data.sub_comments;
+                    subComments.forEach((item,index) =>{
+                        subComments[index].created_at = this.dateFormat(item.created_at);
+                    })
+                    this.comments[index].sub_comments = this.comments[index].sub_comments.concat(subComments);
+                }else{
+                    this.$message({
+                        message: res.data.message,
+                        type: 'warning'
+                    });
+                }
             })
         },
         showCommentArea(index,subIndex){
@@ -245,8 +308,10 @@ export default {
             }
             this.activeIndex = index;
             this.activeSubIndex = subIndex;
-            console.log(index,subIndex);
             this.$set(this.comments[index],'commentData',subIndex !== undefined ? this.comments[index].sub_comments[subIndex] : this.comments[index]);
+        },
+        dateFormat(isoDate){
+            return moment(isoDate).tz('Asia/Shanghai').format('YYYY-MM-DD HH:mm');
         }
     }
 
@@ -432,6 +497,22 @@ export default {
             }
             .reply:hover{
                 color:#2c3e50;
+                cursor: pointer;
+            }
+        }
+        .add-comment{
+            overflow: hidden;
+            .add{
+                cursor: pointer;
+            }
+            span{
+                float:left;
+                font-size:14px;
+                margin-right:10px;
+                color:#969696;
+            }
+            em{
+                color:#0db4f9;
                 cursor: pointer;
             }
         }
