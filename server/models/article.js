@@ -12,11 +12,11 @@ module.exports = {
 			Post.findOne({_id: id})
 			.populate({
 				path:'comments',
-				options:{limit:5},
+				options:{limit:10},
 				populate:[
 					{
 						path:'sub_comments',
-						options:{limit:3},
+						options:{limit:5},
 						populate:[
 							{
 								path:'user',
@@ -58,16 +58,19 @@ module.exports = {
 				$set:options
 			});
 	},
-	updateComment(id,comment_id){//返回更新前数据 要想返回更新后数据 
+	updateComment(id,comment_id){//返回更新前数据 要想返回更新后数据 设置new 为true
 		return Post
 			.findOneAndUpdate(
 				{_id:id},
 				{
 					$push:{
 						'comments':comment_id
+					},
+					$inc:{
+						'comments_count':1
 					}
 				},
-				{new: true}
+				// {new: true}
 			);
 	},
 	getLength(){

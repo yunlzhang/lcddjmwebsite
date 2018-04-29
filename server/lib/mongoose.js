@@ -46,6 +46,10 @@ const PostSchema = Schema({
         type:Schema.Types.Mixed,
         ref:'Comment',
     }],
+    comments_count:{
+        type:Number,
+        default:0
+    },
     pv:{
         type:Number,
         default:0
@@ -70,7 +74,6 @@ const CommentSchema = Schema({
 	content:String,
     parent_id:{
         type:String,
-        ref:'User',
         default:''
     },
     user:{
@@ -81,6 +84,10 @@ const CommentSchema = Schema({
         type:String,
         ref:'Comment'
     }],
+    sub_comments_count:{
+        type:Number,
+        default:0
+    },
     to_user:{
         type:String,
         ref:'User',

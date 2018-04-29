@@ -12,8 +12,8 @@
                         <ul class="create">
                             <li>发表于 {{item.created_at}}</li>
                             <li v-if="item.tags.length"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cc-tag-more"></use></svg> {{item.tags.toString()}}</li>
-                            <li v-if="item.comment_count"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-iconfontpinglun"></use></svg> {{item.comment_count}}</li>
-                            <li v-if="item.pv"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fangwenliang"></use></svg> item.pv</li>                            
+                            <li v-if="item.comments_count"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-iconfontpinglun"></use></svg> {{item.comments_count}}</li>
+                            <li v-if="item.pv"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fangwenliang"></use></svg> {{item.pv}}</li>                            
                         </ul>
                     </router-link>
                 </li>

@@ -4,7 +4,28 @@ const Promise = require("bluebird");
 module.exports = {
 	create(data) {
 		let newComment = new Comment(data);
-		return newComment.save();
+		return newComment.save().then(result=>{
+			if(!result.parent_id){
+				return  Comment.populate(result,[
+					{
+						path:'user',
+						select:'avatar name _id'
+					}
+				])
+			}else{
+				return  Comment.populate(result,[
+					{
+						path:'user',
+						select:'avatar name _id'
+					},
+					{
+						path:'to_user',
+						select:'avatar name _id'
+					}
+				])
+			}
+			
+		});
 	},
 	updateSubcomment(id,sub_id){
 		return Comment
@@ -13,6 +34,9 @@ module.exports = {
 			{
 				$push:{
 					'sub_comments':sub_id
+				},
+				$inc:{
+					'sub_comments_count':1
 				}
 			},
 			{new: true}
@@ -57,7 +81,7 @@ module.exports = {
 			}
 		})
 		.sort({_id:1})		
-		.limit(10)
+		.limit(5)
 		.populate([
 			{
 				path:'user',
