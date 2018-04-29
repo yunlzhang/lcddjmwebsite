@@ -12,11 +12,17 @@ module.exports = {
 			Post.findOne({_id: id})
 			.populate({
 				path:'comments',
-				options:{limit:10},
+				options:{
+					sort:{_id:-1},
+					limit:10
+				},
 				populate:[
 					{
 						path:'sub_comments',
-						options:{limit:5},
+						options:{
+							sort:{_id:1},
+							imit:5
+						},
 						populate:[
 							{
 								path:'user',

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const CommentModal = require('../../models/comment');
+const commentModal = require('../../models/comment');
 const articleModal = require('../../models/article');
 
 router.get('/get_more_comments',function(req,res,next){
@@ -13,9 +13,8 @@ router.get('/get_more_comments',function(req,res,next){
         })
     }
 
-    CommentModal.getComment(opts)
+    commentModal.getComment(opts)
     .then(result => {
-        console.log(result);
         res.json({
             code:200,
             comments:result,
@@ -45,7 +44,7 @@ router.get('/get_more_sub_comments',function(req,res,next){
         })
     }
 
-    CommentModal.getSubComment(opts)
+    commentModal.getSubComment(opts)
     .then(result => {
         res.json({
             code:200,
@@ -72,7 +71,6 @@ router.post('/',function(req,res,next){
     let comment = {};
     comment.user = req.session.user._id;
     comment.to_user = req.body.to_user;
-    comment.content = req.body.content;
     comment.parent_id = req.body.parent_id;
     comment.content = req.body.content;
     comment.article_id = req.body.article_id;
@@ -83,7 +81,7 @@ router.post('/',function(req,res,next){
         })
     };
 
-    CommentModal.create(comment)
+    commentModal.create(comment)
     .then(function (result) {
         if(!comment.parent_id){
             //一级评论
@@ -97,6 +95,14 @@ router.post('/',function(req,res,next){
             })
         }else{
             //二级评论
+            commentModal.updateComment(result.parent_id,result._id)
+            .then( data => {
+                res.json({
+                    code:200,
+                    data:result,
+                    message:'评论成功'
+                })
+            })
         }
         
     })

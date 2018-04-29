@@ -17,7 +17,7 @@
                 <span class="cancel" >取消</span>
             </div>
         </div> -->
-        <comment :userInfo="userInfo" :commentData="commentData" v-on:submitData="comment" ></comment>
+        <comment :userInfo="userInfo"  v-on:submitData="comment" ></comment>
         <div class="comment" v-if="comments.length">
             <div class="tit">{{articleData.comments_count}}条评论</div>
             <div v-for="(item,index) in comments" :class="index == comments.length - 1 ? 'hidden comment-item' : 'comment-item ' "  :key="item._id">
@@ -31,6 +31,13 @@
                 </div>
                 <div class="content">{{item.content}}</div>
                 <div class="sub-comments">
+                    <div class="sub-comment-item" v-for="(sub,subIndex) in  item.sub_comments" :key="sub._id">
+                        <div class="content"><span>{{sub.user.name}}</span>:<span>@{{sub.to_user.name}}</span> {{sub.content}}</div>
+                        <div class="time">
+                            <span>{{sub.created_at}}</span> <span class="reply" @click="showCommentArea(index,subIndex)"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-replycomment"></use></svg> 回复</span>
+                        </div>
+                    </div>
+
                     <transition name="fade">
                         <comment v-if="item.show" :commentData="item.commentData" :index="index" v-on:submitData="comment" v-on:cancel="cancelComment"></comment>
                     </transition>
@@ -48,7 +55,7 @@
                 layout="prev, pager, next"
                 :page-size="10"
                 :total="articleData.comments_count"
-                @current-change="commentChange">
+                @current-change="getComment">
             </el-pagination>
         </div>
     </div>
@@ -68,7 +75,7 @@ import * as moment from 'moment-timezone';
 let Comment = {
     template:`<div class="comment-area" >
                         <div class="avatar" v-if="userInfo"><img   :src="userInfo.avatar" alt=""></div>
-                        <textarea placeholder="写下你的评论...." autofocus v-model="content"></textarea>
+                        <textarea :placeholder="placeholder" autofocus v-model="content"></textarea>
                         <div class="button">
                             <span class="confirm" @click="submitData">确认</span>
                             <span class="cancel" @click="cancel">取消</span>
@@ -77,17 +84,34 @@ let Comment = {
     data(){
         return {
             content:'',
+            placeholder:'写下你的评论...'
         }
+    },
+    mounted(){
+        this.setPlaceholder();
     },
     props:['commentData','userInfo','index'],
     methods:{
         submitData(){
-            this.$emit('submitData',content)
+            let data = {};
+            if(this.commentData){
+                //子评论
+                data.parent_id = this.commentData.parent_id ? this.commentData.parent_id : this.commentData._id;
+                data.to_user = this.commentData.user._id;
+            }
+            data.content  = this.content;
+            this.$emit('submitData',data);
         },
         cancel(){
-            console.log(this);
             this.content = '';
             this.$emit('cancel',this.index)
+        },
+        setPlaceholder(){
+            if(this.commentData){
+                if(this.commentData.parent_id){
+                    this.placeholder = '@' + this.commentData.user.name;
+                }
+            }
         }
     }
 }
@@ -99,14 +123,12 @@ export default {
             previous:'',
             next:'',
             comments:[],
-            commentData:{
-                content:''
-            },
             userInfo:'',
-            activeIndex:''
+            activeIndex:'',
+            activeSubIndex:''
         }
     },
-    mounted: function () {
+    mounted(){
         // document.title = 'lcddjm\'s website';
         let userInfo = localStorage.getItem('userInfo');
         this.getArticleDetail(this.$route.params.id);
@@ -137,10 +159,10 @@ export default {
                     comments.length ? !function(){
                         comments.forEach((item,index) => {
                             comments[index].commentData = '';
-                            comments[index].created_at = moment(comments[index].created_at).tz('Asia/Shanghai').format('YYYY-MM-DD HH:mm');
+                            comments[index].created_at = moment(item.created_at).tz('Asia/Shanghai').format('YYYY-MM-DD HH:mm');
                             if(item.sub_comments.length){
-                                comments[index].sub_comments.forEach((i,idx) =>{
-                                    comments[index].sub_comments[i].created_at = moment(comments[index].sub_comments[i].created_at).tz('Asia/Shanghai').format('YYYY-MM-DD HH:mm');
+                                comments[index].sub_comments.forEach((val,idx) =>{
+                                    comments[index].sub_comments[idx].created_at = moment(val.created_at).tz('Asia/Shanghai').format('YYYY-MM-DD HH:mm');
                                 })
                             }
                         })
@@ -170,24 +192,44 @@ export default {
             })
         },
         comment(data){
+            if(typeof data !== 'object') return;
+            data.article_id = this.articleData._id;     
+            data.user = this.userInfo._id;
             this.axios({
                 method:'post',
                 data:data,
                 url:'/api/comment'
             }).then(res => {
+                let comments = this.comments;
+                if(res.data.code == 200){
+                    this.$message({
+                        message: res.data.message,
+                        type: 'success'
+                    });
+                    if(!res.data.data.parent_id){
+                        this.comments.unshift(res.data.data);
+                        this.articleData.comments_count =  ++this.articleData.comments_count;
+                    }else{
+                        this.comments[this.activeIndex].sub_comments.push(res.data.data);
+                    }
+                }else{
+                    this.$message({
+                        message: res.data.message,
+                        type: 'warning'
+                    });
+                }
                 console.log(res);
             })
         },
         cancelComment(index){
             this.$set(this.comments[index],'show',0);
         },
-        getComment(lastId,parentId){
+        getComment(page){
             this.axios({
                 method:'get',
                 params:{
-                    _id:this.$route.params.id,
-                    last_id:lastId,
-                    parent_id:parentId
+                    article_id:this.$route.params.id,
+                    page:page
                 },
                 url:'/api/comment/get_more_comments'
             })
@@ -196,12 +238,15 @@ export default {
             })
         },
         showCommentArea(index,subIndex){
+            if(this.activeIndex === index && this.activeSubIndex === subIndex){
+                this.$set(this.comments[index],'show',this.comments[index].show ?  0 : 1);
+            }else{
+                this.$set(this.comments[index],'show',1);
+            }
             this.activeIndex = index;
-            this.$set(this.comments[index],'show',this.comments[index].show ?  0 : 1);
-            this.$set(this.comments[index],'commenData',subIndex ? this.comments[index].sub_comments[subIndex] : this.comments[index]);
-        },
-        setActiveData(data){
-            this.activeData = data;
+            this.activeSubIndex = subIndex;
+            console.log(index,subIndex);
+            this.$set(this.comments[index],'commentData',subIndex !== undefined ? this.comments[index].sub_comments[subIndex] : this.comments[index]);
         }
     }
 
@@ -346,6 +391,7 @@ export default {
         }
         .content{
             margin:10px 0;
+            white-space: pre-wrap;
         }
     }
     .sub-comments{
@@ -361,9 +407,33 @@ export default {
             left: 10px;
             top: 0;
         }
+        .sub-comment-item{
+            padding:10px 0;
+            border-top:1px dashed #ccc;
+            &:first-child{
+                border: none;
+            }
+        }
         .comment-area{
             height:180px;
-            padding:0 0 60px 0;
+            padding:20px 0 60px 0;
+        }
+        .content{
+            margin:5px 0; 
+            span{
+                color:#0db4f9;
+            }
+        }
+        .time{
+            overflow: hidden;
+            span{
+                float:left;
+                margin-right:20px;
+            }
+            .reply:hover{
+                color:#2c3e50;
+                cursor: pointer;
+            }
         }
     }
     .el-pagination{

@@ -27,7 +27,7 @@ module.exports = {
 			
 		});
 	},
-	updateSubcomment(id,sub_id){
+	updateComment(id,sub_id){
 		return Comment
 		.findOneAndUpdate(
 			{_id:id},
@@ -44,16 +44,19 @@ module.exports = {
 	},
 	getComment(opts){
 		return Comment.find({
-			article_id:opts.id,
+			article_id:opts.article_id,
 			parent_id:''
 		})
 		.sort({_id:-1})
-		.skip(10*opts.index)
+		.skip(10*(opts.page - 1))
 		.limit(10)
 		.populate([
 			{
 				path:'sub_comments',
-				options:{limit:3},
+				options:{
+					sort:{_id:-1},
+					limit:5
+				},
 				populate:[
 					{
 						path:'user',
