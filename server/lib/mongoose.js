@@ -19,7 +19,8 @@ mongoose.connect(config.mongodb,{ keepAlive: 1, connectTimeoutMS: 30000 });
 const UserSchema = mongoose.Schema({
     name: String,
 	password: String,
-	intro: String
+    intro: String,
+    avatar:String
 });
 UserSchema.set('autoIndex', false);
 UserSchema.index({name: 1}, {unique: true});

@@ -14,6 +14,16 @@ Vue.use(Select);
 Vue.use(Option);
 Vue.prototype.$message = Message;
 
+/**
+ * 挂载全局变量
+ */
+let GLOBALDATA = {
+    imgOrigin:process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : 'https://image.lcddjm.com'
+}
+
+Vue.prototype.GLOBALDATA = GLOBALDATA;
+
+
 Vue.config.productionTip = false;
 /* eslint-disable no-new */
 

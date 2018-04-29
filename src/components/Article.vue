@@ -42,7 +42,7 @@ export default {
     mounted: function () {
         // document.title = 'lcddjm\'s website';
         this.getArticleDetail(this.$route.params.id);
-        
+        console.log(this);
     },
     beforeRouteUpdate (to,from,next){
         this.articleData = {};
@@ -142,7 +142,7 @@ export default {
                 float:right;
             }
             a:hover{
-                color:aqua;
+                color:#0db4f9;
             }
         }
 
@@ -167,6 +167,8 @@ export default {
                 width: 100%;
                 height:100px;
                 padding:10px;
+                font-size:16px;
+                line-height:1.5; 
                 box-sizing: border-box;
                 border:1px solid #ccc;
                 border-radius:5px;
@@ -187,7 +189,7 @@ export default {
                     cursor: pointer;
                 }
                 .confirm{
-                    background:aqua;
+                    background:#0db4f9;
                     color:#fff;
                     border-radius:20px;
                 }

@@ -292,6 +292,6 @@ export default {
         font-size:16px;
     }
     .el-pagination.is-background .el-pager li.active{
-        background:#3cdee8;
+        background:#0db4f9!important;
     }
 </style>

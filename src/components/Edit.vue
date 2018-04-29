@@ -219,7 +219,7 @@ export default {
                 if(res.data.code == 200){
                     this.isUpload = true;
                     console.log(process.env)
-                    this.cover = (process.env.NODE_ENV  === 'development' ? 'http://localhost:8080' : 'https://image.lcddjm.com') + res.data.img ;
+                    this.cover = this.GLOBALDATA.imgOrigin + res.data.img;
                     this.$refs.coverbg.style.cssText += ''
                 }else{
                     this.$message({

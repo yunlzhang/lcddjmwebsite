@@ -48,28 +48,6 @@ export default {
     mounted(){
         //看用户session 是否过期
         this.getUserInfo();
-        // this.$nextTick(function () {
-        //     var _this = this;
-        //     var pic = document.querySelector('#rainyday');
-        //     pic.onload = function(){
-        //         engine = new rainyDay({
-        //             image: pic,
-        //             height:window.innerHeight,
-        //             width:window.innerWidth
-        //         });
-        //         engine.canvas.id = "rainCanvas";
-        //         if(~['signin','signup'].indexOf(_this.$route.name)){
-        //             engine.canvas.style.display = 'block';
-        //         }else{
-        //             engine.canvas.style.display = 'none';
-        //         }
-        //         engine.rain([ [3, 3, 0.88], [5, 5, 0.9], [6, 2, 1] ], 100);
-        //         this.crossOrigin = 'anonymous';
-        //         this.style.visibility = "hidden";
-        //     }
-        //     pic.crossOrigin = "Anonymous";
-        //     pic.src = bgCovers.path + bgCovers.names[Math.floor(Math.random()*bgCovers.names.length)];            
-        // })
     },
     methods:{
         getUserInfo(){
@@ -77,9 +55,11 @@ export default {
                 if(res.data.code === 200){
                     this.userInfo = res.data.data;
                     this.isLogin = true;
+                    this.GLOBALDATA.userInfo = res.data.data;
                     sessionStorage.setItem('isLogin','1');
                 }else{
                     this.userInfo = '';
+                    this.GLOBALDATA.userInfo = '';                    
                     this.isLogin = false;
                     sessionStorage.removeItem('isLogin');                    
                 }
@@ -103,9 +83,6 @@ export default {
 <style lang="scss">
     @import './static/scss/normalize';
     #app {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
         color: #2c3e50;
         width: 100vw;
         font-size:16px;

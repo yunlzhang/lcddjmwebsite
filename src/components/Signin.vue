@@ -47,7 +47,7 @@ export default {
             .then(res => {
                 if(res.data.code === 200){
                     this.$emit('getUserInfo');
-                    document.querySelector('body').removeChild(document.querySelector('#rainCanvas'));
+                    document.querySelector('#rainCanvas') && document.querySelector('body').removeChild(document.querySelector('#rainCanvas'));
                     this.$router.replace('/');
                 }else{
                     this.$message({
@@ -115,7 +115,7 @@ export default {
             height:40px;
             text-align: center;
             line-height: 40px;
-            background:#00d5a0;
+            background:#0db4f9;
             justify-content: center;
             cursor: pointer;
             color:#fff;

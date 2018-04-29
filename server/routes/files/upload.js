@@ -42,8 +42,8 @@ router.post('/',function(req,res,next){
         }
        
         function rename(){
-            let  fileFormat = req.file.originalname.split(".");
-            let newName = uuidV1() + "." + fileFormat[fileFormat.length - 1];
+            let  fileFormat = req.file.mimetype.split("/");
+            let newName = uuidV1() + "." + fileFormat[1];
             fs.rename('./qnimg/' + req.file.filename , path + newName,err => {
                 if(err){
                     res.json({
