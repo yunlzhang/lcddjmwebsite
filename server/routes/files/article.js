@@ -127,6 +127,8 @@ router.get('/get_article_detail',function(req,res){
     let opts = req.query;
     ArticleModel.getPostById(opts._id)
     .then(function (result) {
+        ArticleModel.incPv(opts._id)//更新pv
+        .then(res => {}) ;      
         res.json({
             code:200,
             data:arrayCurry(result),

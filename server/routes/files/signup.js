@@ -9,6 +9,7 @@ router.post('/',function(req,res,next){
     let name = req.body.name,
         password = req.body.password,
         repassword = req.body.repassword,
+        avatar = req.body.avatar,
         intro = req.body.intro;
     //校验
     if(!name){
@@ -39,7 +40,8 @@ router.post('/',function(req,res,next){
     UserModel.create({
         name:name,
         password:password,
-        intro:intro
+        intro:intro,
+        avatar:avatar
     })
     .then(function (result) {
     //   // 此 user 是插入 mongodb 后的值，包含 _id

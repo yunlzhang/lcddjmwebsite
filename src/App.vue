@@ -38,12 +38,8 @@ export default {
     name: 'app',
     data(){
         return {
-            userInfo:'',
             isLogin:false
         }
-    },
-    created(){
-
     },
     mounted(){
         //看用户session 是否过期
@@ -53,15 +49,13 @@ export default {
         getUserInfo(){
             this.axios.get('/api/get_user_info').then(res => {
                 if(res.data.code === 200){
-                    this.userInfo = res.data.data;
                     this.isLogin = true;
-                    this.GLOBALDATA.userInfo = res.data.data;
-                    sessionStorage.setItem('isLogin','1');
+                    this.GLOBALDATA.isLogin = true;                    
+                    localStorage.setItem('userInfo',JSON.stringify(res.data.data));
                 }else{
-                    this.userInfo = '';
-                    this.GLOBALDATA.userInfo = '';                    
                     this.isLogin = false;
-                    sessionStorage.removeItem('isLogin');                    
+                    this.GLOBALDATA.isLogin = false;
+                    localStorage.removeItem('userInfo');                    
                 }
             })
         }

@@ -8,8 +8,8 @@ module.exports = {
   },
 
   // 通过用户名获取用户信息
-  getUserByName: function getUserByName(name) {
+  getUserByName: function getUserById(id) {
     return User
-      .findOne({ name: name });
+      .findOne({"_id": id },{"password":0});
   }
 };

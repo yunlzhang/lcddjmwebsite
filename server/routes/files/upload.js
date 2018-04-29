@@ -6,6 +6,13 @@ let uuidV1 = require('uuid/v1');
  
 let upload = multer({ dest: './qnimg/' }).single('pic');
 router.post('/',function(req,res,next){
+    if (!req.session.user) {
+        return res.json({
+            code:'100',
+            message:'未登录或登录已过期'
+        })
+        // An error occurred when uploading
+    }
     upload(req, res, function (err) {
         if (err) {
             res.json({

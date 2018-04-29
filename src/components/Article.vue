@@ -10,7 +10,7 @@
             <div class="next" v-if="next"><router-link :to="'/article/'+next._id">下一篇  {{next.title}}</router-link></div>
         </div>
         <div class="comment-area">
-            <div class="avatar"></div>
+            <div class="avatar"><img v-if="userInfo"  :src="userInfo.avatar" alt=""></div>
             <textarea placeholder="期待你的评论...." @focus="setActiveData(articleData)" v-model="commentContent"></textarea>
             <div class="button">
                 <span class="confirm" @click="comment()">确认</span>
@@ -36,13 +36,19 @@ export default {
             previous:'',
             next:'',
             activeData:{},
-            commentContent:''
+            commentContent:'',
+            userInfo:''
         }
     },
     mounted: function () {
         // document.title = 'lcddjm\'s website';
+        let userInfo = localStorage.getItem('userInfo');
         this.getArticleDetail(this.$route.params.id);
-        console.log(this);
+        try{
+            this.userInfo = JSON.parse(userInfo)
+        }catch(err){
+            console.log(err);
+        }  
     },
     beforeRouteUpdate (to,from,next){
         this.articleData = {};
@@ -109,6 +115,20 @@ export default {
                 console.log(res);
             })
         },
+        getComment(lastId,parentId){
+            this.axios({
+                method:'get',
+                params:{
+                    _id:this.$route.params.id,
+                    last_id:lastId,
+                    parent_id:parentId
+                },
+                url:'/api/comment/get_more_comments'
+            })
+            .then(res => {
+
+            })
+        },
         setActiveData(data){
             this.activeData = data;
         }
@@ -160,7 +180,7 @@ export default {
                 top:20px;
                 border:1px solid #ccc;
                 box-sizing: border-box;
-
+                overflow: hidden;
             }
             textarea{
                 display: block;

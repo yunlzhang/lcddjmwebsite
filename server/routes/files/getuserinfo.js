@@ -6,6 +6,7 @@ let UserModel = require('../../models/users');
 
 router.get('/',function(req, res, next) {
     if(req.session.user){
+        delete req.session.user.password;
         return res.json({
             code:200,
             data:req.session.user,

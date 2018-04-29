@@ -9,7 +9,32 @@ module.exports = {
 	getPostById(id) {
 		return Promise.all([
 			Post.find({ '_id': { '$gt': id } }).sort({_id: 1}).limit(1).lean(),					
-			Post.findOne({_id: id}).lean(),
+			Post.findOne({_id: id})
+			.populate({
+				path:'comments',
+				options:{limit:5},
+				populate:[
+					{
+						path:'sub_comments',
+						options:{limit:3},
+						populate:[
+							{
+								path:'user',
+								select:'avatar name _id'
+							},
+							{
+								path:'to_user',
+								select:'avatar name _id'
+							}
+						]
+					},
+					{
+						path:'user',
+						select:'avatar name _id'
+					}
+				]
+			})
+			.lean(),
 			Post.find({'_id': { '$lt': id } }).sort({_id: -1}).limit(1).lean()
 		])
 	},
@@ -33,14 +58,26 @@ module.exports = {
 				$set:options
 			});
 	},
+	updateComment(id,comment_id){//返回更新前数据 要想返回更新后数据 
+		return Post
+			.findOneAndUpdate(
+				{_id:id},
+				{
+					$push:{
+						'comments':comment_id
+					}
+				},
+				{new: true}
+			);
+	},
 	getLength(){
 		return Post
 			.count();
 	},
-	incPv(postId) {
+	incPv(id) {
 		return Post
 			.update({
-				_id: postId
+				_id: id
 			}, {
 				$inc: {
 					pv: 1

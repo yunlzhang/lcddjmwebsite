@@ -1,12 +1,63 @@
 const express = require('express');
 const router = express.Router();
 const CommentModal = require('../../models/comment');
-router.get('/get_comment',function(req,res,next){
+const articleModal = require('../../models/article');
+
+router.get('/get_more_comments',function(req,res,next){
     let opts = req.query;
 
-    CommentModal.getPostById(opts.id)
+    if(!req.query.article_id){
+        return res.json({
+            code:100,
+            message:'文章id不能为空'
+        })
+    }
+
+    CommentModal.getComment(opts)
     .then(result => {
         console.log(result);
+        res.json({
+            code:200,
+            comments:result,
+            message:'获取成功'
+        })
+    }).catch(err => {
+        res.json({
+            code:100,
+            info:JSON.stringify(err),
+            message:'获取失败'
+        })
+    })
+})
+router.get('/get_more_sub_comments',function(req,res,next){
+    let opts = req.query;
+
+    if(!req.query.article_id){
+        return res.json({
+            code:100,
+            message:'文章id不能为空'
+        })
+    }
+    if(!req.query.parent_id){
+        return res.json({
+            code:100,
+            message:'一级评论id不能为空'
+        })
+    }
+
+    CommentModal.getSubComment(opts)
+    .then(result => {
+        res.json({
+            code:200,
+            sub_comments:result,
+            message:'获取成功'
+        })
+    }).catch(err => {
+        res.json({
+            code:100,
+            info:JSON.stringify(err),
+            message:'获取失败'
+        })
     })
 })
 
@@ -34,11 +85,20 @@ router.post('/',function(req,res,next){
 
     CommentModal.create(comment)
     .then(function (result) {
-        res.json({
-            code:200,
-            data:result,
-            message:'评论成功'
-        })
+        if(!comment.parent_id){
+            //一级评论
+            articleModal.updateComment(comment.article_id,result._id)
+            .then( data => {
+                res.json({
+                    code:200,
+                    data:result,
+                    message:'评论成功'
+                })
+            })
+        }else{
+            //二级评论
+        }
+        
     })
     .catch(next);
 })
