@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const commentModal = require('../../models/comment');
 const articleModal = require('../../models/article');
+const checkLogin = require('../common/check-login');
 
 router.get('/get_more_comments',function(req,res,next){
     let opts = req.query;
@@ -12,7 +13,6 @@ router.get('/get_more_comments',function(req,res,next){
             message:'文章id不能为空'
         })
     }
-
     commentModal.getComment(opts)
     .then(result => {
         res.json({
@@ -30,7 +30,6 @@ router.get('/get_more_comments',function(req,res,next){
 })
 router.get('/get_more_sub_comments',function(req,res,next){
     let opts = req.query;
-
     if(!req.query.article_id){
         return res.json({
             code:100,
@@ -61,13 +60,8 @@ router.get('/get_more_sub_comments',function(req,res,next){
 })
 
 
-router.post('/',function(req,res,next){
-    if(!req.session.user){
-        return res.json({
-            code:100,
-            message:'未登陆'
-        })
-    }
+router.post('/',checkLogin,function(req,res,next){
+    
     let comment = {};
     comment.user = req.session.user._id;
     comment.to_user = req.body.to_user;
