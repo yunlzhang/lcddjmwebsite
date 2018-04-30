@@ -193,6 +193,10 @@ export default {
                     _this.$refs.quillEditor.quill.setSelection(index+1)
                     _this.$refs.quillEditor.quill.focus()
                 } else {
+                    this.$message({
+                        message: res.data.message,
+                        type: 'warning'
+                    });
                 }
             });
 

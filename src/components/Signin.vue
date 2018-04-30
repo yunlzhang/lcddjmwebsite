@@ -39,7 +39,7 @@ export default {
         }catch(e){
 
         }
-        if(userInfo._id){
+        if(userInfo && userInfo._id){
             history.go(-1);
         }
         next();

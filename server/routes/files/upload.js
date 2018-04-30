@@ -6,7 +6,7 @@ let uuidV1 = require('uuid/v1');
  
 let upload = multer({ dest: './qnimg/' }).single('pic');
 router.post('/',function(req,res,next){
-    if (!req.session.user) {
+    if (!req.session.user && !req.headers.referer.match(/signup/)) {
         return res.json({
             code:'100',
             message:'未登录或登录已过期'

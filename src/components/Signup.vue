@@ -92,7 +92,7 @@
 			}catch(e){
 
 			}
-			if(userInfo._id){
+			if(userInfo && userInfo._id){
 				history.go(-1);
 			}
 			next();
@@ -132,7 +132,14 @@
                     formData.append('path','avatar');
                     this.upImg(formData)
                     .then(res => {
-                        this.signupData.avatar = this.GLOBALDATA.imgOrigin + res.data.img;
+						if(res.data.code == 200){
+	                        this.signupData.avatar = this.GLOBALDATA.imgOrigin + res.data.img;
+						}else{
+							this.$message({
+								message: res.data.message,
+								type: 'warning'
+							});
+						}
                     })
                     this.cropper = false;
                 });

@@ -75,7 +75,7 @@ module.exports = {
 					$inc:{
 						'comments_count':1
 					}
-				},
+				}
 				// {new: true}
 			);
 	},

@@ -40,7 +40,7 @@
                     <div class="add-comment" v-if="item.sub_comments.length" >
                         <span class="add" @click="showCommentArea(index)"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-replycomment"></use></svg> 添加新评论</span>
                         <span class="line" v-if="item.sub_comments.length != item.sub_comments_count">|</span>
-                        <span v-if="item.sub_comments.length != item.sub_comments_count">还有{{item.sub_comments_count - item.sub_comments.length}}条评论，<em @click="getMoreSubComments(item._id,item.last_id,index)">点击查看</em></span>
+                        <span v-if="item.last">还有{{item.last}}条评论，<em @click="getMoreSubComments(item._id,item.last_id,item.last,index)">点击查看</em></span>
                     </div>
                     <transition name="fade">
                         <comment v-if="item.show" :commentData="item.commentData" :index="index" v-on:submitData="comment" v-on:cancel="cancelComment"></comment>
@@ -183,7 +183,9 @@ export default {
                                 comments[index].sub_comments.forEach((val,idx) =>{
                                     comments[index].sub_comments[idx].created_at = this.dateFormat(val.created_at);
                                 })
+                                //获取剩余的二级评论
                                 comments[index].last_id =  item.sub_comments[item.sub_comments.length-1]._id;
+                                comments[index].last =  item.sub_comments_count - item.sub_comments.length-1;
                             }
                         })) : '';
                     this.comments = comments;
@@ -231,6 +233,7 @@ export default {
                         this.articleData.comments_count =  ++this.articleData.comments_count;
                     }else{
                         this.comments[this.activeIndex].sub_comments.push(res.data.data);
+                        this.comments[this.activeIndex].sub_comments.comments_count = ++this.comments[this.activeIndex].sub_comments.comments_count;
                     }
                 }else{
                     this.$message({
@@ -238,7 +241,7 @@ export default {
                         type: 'warning'
                     });
                 }
-                this.$set(this.comments[this.activeIndex],'show',0);
+                this.activeIndex && this.$set(this.comments[this.activeIndex],'show',0);
             })
         },
         cancelComment(index){
@@ -275,13 +278,14 @@ export default {
                 }
             })
         },
-        getMoreSubComments(parent_id,last_id,index){
+        getMoreSubComments(parent_id,last_id,last,index){
             this.axios({
                 method:'get',
                 params:{
                     article_id:this.$route.params.id,
                     parent_id:parent_id,
-                    last_id:last_id
+                    last_id:last_id,
+                    count:last
                 },
                 url:'/api/comment/get_more_sub_comments'
             })
