@@ -144,7 +144,23 @@
 					}).catch(() => {
 						//不做处理
 					});
+					return false;
 				}
+				this.axios({
+					method: 'post',
+					data: this.signupData,
+					url: '/api/signup'
+				})
+				.then(res => {
+					if (res.data.code === 200) {
+						this.$router.push('/signin');
+					} else {
+						this.$message({
+							message: res.data.message,
+							type: 'info'
+						});
+					}
+				})
             },
             confirmCrop(){
                 this.$refs.cropper.getCropBlob((data) => {
