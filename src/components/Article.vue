@@ -284,6 +284,7 @@ export default {
                             comments[index].last_id =  item.sub_comments[item.sub_comments.length-1]._id;
                         }
                     })
+                    document.documentElement.scrollTop = document.querySelector('.comment').offsetTop;
                     this.comments = comments;
                 }else{
                     this.$message({

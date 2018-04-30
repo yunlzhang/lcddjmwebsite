@@ -3,8 +3,8 @@
         <!--<HeaderTop :isLogin="isLogin" :active="'work'" :userInfo="userInfo"></HeaderTop>-->
         <div id="particles-js"></div>
         <div class="main-wrap" ref="main">
-            <ul class="article_lists" v-if="article.length">
-                <li class="article_item" v-for="item in article" v-bind:key="item._id">
+            <ul class="article-lists" v-if="article.length">
+                <li class="article-item" v-for="item in article" v-bind:key="item._id">
                     <router-link :to="'/article/'+item._id">
                         <div class="title" v-if="item.title"><span>{{item.title}}</span></div>
                         <!--<div class="cover" v-if="item.cover"><img :src="item.cover" alt=""></div>-->
@@ -207,11 +207,11 @@ export default {
         width:800px;
         position: relative;
         margin:0 auto;
-        .article_lists{
+        .article-lists{
             text-align:left;
             // margin:20px 0;
         }
-        .article_item{
+        .article-item{
             padding:15px;
             border:1px solid #ccc;
             border-radius:5px;
