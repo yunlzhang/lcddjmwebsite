@@ -112,15 +112,15 @@
 					this.showMessage('两次密码不一致')
 					return false;
 				}
-				if(!this.name){
+				if(!this.signupData.name){
 					this.showMessage('昵称不能为空')
 					return false;
 				}
-				if(!this.intro){
+				if(!this.signupData.intro){
 					this.showMessage('请填写简介')
 					return false;
 				}
-				if(!this.avatar){
+				if(!this.signupData.avatar){
 					this.$confirm('未上传头像，是否使用默认头像？', '提示', {
 						confirmButtonText: '确定',
 						cancelButtonText: '取消',
