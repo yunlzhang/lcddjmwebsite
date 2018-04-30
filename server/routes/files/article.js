@@ -15,6 +15,12 @@ router.post('/deal_article',function(req,res,next){
             message:'未登陆'
         })
     }
+    if(req.session.user.right != 1000){
+        return res.json({
+            code:100,
+            message:'没有发布文章的权限，请联系管理员'
+        })
+    }
     let author = req.session.user._id,  
         title = req.body.title,
         cover = req.body.cover,
