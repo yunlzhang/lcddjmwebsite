@@ -21,7 +21,7 @@
 ## 网址快照
 ![](https://image.lcddjm.com/shortcut/WechatIMG159.jpeg)
 
-![](https://image.lcddjm.com/shortcut/WechatIMG160.jpeg)
+<!-- ![](https://image.lcddjm.com/shortcut/WechatIMG160.jpeg) -->
 
 ![](https://image.lcddjm.com/shortcut/WechatIMG162.jpeg)
 
