@@ -18,7 +18,7 @@
 
 > 评论 
 
-## 网址快照
+## 快照
 ![](https://image.lcddjm.com/shortcut/WechatIMG159.jpeg)
 
 <!-- ![](https://image.lcddjm.com/shortcut/WechatIMG160.jpeg) -->
@@ -29,7 +29,10 @@
 
 ![](https://image.lcddjm.com/shortcut/WechatIMG164.jpeg)
 
-<video controls src="https://lcddjm.com/shortcut/WeChatSight161.mp4"></video>
+![](https://image.lcddjm.com/shortcut/WechatIMG164.jpeg)
+
+https://lcddjm.com/shortcut/WeChatSight161.mp4
+<!-- <video controls src="https://lcddjm.com/shortcut/WeChatSight161.mp4"></video> -->
 
 ## Build Setup
 
