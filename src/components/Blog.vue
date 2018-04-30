@@ -2,7 +2,14 @@
     <div class="main">
         <!--<HeaderTop :isLogin="isLogin" :active="'work'" :userInfo="userInfo"></HeaderTop>-->
         <div id="particles-js"></div>
-        <div class="main-wrap" ref="main">
+        <div v-if="!loading" class="showbox loading">
+            <div class="loader">
+                <svg class="circular" viewBox="25 25 50 50">
+                    <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+                </svg>
+            </div>
+        </div>
+        <div v-else class="main-wrap" ref="main">
             <ul class="article-lists" v-if="article.length">
                 <li class="article-item" v-for="item in article" v-bind:key="item._id">
                     <router-link :to="'/article/'+item._id">
@@ -37,7 +44,8 @@ export default {
     data() {
         return {
             article:[],
-            articleLength:0
+            articleLength:0,
+            loading:false
         }
     },
     props:['isLogin','userInfo'],
@@ -65,6 +73,7 @@ export default {
                 if(res.data.code == 200){
                     this.articleLength = res.data.article_length;
                     this.article = res.data.article_data;
+                    this.loading = true;
                 }else{
                     this.$message({
                         message: res.data.message,

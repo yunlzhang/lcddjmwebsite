@@ -5,4 +5,5 @@ module.exports = function(req,res,next){
             message:'未登陆或登陆已过期'
         })
     }
+    next();//执行其他处理
 }
