@@ -81,6 +81,7 @@ video {
 
 a {
     text-decoration: none;
+    -webkit-tap-highlight-color:transparent;
     outline: none;
     color:#242729;
 }
@@ -104,5 +105,5 @@ pre{
     display:none;
 }
 input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill{
-    background-color:none!important;
+    background-color:transparent!important;
 }
