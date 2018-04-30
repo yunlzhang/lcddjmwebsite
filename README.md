@@ -1,6 +1,7 @@
 # lcddjmwebsite
 
 > A Vue.js project
+
 > 技术栈 vue2.0 + axios + element-ui + express + mongodb + pm2
 
 ## Build Setup
