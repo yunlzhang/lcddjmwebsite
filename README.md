@@ -6,19 +6,21 @@
 
 ## 网站功能
 
-> 首页列表展示
+- 首页列表展示
 
-> 详情页
+- 详情页
 
-> 编辑页
+- 编辑页
 
-> 登录
+- 登录
 
-> 注册
+- 注册
 
-> 评论 
+- 评论 
+
 
 ## 快照
+
 ![](https://image.lcddjm.com/shortcut/WechatIMG159.jpeg)
 
 <!-- ![](https://image.lcddjm.com/shortcut/WechatIMG160.jpeg) -->
@@ -32,7 +34,7 @@
 ![](https://image.lcddjm.com/shortcut/WechatIMG164.jpeg)
 
 https://lcddjm.com/shortcut/WeChatSight161.mp4
-<!-- <video controls src="https://lcddjm.com/shortcut/WeChatSight161.mp4"></video> -->
+
 
 ## Build Setup
 
@@ -50,7 +52,26 @@ npm run build
 npm run build --report
 
 ```
+For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 功能不断完善中，欢迎star、fork及提issue
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+附：
+
+[N-blog](https://github.com/nswbmw/N-blog)
+
+[vue.js](https://cn.vuejs.org/index.html)
+
+[element-ui](http://element-cn.eleme.io/#/zh-CN)
+
+[mongoose](http://mongoosejs.com/)
+
+[pm2](http://pm2.keymetrics.io/)
+
+[vue-quill-editor](https://surmon-china.github.io/vue-quill-editor/)
+
+[vue-cropper](http://xyxiao.cn/vue-cropper/example/)
+
+[rainyday.js](http://maroslaw.github.io/rainyday.js/)
+
+(未完，待续。。。)
