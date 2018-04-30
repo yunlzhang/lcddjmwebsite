@@ -5,16 +5,10 @@ const arrayCurry  =  require('../../common/public').arrayCurry;
 const Promise = require("bluebird");
 const moment = require('moment');
 const objectIdToTimestamp = require('objectid-to-timestamp');
+const checkLogin = require('../common/check-login');
 
 
-
-router.post('/deal_article',function(req,res,next){
-    if(!req.session.user){
-        return res.json({
-            code:100,
-            message:'未登陆'
-        })
-    }
+router.post('/deal_article',checkLogin,function(req,res,next){
     if(req.session.user.right != 1000){
         return res.json({
             code:100,

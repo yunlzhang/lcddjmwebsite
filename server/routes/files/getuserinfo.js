@@ -2,24 +2,17 @@ let sha1 = require('sha1');
 let express = require('express');
 let router = express.Router();
 let UserModel = require('../../models/users');
+const checkLogin = require('../common/check-login');
 
 
-router.get('/',function(req, res, next) {
-    if(req.session.user){
-        delete req.session.user.password;
-        return res.json({
-            code:200,
-            data:req.session.user,
-            message:''
-        })
-    }else{
-        return res.json({
-            code:100,
-            data:'',
-            message:'登陆过期或未登陆'
-        })
-    }
-  });
-  
-  module.exports = router;
+router.get('/',checkLogin,function(req, res, next) {
+    delete req.session.user.password;
+    return res.json({
+        code:200,
+        data:req.session.user,
+        message:''
+    })
+});
+
+module.exports = router;
 
