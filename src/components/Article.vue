@@ -1,5 +1,6 @@
 <template>
-    <div class="article-wrap">
+<div>
+    <div v-if="loading" class="article-wrap">
         <div class="title">{{articleData.title}}</div>
         <div class="cover" v-if="articleData.cover"><img :src="articleData.cover" alt=""></div>
         <div class="content rich-text ql-editor">
@@ -63,6 +64,14 @@
             </el-pagination>
         </div>
     </div>
+    <div v-else class="showbox loading">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+</div>
 </template>
 
 <script>
@@ -70,8 +79,6 @@ import 'quill/dist/quill.snow.css'
 import '../static/css/highlight.min.css'
 import '../static/js/highlight.min';
 import * as moment from 'moment-timezone';
-
-
 /**
  * 
  * 评论组件
@@ -144,7 +151,8 @@ export default {
             comments:[],
             userInfo:'',
             activeIndex:'',
-            activeSubIndex:''
+            activeSubIndex:'',
+            loading:false
         }
     },
     mounted(){
@@ -159,6 +167,7 @@ export default {
     },
     beforeRouteUpdate (to,from,next){
         this.articleData = {};
+        this.loading  = false;
         this.getArticleDetail(to.params.id);
         next();
     },
@@ -192,7 +201,8 @@ export default {
                     this.previous = res.data.data[0]._id  ? res.data.data[0] : '';
                     this.next = res.data.data[2]._id ? res.data.data[2] : '';
                     document.title = res.data.data[1].title; 
-                    this.dealPre();   
+                    this.dealPre(); 
+                    this.loading = true;  
                 }
             }).catch(e => {
                 console.log(e);
@@ -530,6 +540,80 @@ export default {
     .el-pagination{
         text-align: center;
         margin:40px 0;
+    }
+
+    /* loading*/
+    .loading {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        .loader {
+            position: relative;
+            margin: 0 auto;
+            width: 100px;
+            &::before {
+                content: '';
+                display: block;
+                padding-top: 100%;
+            }
+        }
+        .circular {
+            animation: rotate2 2s linear infinite;
+            height: 100%;
+            transform-origin: center center;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+        .path {
+            stroke-dasharray: 1, 200;
+            stroke-dashoffset: 0;
+            animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+            stroke-linecap: round;
+        }
+    }
+
+    @keyframes rotate2 {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes dash {
+        0% {
+            stroke-dasharray: 1, 200;
+            stroke-dashoffset: 0;
+        }
+        50% {
+            stroke-dasharray: 89, 200;
+            stroke-dashoffset: -35px;
+        }
+        100% {
+            stroke-dasharray: 89, 200;
+            stroke-dashoffset: -124px;
+        }
+    }
+
+    @keyframes color {
+        100%,
+        0% {
+            stroke: #d62d20;
+        }
+        40% {
+            stroke: #0057e7;
+        }
+        66% {
+            stroke: #008744;
+        }
+        80%,
+        90% {
+            stroke: #ffa700;
+        }
     }
 </style>
 <style lang="scss">

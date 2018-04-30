@@ -103,3 +103,6 @@ pre{
     width:0;
     display:none;
 }
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill{
+    background-color:none!important;
+}
