@@ -39,7 +39,7 @@
                     </div>
                     <div class="add-comment" v-if="item.sub_comments.length" >
                         <span class="add" @click="showCommentArea(index)"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-replycomment"></use></svg> 添加新评论</span>
-                        <span class="line" v-if="item.sub_comments.length != item.sub_comments_count">|</span>
+                        <span class="line" v-if="item.last">|</span>
                         <span v-if="item.last">还有{{item.last}}条评论，<em @click="getMoreSubComments(item._id,item.last_id,item.last,index)">点击查看</em></span>
                     </div>
                     <transition name="fade">
@@ -185,7 +185,7 @@ export default {
                                 })
                                 //获取剩余的二级评论
                                 comments[index].last_id =  item.sub_comments[item.sub_comments.length-1]._id;
-                                comments[index].last =  item.sub_comments_count - item.sub_comments.length-1;
+                                comments[index].last =  item.sub_comments_count - item.sub_comments.length;
                             }
                         })) : '';
                     this.comments = comments;

@@ -61,9 +61,11 @@ export default {
             .then(res => {
                 if(res.data.code === 200){
                     this.$emit('getUserInfo');
+                    localStorage.setItem('userInfo',JSON.stringify(res.data.data));
                     document.querySelector('#rainCanvas') && document.querySelector('body').removeChild(document.querySelector('#rainCanvas'));
                     history.length > 2 ? this.$router.go(-1) : this.$router.replace('/');
                 }else{
+                    localStorage.removeItem('userInfo');
                     this.$message({
                         message: res.data.message,
                         type: 'info'

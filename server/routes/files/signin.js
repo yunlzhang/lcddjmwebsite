@@ -16,7 +16,6 @@ router.post('/',function(req, res, next) {
                 'message':'用户不存在'
             })
         }
-        console.log(user.password);
         // 检查密码是否匹配
         if (sha1(password) !== user.password) {
             return res.json({
@@ -24,9 +23,9 @@ router.post('/',function(req, res, next) {
                 'message':'密码不正确'
             })
         }
-        delete user.password;
         // 用户信息写入 session
-        req.session.user = user;        
+        req.session.user = user; 
+        delete user.password;
         return res.json({
             'code':200,
             'message':'登陆成功',

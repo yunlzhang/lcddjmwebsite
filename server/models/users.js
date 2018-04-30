@@ -10,6 +10,6 @@ module.exports = {
   // 通过用户名获取用户信息
   getUserByName: function getUserById(name) {
     return User
-      .findOne({"name": name });
+      .findOne({"name": name }).lean();
   }
 };
