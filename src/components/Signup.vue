@@ -102,28 +102,49 @@
                 let file = e.target.files[0];
                 let fileReader = new FileReader();
                 fileReader.onload = e => {
-                    console.log(this);
                     this.options.img = e.target.result;
                     this.cropper = true;
                 }
                 fileReader.readAsDataURL(file);
             },
 			signup() {
-				this.axios({
-						method: 'post',
-						data: this.signupData,
-						url: '/api/signup'
-					})
-					.then(res => {
-						if (res.data.code === 200) {
-							this.$router.push('/signin');
-						} else {
-							this.$message({
-								message: res.data.message,
-								type: 'info'
-							});
-						}
-					})
+				if(this.signupData.password != this.signupData.repassword){
+					this.showMessage('两次密码不一致')
+					return false;
+				}
+				if(!this.name){
+					this.showMessage('昵称不能为空')
+					return false;
+				}
+				if(!this.intro){
+					this.showMessage('请填写简介')
+					return false;
+				}
+				if(!this.avatar){
+					this.$confirm('未上传头像，是否使用默认头像？', '提示', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消',
+						type: 'warning'
+					}).then(() => {
+						this.axios({
+							method: 'post',
+							data: this.signupData,
+							url: '/api/signup'
+						})
+						.then(res => {
+							if (res.data.code === 200) {
+								this.$router.push('/signin');
+							} else {
+								this.$message({
+									message: res.data.message,
+									type: 'info'
+								});
+							}
+						})
+					}).catch(() => {
+						//不做处理
+					});
+				}
             },
             confirmCrop(){
                 this.$refs.cropper.getCropBlob((data) => {
@@ -144,7 +165,13 @@
                     this.cropper = false;
                 });
                 this.resetFileValue();                
-            },
+			},
+			showMessage(str){
+				return this.$message({
+					message: str,
+					type: 'info'
+				});
+			},
             cancelCrop(){
                 this.cropper = false;
                 this.resetFileValue();

@@ -105,6 +105,7 @@ let Comment = {
                 data.to_user = this.commentData.user._id;
             }
             data.content  = this.content;
+            this.content = '';
             this.$emit('submitData',data);
         },
         checkLogin(){
@@ -117,7 +118,6 @@ let Comment = {
                     // 去登陆
                     this.$router.push('/signin')
                 }).catch(() => {
-                    console.log(222);
                 });
             }
         },
@@ -241,7 +241,12 @@ export default {
                         type: 'warning'
                     });
                 }
-                this.activeIndex && this.$set(this.comments[this.activeIndex],'show',0);
+                for(let i = 0,len = this.comments.length;i<len;i++){
+                    if(this.comments[i]._id == data.parent_id){
+                        this.$set(this.comments[i],'show',0);
+                        break;
+                    }
+                }
             })
         },
         cancelComment(index){
@@ -295,6 +300,7 @@ export default {
                     subComments.forEach((item,index) =>{
                         subComments[index].created_at = this.dateFormat(item.created_at);
                     })
+                    this.comments[index].last = 0;
                     this.comments[index].sub_comments = this.comments[index].sub_comments.concat(subComments);
                 }else{
                     this.$message({

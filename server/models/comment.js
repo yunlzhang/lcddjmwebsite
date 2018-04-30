@@ -84,7 +84,7 @@ module.exports = {
 			}
 		})
 		.sort({_id:1})		
-		.limit(opts.count)
+		.limit(Number(opts.count))
 		.populate([
 			{
 				path:'user',

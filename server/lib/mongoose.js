@@ -20,7 +20,10 @@ const UserSchema = Schema({
     name: String,
 	password: String,
     intro: String,
-    avatar:String,
+    avatar:{
+        type:String,
+        default:'https://image.lcddjm.com/avatar/7e89cb90-4c29-11e8-9168-4de305b3c4a5.png'
+    },
     created_at :{ 
         type: Date, 
         required: true, 
