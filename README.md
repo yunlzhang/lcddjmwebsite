@@ -2,7 +2,7 @@
 
 > A Vue.js project (https://lcddjm.com)
 
-> 技术栈 vue2.0 + axios + element-ui + express + mongodb + pm2
+> 技术栈 vue2 + axios + element-ui + express + mongodb + pm2
 
 注：移动端暂未兼容，体验效果可能会差一点。
 ## 网站功能
