@@ -31,9 +31,6 @@
 
 ![](https://image.lcddjm.com/shortcut/WechatIMG164.jpeg)
 
-![](https://image.lcddjm.com/shortcut/WechatIMG164.jpeg)
-
-https://lcddjm.com/shortcut/WeChatSight161.mp4
 
 
 ## Build Setup
