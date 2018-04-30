@@ -4,7 +4,7 @@
 
 > 技术栈 vue2.0 + axios + element-ui + express + mongodb + pm2
 
-##网站功能
+## 网站功能
 
 > 首页列表展示
 
@@ -18,7 +18,7 @@
 
 > 评论 
 
-##网址快照
+## 网址快照
 ![](https://image.lcddjm.com/shortcut/WechatIMG159.jpeg)
 
 ![](https://image.lcddjm.com/shortcut/WechatIMG160.jpeg)
