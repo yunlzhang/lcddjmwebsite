@@ -1,6 +1,4 @@
-# lcddjmwebsite
-
-> A Vue.js project (https://lcddjm.com)
+# lcddjmwebsite (https://lcddjm.com)
 
 > 技术栈 vue2 + axios + element-ui + express + mongodb + pm2
 
