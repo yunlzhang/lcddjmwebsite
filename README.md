@@ -57,20 +57,20 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 附：
 
-[N-blog](https://github.com/nswbmw/N-blog)
+    [N-blog](https://github.com/nswbmw/N-blog)
 
-[vue.js](https://cn.vuejs.org/index.html)
+    [vue.js](https://cn.vuejs.org/index.html)
 
-[element-ui](http://element-cn.eleme.io/#/zh-CN)
+    [element-ui](http://element-cn.eleme.io/#/zh-CN)
 
-[mongoose](http://mongoosejs.com/)
+    [mongoose](http://mongoosejs.com/)
 
-[pm2](http://pm2.keymetrics.io/)
+    [pm2](http://pm2.keymetrics.io/)
 
-[vue-quill-editor](https://surmon-china.github.io/vue-quill-editor/)
+    [vue-quill-editor](https://surmon-china.github.io/vue-quill-editor/)
 
-[vue-cropper](http://xyxiao.cn/vue-cropper/example/)
+    [vue-cropper](http://xyxiao.cn/vue-cropper/example/)
 
-[rainyday.js](http://maroslaw.github.io/rainyday.js/)
+    [rainyday.js](http://maroslaw.github.io/rainyday.js/)
 
 (未完，待续。。。)
