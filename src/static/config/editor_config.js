@@ -5,7 +5,7 @@ const editorConfig = {
     },
     // placeholder: 'write something here ......',
     theme: 'snow',
-    scrollingContainer:'.editor'
+    scrollingContainer:'body'
 };
 
 export default editorConfig;

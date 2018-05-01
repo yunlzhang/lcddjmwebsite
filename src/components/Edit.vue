@@ -51,12 +51,44 @@
 import 'quill/dist/quill.snow.css'
 // import 'quill/dist/quill.bubble.css'
 
-import { ImageImport} from '../static/js/image-import';
-
 
 import options from '../static/config/editor_config';
 import { quillEditor } from 'vue-quill-editor';
 // import Quill from 'quill'
+import Quill from 'quill'
+import Delta from 'quill-delta'
+
+const Clipboard = Quill.import('modules/clipboard')
+
+class PlainTextClipboard extends Clipboard {
+    onPaste (e) {
+        
+        if (e.defaultPrevented || !this.quill.isEnabled()) return;
+        let range = this.quill.getSelection()
+        let delta = new Delta().retain(range.index)
+        let containerHeight = this.quill.container.offsetHeight;
+        if (e && e.clipboardData && e.clipboardData.types && e.clipboardData.getData) {
+            let text = (e.originalEvent || e).clipboardData.getData('text/plain')
+            let cleanedText = this.convert(text)
+            // Stop the data from actually being pasted
+            e.stopPropagation()
+            e.preventDefault()
+
+            // Process cleaned text
+            delta = delta.concat(cleanedText).delete(range.length)
+            this.quill.updateContents(delta, Quill.sources.USER)
+            // range.length contributes to delta.length()
+            this.quill.setSelection(delta.length() - range.length, Quill.sources.SILENT)
+            document.documentElement.scrollTop += this.quill.container.offsetHeight - containerHeight;
+            return false
+        }
+    }
+}
+
+Quill.register('modules/clipboard', PlainTextClipboard)
+
+
+
 export default {
     name: 'Edit',
     data() {
@@ -83,14 +115,9 @@ export default {
         if(this.$route.params.id){
             this.getArticleDetail();
         }
-        // this.uploadImg('QINIU','cover_pic/',function(obj,link){
-        //     obj.isUpload = true;
-        //     obj.cover = link;
-        //     obj.$refs.coverbg.style.cssText += ''
-        // });
+        
         this.scrollHandle();
         //重写编辑器的上传图片
-
         var imgHandler = function(f) {
             _this.addImgRange = _this.$refs.quillEditor.quill.getSelection()
             if (f) {
@@ -129,8 +156,7 @@ export default {
             }
         },
         contentChange(){
-            return false;
-            document.documentElement.scrollTop = document.documentElement.scrollHeight;
+            // document.documentElement.scrollTop = document.documentElement.scrollHeight;
         },
         setTitle(e){
             this.title = e.target.value;
@@ -139,7 +165,6 @@ export default {
             return this.$refs.quillEditor.quill;
         },
         save(){
-            // .replace(/\s/ig,'&nbsp;')
             this.axios({
                 method:'post',
                 data:{
@@ -221,7 +246,6 @@ export default {
                
                 if(res.data.code == 200){
                     this.isUpload = true;
-                    console.log(process.env)
                     this.cover = this.GLOBALDATA.imgOrigin + res.data.img;
                     this.$refs.coverbg.style.cssText += ''
                 }else{

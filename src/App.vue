@@ -15,29 +15,7 @@ import {throttle,returnTop} from './static/js/common';
 import Rain from './components/Rainday';
 import './static/iconfont/iconfont';
 var rainyDay = require('./static/js/RainyDay').RainyDay;
-var  bgCovers = {
-    path:'http://image.lcddjm.com/qnimg/',
-    names:[
-        '20171010-DSC_2019.jpg',
-        '20171010-DSC_2020.jpg',
-        '20171010-DSC_2068.jpg',
-        '20171010-DSC_2075.jpg',
-        '20171010-DSC_2077.jpg',
-        '20171010-DSC_2078.jpg',
-        '20171010-DSC_2085.jpg',
-        '20171010-DSC_2091.jpg',
-        '20171010-DSC_2190.jpg',
-        '20171010-DSC_2198.jpg',
-        '20171010-DSC_2223.jpg',
-        '20171010-DSC_2357.jpg',
-        '20171011-DSC_2363.jpg',
-        '20171011-DSC_2367.jpg'      
-    ]
-}
 
-
-
-var engine;
 export default {
     name: 'app',
     data(){
@@ -87,12 +65,7 @@ export default {
     },
     watch:{
         '$route':function(){
-            // if(!engine) return;
-            // if(~['signin','signup'].indexOf(this.$route.name)){
-            //     engine.canvas.style.display = 'block';
-            // }else{
-            //     engine.canvas.style.display = 'none';                
-            // }
+           
         }
     },
     components:{Rain}
