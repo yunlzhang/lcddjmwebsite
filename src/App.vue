@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <router-view :isLogin="isLogin"  @getUserInfo="getUserInfo"/>
+    <div class="return-top"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fanhuidingbu1"></use></svg></div>    
   </div>
 </template>
 
@@ -10,7 +11,7 @@ import './static/js/util.js';
 import './static/js/copy.js';
 /*  end  */
 
-
+import {throttle,returnTop} from './static/js/common';
 import Rain from './components/Rainday';
 import './static/iconfont/iconfont';
 var rainyDay = require('./static/js/RainyDay').RainyDay;
@@ -33,6 +34,9 @@ var  bgCovers = {
         '20171011-DSC_2367.jpg'      
     ]
 }
+
+
+
 var engine;
 export default {
     name: 'app',
@@ -44,6 +48,27 @@ export default {
     mounted(){
         //看用户session 是否过期
         this.getUserInfo();
+        document.addEventListener('scroll',throttle(function(){
+            if(document.documentElement.scrollTop > window.innerHeight){
+                document.querySelector('.return-top').style.display = 'block';
+            }else{
+                document.querySelector('.return-top').style.display = 'none';
+            }
+        },200,true),false)
+
+        document.addEventListener('click',function(e){
+            let isClickTarget = false;
+            let el = document.querySelectorAll('.return-top,.return-top *');
+            for(let i =0,len = el.length;i<len;i++){
+                if(el[i] === e.target){
+                    isClickTarget = true;
+                    break;
+                }
+            }
+            if(isClickTarget){
+                returnTop();
+            }
+        },false)
     },
     methods:{
         getUserInfo(){
@@ -118,6 +143,26 @@ export default {
             stroke-dashoffset: 0;
             animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
             stroke-linecap: round;
+        }
+    }
+
+    /* 返回顶部 */
+    .return-top{
+        position: fixed;
+        display: none;
+        width: 40px;
+        height: 40px;
+        right:40px;
+        bottom:40px;
+        border-radius: 50%;
+        border:1px solid #ccc;
+        cursor: pointer;
+        background:rgba(255,255,255,.8);
+        font-size:30px;
+        text-align: center;
+        line-height: 40px;
+        &:hover{
+           background:rgba(204,204,204,.8); 
         }
     }
 
