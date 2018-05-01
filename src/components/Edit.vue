@@ -53,12 +53,10 @@ import 'quill/dist/quill.snow.css'
 
 import { ImageImport} from '../static/js/image-import';
 
-import '../static/js/plupload/plupload.full.min';
-import '../static/js/qiniu.min';
 
 import options from '../static/config/editor_config';
 import { quillEditor } from 'vue-quill-editor';
-import Quill from 'quill'
+// import Quill from 'quill'
 export default {
     name: 'Edit',
     data() {
@@ -131,6 +129,7 @@ export default {
             }
         },
         contentChange(){
+            return false;
             document.documentElement.scrollTop = document.documentElement.scrollHeight;
         },
         setTitle(e){

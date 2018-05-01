@@ -82,7 +82,7 @@
     "url-loader": "^0.5.8",
     "vue-cropper": "^0.2.9",
     "vue-loader": "^13.3.0",
-    "vue-quill-editor": "^3.0.4",
+    "vue-quill-editor": "^3.0.6",
     "vue-ssr-webpack-plugin": "^3.0.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
