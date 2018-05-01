@@ -35,6 +35,8 @@
 
 ## Build Setup
 
+注：在本地运行项目需要安装mongodb [安装方法](./doc/mongo.md)
+
 ``` bash
 # install dependencies
 npm install
