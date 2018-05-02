@@ -44,7 +44,7 @@
                         <span v-if="item.last">还有{{item.last}}条评论，<em @click="getMoreSubComments(item._id,item.last_id,item.last,index)">点击查看</em></span>
                     </div>
                     <transition name="fade">
-                        <comment v-if="item.show" :commentData="item.commentData" :index="index" v-on:submitData="comment" v-on:cancel="cancelComment"></comment>
+                        <comment v-if="item.show"  :commentData="item.commentData" :index="index" v-on:submitData="comment" v-on:cancel="cancelComment"></comment>
                     </transition>
                     <!-- <div class="comment-area" v-if="item.show">
                         <textarea placeholder="写下你的评论...." autofocus v-model="item.commentData.commentContent"></textarea>
@@ -97,13 +97,26 @@ let Comment = {
     data(){
         return {
             content:'',
+            comment:{},
             placeholder:'写下你的评论...'
         }
     },
     mounted(){
+        this.comment = this.commentData;
         this.setPlaceholder();
     },
-    props:['commentData','showAvatar','userInfo','index'],
+    // updated(){
+    //     this.setPlaceholder();        
+    // },
+    props:['commentData','showAvatar','userInfo','index','test'],
+    watch: {
+        commentData:{
+            deep:true,
+            handler:function(val,oldVal){
+                this.setPlaceholder();
+            }
+        }
+    },
     methods:{
         submitData(){
             let data = {};
@@ -137,6 +150,8 @@ let Comment = {
             if(this.commentData){
                 if(this.commentData.parent_id){
                     this.placeholder = '@' + this.commentData.user.name;
+                }else{
+                    this.placeholder = '写下你的评论...';
                 }
             }
         }
@@ -156,7 +171,8 @@ export default {
             userInfo:'',
             activeIndex:'',
             activeSubIndex:'',
-            loading:false
+            loading:false,
+            test:1
         }
     },
     mounted(){
@@ -337,7 +353,10 @@ export default {
             }
             this.activeIndex = index;
             this.activeSubIndex = subIndex;
-            this.$set(this.comments[index],'commentData',subIndex !== undefined ? this.comments[index].sub_comments[subIndex] : this.comments[index]);
+            //触发重新渲染
+            let newComment = this.comments.concat([]);
+            newComment[index].commentData = Object.assign({},subIndex !== undefined ? this.comments[index].sub_comments[subIndex] : this.comments[index]);
+            this.comments = newComment;
         },
         dateFormat(isoDate){
             return moment(isoDate).tz('Asia/Shanghai').format('YYYY-MM-DD HH:mm');
