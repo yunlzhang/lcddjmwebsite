@@ -26,6 +26,7 @@ export default {
                 return response.json();
             }).then(res=>{
                 if(res.code === 200){
+                    localStorage.removeItem('userInfo');
                     location.reload();
                 }else{
                     alert(res.message);

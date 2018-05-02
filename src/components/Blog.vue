@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <!--<HeaderTop :isLogin="isLogin" :active="'work'" :userInfo="userInfo"></HeaderTop>-->
+        <HeaderTop :isLogin="isLogin" :active="'work'" :userInfo="userInfo"></HeaderTop>
         <div id="particles-js"></div>
         <div v-if="!loading" class="showbox loading">
             <div class="loader">
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-// import HeaderTop from './Header';
+import HeaderTop from './Header';
 import '../static/js/particles';
 export default {
     name: 'Blog',
@@ -49,7 +49,7 @@ export default {
         }
     },
     props:['isLogin','userInfo'],
-    // components:{HeaderTop},
+    components:{HeaderTop},
     mounted: function () {
         document.title = 'lcddjm\'s website';
         this.getIndexData({
@@ -280,7 +280,7 @@ export default {
 </style>
 <style>
 .el-pagination{
-        margin:80px 0;
+        margin:40px 0;
         text-align:center;
     }
     .el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev, .el-pagination.is-background .el-pager li{

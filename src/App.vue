@@ -2,6 +2,7 @@
   <div id="app">
     <router-view :isLogin="isLogin"  @getUserInfo="getUserInfo"/>
     <div class="return-top"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fanhuidingbu1"></use></svg></div>    
+    <div class="icp">&copy;京ICP备18002267号-1</div>
   </div>
 </template>
 
@@ -82,6 +83,9 @@ export default {
         // background:url('./static/img/bg.jpeg');
         // background-attachment:fixed;        
         min-height:100vh;
+        position: relative;
+        padding-bottom: 40px;
+        box-sizing: border-box;
     }
     /* loading*/
     .loading {
@@ -138,7 +142,15 @@ export default {
            background:rgba(204,204,204,.8); 
         }
     }
-
+    .icp{
+        text-align: center;
+        line-height: 40px;
+        position: absolute;
+        width: 100%;
+        font-size:14px;
+        bottom:0;
+        left:0;
+    }
     @keyframes rotate2 {
         100% {
             transform: rotate(360deg);
