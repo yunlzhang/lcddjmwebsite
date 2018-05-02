@@ -1,4 +1,4 @@
-import {cacheImg} from './common';
+// import {cacheImg} from './common';
 let rainyDay = require('./RainyDay').RainyDay;
 const bgCovers = {
 	path: location.href.match(/localhost/) ? '/engine/' : 'https://image.lcddjm.com/engine/',
