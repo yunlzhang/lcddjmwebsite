@@ -1,7 +1,7 @@
 import {cacheImg} from './common';
 let rainyDay = require('./RainyDay').RainyDay;
 const bgCovers = {
-	path: 'https://image.lcddjm.com/engine/',
+	path: location.href.match(/localhost/) ? '/engine/' : 'https://image.lcddjm.com/engine/',
 	names: [
 		'20171010-20171010-DSC_2019.jpg',
 		'20171010-20171010-DSC_2020.jpg',
@@ -36,7 +36,8 @@ function instantiationEngine() {
 		this.style.visibility = "hidden";
 	}
 	pic.crossOrigin = "Anonymous";
-	pic.src = cacheImg(bgCovers.path + bgCovers.names[Math.floor(Math.random() * bgCovers.names.length)]);
+	// pic.src = cacheImg(bgCovers.path + bgCovers.names[Math.floor(Math.random() * bgCovers.names.length)])
+	pic.src = bgCovers.path + bgCovers.names[Math.floor(Math.random() * bgCovers.names.length)];
 }
 
 export {

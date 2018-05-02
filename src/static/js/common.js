@@ -122,11 +122,12 @@ function cacheImg(src){
         let canvas = document.createElement('canvas');
         canvas.width = _this.width;
         canvas.height = _this.height;
-        canvas.style.cssText = `position:'fixed';left:-100000px;opacity:0;`;
+        canvas.style.cssText = `position:fixed;left:-100000px;opacity:0;`;
         document.querySelector('body').appendChild(canvas);
         let ctx = canvas.getContext('2d');
-        ctx.drawImage(newImage,0,0)
+        ctx.drawImage(newImage,0,0);
         localStorage.setItem(`${name}`,canvas.toDataURL(`image/${src.split('.').slice(-1)}`,1));
+        document.querySelector('body').removeChild(canvas);
     })   
     return src;
 }
