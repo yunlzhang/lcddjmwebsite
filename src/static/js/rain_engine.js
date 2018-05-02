@@ -1,3 +1,4 @@
+import {cacheImg} from './common';
 let rainyDay = require('./RainyDay').RainyDay;
 const bgCovers = {
 	path: 'https://image.lcddjm.com/engine/',
@@ -35,7 +36,7 @@ function instantiationEngine() {
 		this.style.visibility = "hidden";
 	}
 	pic.crossOrigin = "Anonymous";
-	pic.src = bgCovers.path + bgCovers.names[Math.floor(Math.random() * bgCovers.names.length)];
+	pic.src = cacheImg(bgCovers.path + bgCovers.names[Math.floor(Math.random() * bgCovers.names.length)]);
 }
 
 export {

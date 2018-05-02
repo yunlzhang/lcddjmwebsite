@@ -1,3 +1,5 @@
+import { publicDecrypt } from "crypto";
+
 /**
  * 防抖函数 表单验证（input 等）
  * @param {*} func 
@@ -98,8 +100,41 @@ function returnTop(time=500){
     });
 }
 
+function cacheImg(src){
+    if(!src || typeof src !== 'string') return;
+    src = src.split('?')[0];
+    let name = src.split('/').slice(-1);
+    if(localStorage.getItem(name)){
+        return localStorage.getItem(name);
+    }
+    let newImage = new Image();  
+    newImage.crossOrigin = "Anonymous";  
+    let promise = new Promise((resolve,reject) =>{
+        newImage.onload = function(){
+           resolve(this);
+        }
+        newImage.onerror = function(){
+            reject('error');
+        }
+        newImage.src = src;
+    });
+    promise.then(_this => {
+        let canvas = document.createElement('canvas');
+        canvas.width = _this.width;
+        canvas.height = _this.height;
+        canvas.style.cssText = `position:'fixed';left:-100000px;opacity:0;`;
+        document.querySelector('body').appendChild(canvas);
+        let ctx = canvas.getContext('2d');
+        ctx.drawImage(newImage,0,0)
+        localStorage.setItem(`${name}`,canvas.toDataURL(`image/${src.split('.').slice(-1)}`,1));
+    })   
+    return src;
+}
+
+
 export {
     debounce,
     throttle,
-    returnTop
+    returnTop,
+    cacheImg
 }

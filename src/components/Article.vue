@@ -78,6 +78,7 @@
 import 'quill/dist/quill.snow.css'
 import '../static/css/vs2015.css'
 import '../static/js/highlight.min';
+import {cacheImg} from '../static/js/common';
 import * as moment from 'moment-timezone';
 /**
  * 
@@ -141,6 +142,9 @@ let Comment = {
         }
     }
 }
+
+//缓存图片
+
 export default {
     name: 'Article',
     data() {
@@ -163,7 +167,11 @@ export default {
             this.userInfo = JSON.parse(userInfo)
         }catch(err){
             console.log(err);
-        }  
+        }
+        // let img = cacheImg('/cover/8e9b2930-4b6a-11e8-b5e6-2794361b596e.jpeg')
+        // document.querySelector('body').style.cssText += `background:url(${img}) center top / 100%;background-attchment:fixed;`;
+
+
     },
     beforeRouteUpdate (to,from,next){
         this.articleData = {};
