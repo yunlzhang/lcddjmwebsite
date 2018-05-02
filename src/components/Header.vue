@@ -7,6 +7,11 @@
             <li :class="active === 'about' ? 'active' : ''"><router-link to="/about">license</router-link></li>            
         </ul>
         <div class="right">
+            <div class="search">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-search"></use>
+                </svg>    
+            </div>
             <div class="user" v-if="isLogin">
                 <span class="avatar" @click="showInfo"><img :src="userInfo.avatar" alt="" ></span>
                 <User :userInfo="userInfo" ref="userInfo"></User>
@@ -65,7 +70,25 @@
         }
         .right{
             float:right;
-            // margin-right:40px;
+            >div{
+                float:left;
+            }
+            .search{
+                font-size:24px;
+                cursor:pointer;
+                padding-right:80px;
+                position: relative;
+                &::after{
+                    content:'';
+                    display: block;
+                    width: 0;
+                    height:20px;
+                    position: absolute;
+                    right:40px;
+                    top:20px;
+                    border-right:1px solid #ccc;
+                }
+            }
             .avatar{
                 display:block;
                 background:#ccc;

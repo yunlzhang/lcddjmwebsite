@@ -33,6 +33,9 @@
                 @current-change="pageChange">
             </el-pagination>
         </div>
+        <div class="search-wrap">
+            <div class="close">&times;</div>
+        </div>
     </div>
 </template>
 
@@ -276,7 +279,28 @@ export default {
             }
         }
     }
-    
+    .search-wrap{
+        display: none;
+        position: fixed;
+        width:100%;
+        height:100%;
+        top:0;
+        left:0;
+        background:rgba(0,0,0,.7);
+        z-index: 100;
+        .close{
+            width:80px;
+            height:80px;
+            line-height:80px;
+            text-align: center;
+            font-size:40px;
+            color:#fff;
+            position: absolute;
+            right:0;
+            top:0;
+            cursor: pointer;
+        }
+    }
 </style>
 <style>
 .el-pagination{
