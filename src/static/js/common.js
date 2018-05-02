@@ -124,7 +124,8 @@ function cacheImg(src){
         document.querySelector('body').appendChild(canvas);
         let ctx = canvas.getContext('2d');
         ctx.drawImage(newImage,0,0);
-        localStorage.setItem(`${name}`,canvas.toDataURL(`image/${src.split('.').slice(-1)}`,1));
+        console.log(canvas.toDataURL('image/jpeg',1).length)
+        localStorage.setItem(`${name}`,canvas.toDataURL('image/jpeg',1));
         document.querySelector('body').removeChild(canvas);
     })   
     return src;

@@ -18,16 +18,16 @@ const bgCovers = {
 }
 
 function instantiationEngine() {
-    let engine;
+	let result = {};
 	let pic = document.querySelector('#rainyday');
 	pic.onload = function () {
-		engine = new rainyDay({
+		result.engine = new rainyDay({
 			image: pic,
 			height: window.innerHeight,
 			width: window.innerWidth
 		});
-		engine.canvas.id = "rainCanvas";
-		engine.rain([
+		result.engine.canvas.id = "rainCanvas";
+		result.engine.rain([
 			[3, 3, 0.88],
 			[5, 5, 0.9],
 			[6, 2, 1]
@@ -36,8 +36,9 @@ function instantiationEngine() {
 		this.style.visibility = "hidden";
 	}
 	pic.crossOrigin = "Anonymous";
-	pic.src = cacheImg(bgCovers.path + bgCovers.names[Math.floor(Math.random() * bgCovers.names.length)])
-	// pic.src = bgCovers.path + bgCovers.names[Math.floor(Math.random() * bgCovers.names.length)];
+	// pic.src = cacheImg(bgCovers.path + bgCovers.names[Math.floor(Math.random() * bgCovers.names.length)])
+	pic.src = bgCovers.path + bgCovers.names[Math.floor(Math.random() * bgCovers.names.length)];
+	return result;
 }
 
 export {

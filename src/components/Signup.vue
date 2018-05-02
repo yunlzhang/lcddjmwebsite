@@ -62,6 +62,7 @@
 	import {
 		instantiationEngine
 	} from '../static/js/rain_engine'
+	let instant;
 	export default {
 		name: 'Signup',
 		data() {
@@ -82,7 +83,7 @@
 		mounted: function () {
 			document.title = '注册';
 			this.$nextTick(function () {
-				instantiationEngine();
+				instant =  instantiationEngine();
 			})
 		},
 		beforeRouteEnter (to,from,next){
@@ -98,6 +99,7 @@
 			next();
 		},
 		beforeDestroy(){
+			instant.engine = null;//手动释放rainy内存
 			document.querySelector('#rainCanvas') && document.querySelector('body').removeChild(document.querySelector('#rainCanvas'))
 		},
         methods: {

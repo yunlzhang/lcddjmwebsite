@@ -22,6 +22,7 @@
 <script>
 import Rain from './Rainday';
 import {instantiationEngine} from '../static/js/rain_engine'
+let instant;
 export default {
     name: 'Signin',
     data() {
@@ -47,11 +48,12 @@ export default {
     mounted: function () {
         document.title = '登陆';
         this.$nextTick(function () {
-            instantiationEngine();      
+            instant = instantiationEngine();      
         })
         
     },
     beforeDestroy(){
+        instant.engine = null;
         document.querySelector('#rainCanvas') && document.querySelector('body').removeChild(document.querySelector('#rainCanvas'))
     },
     methods:{
