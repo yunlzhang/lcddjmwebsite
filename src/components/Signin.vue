@@ -51,6 +51,9 @@ export default {
         })
         
     },
+    beforeDestroy(){
+        document.querySelector('body').removeChild(document.querySelector('#rainCanvas'))
+    },
     methods:{
         signin(){
             this.axios({

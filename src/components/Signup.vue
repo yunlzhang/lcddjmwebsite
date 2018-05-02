@@ -97,6 +97,9 @@
 			}
 			next();
 		},
+		beforeDestroy(){
+			document.querySelector('body').removeChild(document.querySelector('#rainCanvas'))
+		},
         methods: {
             cropAvatar(e){
                 let file = e.target.files[0];

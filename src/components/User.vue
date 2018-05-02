@@ -46,12 +46,19 @@ export default {
         position:fixed;
         width:160px;
         right:0;
-        top:56px;
+        top:60px;
         border-radius:5px;
-        border:1px solid #dee0e1;
+        text-align: center;
+        background: #fff;
+        // border:1px solid #ccc;
+        box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
         display:none;
+        z-index: 1000;
         .signout{
             cursor:pointer;
+            &:hover{
+                color:#0db4f9;
+            }
         }
     }
 </style>

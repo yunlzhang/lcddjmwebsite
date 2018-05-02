@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view :isLogin="isLogin"  @getUserInfo="getUserInfo"/>
+    <router-view :isLogin="isLogin" :userInfo="userInfo"   @getUserInfo="getUserInfo"/>
     <div class="return-top"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fanhuidingbu1"></use></svg></div>    
     <div class="icp">&copy;京ICP备18002267号-1</div>
   </div>
@@ -20,7 +20,8 @@ export default {
     name: 'app',
     data(){
         return {
-            isLogin:false
+            isLogin:false,
+            userInfo:{}
         }
     },
     mounted(){
@@ -53,7 +54,8 @@ export default {
             this.axios.get('/api/get_user_info').then(res => {
                 if(res.data.code === 200){
                     this.isLogin = true;
-                    this.GLOBALDATA.isLogin = true;                    
+                    this.GLOBALDATA.isLogin = true; 
+                    this.userInfo = res.data.data;                   
                     localStorage.setItem('userInfo',JSON.stringify(res.data.data));
                 }else{
                     this.isLogin = false;

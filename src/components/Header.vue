@@ -29,7 +29,7 @@
         },
         props:["isLogin","userInfo",'active'],
         mounted(){
-            
+            console.log(this.props)
         },
         components:{User} ,
         methods:{
@@ -44,14 +44,13 @@
         width:100%;
         padding:0 40px;
         box-sizing: border-box;
-        height:70px;
-        line-height: 70px;
+        height:60px;
+        line-height: 60px;
         box-shadow: 0 1px 0 rgba(12,13,14,0.15), 0 0 0 transparent, 0 0 0 transparent, 0 0 0 transparent;
         .nav-inner{
             li{
                 float:left;
                 width:100px;
-                line-height: 70px;
                 text-align:center;
                 a:hover{
                     color:#0db4f9;
