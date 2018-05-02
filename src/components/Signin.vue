@@ -52,7 +52,7 @@ export default {
         
     },
     beforeDestroy(){
-        document.querySelector('body').removeChild(document.querySelector('#rainCanvas'))
+        document.querySelector('#rainCanvas') && document.querySelector('body').removeChild(document.querySelector('#rainCanvas'))
     },
     methods:{
         signin(){

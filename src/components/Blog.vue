@@ -51,7 +51,6 @@ export default {
     props:['isLogin','userInfo'],
     components:{HeaderTop},
     mounted: function () {
-        console.log(this.userInfo)
         document.title = 'lcddjm\'s website';
         this.getIndexData({
             page:1,

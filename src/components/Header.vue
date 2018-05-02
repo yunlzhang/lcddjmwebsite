@@ -29,7 +29,6 @@
         },
         props:["isLogin","userInfo",'active'],
         mounted(){
-            console.log(this.props)
         },
         components:{User} ,
         methods:{
