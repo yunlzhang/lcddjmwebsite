@@ -7,7 +7,7 @@
             <li :class="active === 'about' ? 'active' : ''"><router-link to="/about">license</router-link></li>            
         </ul>
         <div class="right">
-            <div class="search">
+            <div class="search" @click="triggerSearch">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-search"></use>
                 </svg>    
@@ -39,6 +39,9 @@
         methods:{
             showInfo(e){
                 this.$refs.userInfo.$el.style.display = this.$refs.userInfo.$el.style.display === 'block' ? 'none' : 'block';
+            },
+            triggerSearch(){
+                this.$emit('showSearch');
             }
         }       
     }

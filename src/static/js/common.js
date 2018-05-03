@@ -7,11 +7,9 @@
 function debounce(func, wait, immediate) {
 
     var timeout, result;
-
     var debounced = function () {
         var context = this;
         var args = arguments;
-
         if (timeout) clearTimeout(timeout);
         if (immediate) {
             // 如果已经执行过，不再执行
@@ -20,8 +18,7 @@ function debounce(func, wait, immediate) {
                 timeout = null;
             }, wait)
             if (callNow) result = func.apply(context, args)
-        }
-        else {
+        } else {
             timeout = setTimeout(function(){
                 func.apply(context, args)
             }, wait);
@@ -124,7 +121,6 @@ function cacheImg(src){
         document.querySelector('body').appendChild(canvas);
         let ctx = canvas.getContext('2d');
         ctx.drawImage(newImage,0,0);
-        console.log(canvas.toDataURL('image/jpeg',1).length)
         localStorage.setItem(`${name}`,canvas.toDataURL('image/jpeg',1));
         document.querySelector('body').removeChild(canvas);
     })   

@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <HeaderTop :isLogin="isLogin" :active="'work'" :userInfo="userInfo"></HeaderTop>
+        <HeaderTop :isLogin="isLogin" :active="'work'" :userInfo="userInfo" v-on:showSearch="triggerSearch"></HeaderTop>
         <div id="particles-js"></div>
         <div v-if="!loading" class="showbox loading">
             <div class="loader">
@@ -33,8 +33,29 @@
                 @current-change="pageChange">
             </el-pagination>
         </div>
-        <div class="search-wrap">
-            <div class="close">&times;</div>
+        <div class="search-wrap" v-if="showSearchPage">
+            <div class="close" @click="triggerSearch">&times;</div>
+            <div class="search-result">
+                <div class="search-area">
+                    <input type="text" v-model="searchKey" placeholder="请输入搜索内容">
+                    <div class="search-icon">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-search"></use>
+                        </svg>
+                    </div>
+                </div>
+                <ul>
+                    <li v-for="item in searchData" :key="item._id">
+                        <router-link :to="'/article/'+item._id">
+                            <div class="title" v-if="item.title"><span>{{item.title}}</span></div>
+                            <div>
+                                <span>发表于 {{item.created_at}}</span>
+                                <span v-if="item.tags.length"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cc-tag-more"></use></svg> {{item.tags.toString()}}</span>
+                            </div>
+                        </router-link>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </template>
@@ -42,13 +63,18 @@
 <script>
 import HeaderTop from './Header';
 import '../static/js/particles';
+import {debounce} from '../static/js/common';
+let _this;
 export default {
     name: 'Blog',
     data() {
         return {
             article:[],
             articleLength:0,
-            loading:false
+            loading:false,
+            showSearchPage:true,
+            searchData:[],
+            searchKey:''
         }
     },
     props:['isLogin','userInfo'],
@@ -60,11 +86,19 @@ export default {
             num:5
         });
         this.particle();
+        _this = this;
     },
     updated(){
         this.$nextTick(()=>{
       
         })
+    },
+    watch:{
+        searchKey:{
+            handler:debounce(function (){
+                _this.getSearchData(_this.searchKey);
+            },1000,false)
+        }
     },
     methods:{
         getIndexData(data){
@@ -197,6 +231,12 @@ export default {
                 },
                 retina_detect: !0
             });
+        },
+        triggerSearch(){
+            this.showSearchPage = !this.showSearchPage;
+        },
+        getSearchData(val){
+            console.log(val);
         }
     }
 
@@ -280,7 +320,7 @@ export default {
         }
     }
     .search-wrap{
-        display: none;
+        // display: none;
         position: fixed;
         width:100%;
         height:100%;
@@ -300,6 +340,55 @@ export default {
             top:0;
             cursor: pointer;
         }
+        .search-result{
+            width:800px;
+            position: relative;
+            border-radius:10px;
+            margin:5vh auto;
+            height:90vh;
+            overflow: hidden;
+            background: #fff;
+            padding: 20px 40px;
+            box-sizing:border-box;
+        }
+        .search-area{
+            overflow: hidden;
+            input{
+                float:left;
+                width:640px;
+                height:50px;
+                line-height:50px;
+                padding-left:25px;
+                font-size:18px;
+                border-radius:50px 0 0 50px;
+                border:1px solid #ccc;
+                border-right:none;
+            }
+            .search-icon{
+                float:left;
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+                text-align: center;
+                font-size:20px;
+                border-radius:0 50px 50px 0;
+                border:1px solid #ccc;
+                border-left:none;
+            }
+            
+        }
+        ul{
+            position: absolute;
+            top:92px;
+            bottom:20px;
+            left:40px;
+            right:40px;
+            overflow:scroll;
+            li{
+                line-height:1.5;
+            }
+        }
+        
     }
 </style>
 <style>
