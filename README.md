@@ -17,6 +17,8 @@
 
 - 评论 
 
+- 搜索
+
 ## 快照
 
 ![](https://image.lcddjm.com/shortcut/WechatIMG159.jpeg)
