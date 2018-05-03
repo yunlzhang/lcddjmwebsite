@@ -37,12 +37,16 @@ router.post('/',function(req,res,next){
         });
     }
     password = sha1(password);
-    UserModel.create({
+    let signupData = {
         name:name,
         password:password,
         intro:intro,
         avatar:avatar
-    })
+    };
+    if(!avatar){
+        delete signupData.avatar;
+    }
+    UserModel.create(signupData)
     .then(function (result) {
     //   // 此 user 是插入 mongodb 后的值，包含 _id
     //   user = result.ops[0];
