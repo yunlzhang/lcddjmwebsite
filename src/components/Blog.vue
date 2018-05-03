@@ -33,30 +33,35 @@
                 @current-change="pageChange">
             </el-pagination>
         </div>
-        <div class="search-wrap" v-if="showSearchPage">
-            <div class="close" @click="triggerSearch">&times;</div>
-            <div class="search-result">
-                <div class="search-area">
-                    <input type="text" v-model="searchKey" placeholder="请输入搜索内容">
-                    <div class="search-icon">
-                        <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-search"></use>
-                        </svg>
+        <transition enter-active-class="animated rollIn" leave-active-class="animated rollOut">
+            <div class="search-wrap" v-show="showSearchPage">
+                <div class="close" @click="triggerSearch">&times;</div>
+                <div class="search-result">
+                    <div class="search-area">
+                        <input type="text" v-model="searchKey" placeholder="请输入搜索内容">
+                        <div class="search-icon">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-search"></use>
+                            </svg>
+                        </div>
+                    </div>
+                    <ul v-if="searchData.length">
+                        <li v-for="item in searchData" :key="item._id">
+                            <router-link :to="'/article/'+item._id">
+                                <div class="title" v-if="item.title"><span>{{item.title}}</span></div>
+                                <div>
+                                    <span>发表于 {{item.created_at}}</span>
+                                    <span v-if="item.tags.length"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cc-tag-more"></use></svg> {{item.tags.toString()}}</span>
+                                </div>
+                            </router-link>
+                        </li>
+                    </ul>
+                    <div class="vacant" v-if="vacant">
+                        没有查询到数据
                     </div>
                 </div>
-                <ul>
-                    <li v-for="item in searchData" :key="item._id">
-                        <router-link :to="'/article/'+item._id">
-                            <div class="title" v-if="item.title"><span>{{item.title}}</span></div>
-                            <div>
-                                <span>发表于 {{item.created_at}}</span>
-                                <span v-if="item.tags.length"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cc-tag-more"></use></svg> {{item.tags.toString()}}</span>
-                            </div>
-                        </router-link>
-                    </li>
-                </ul>
             </div>
-        </div>
+        </transition>
     </div>
 </template>
 
@@ -73,8 +78,9 @@ export default {
             articleLength:0,
             loading:false,
             showSearchPage:true,
-            searchData:[],
-            searchKey:''
+            searchData:'',
+            searchKey:'',
+            vacant:false
         }
     },
     props:['isLogin','userInfo'],
@@ -97,7 +103,7 @@ export default {
         searchKey:{
             handler:debounce(function (){
                 _this.getSearchData(_this.searchKey);
-            },1000,false)
+            },500,false)
         }
     },
     methods:{
@@ -235,8 +241,25 @@ export default {
         triggerSearch(){
             this.showSearchPage = !this.showSearchPage;
         },
-        getSearchData(val){
-            console.log(val);
+        getSearchData(key,page=0,num=5){
+            this.vacant = false;
+            this.axios({
+                method:'get',
+                params:{
+                    key,
+                    page,
+                    num
+                },
+                url:'/api/search'
+            })
+            .then(res => {
+                if(res.data.code == 200){
+                    this.searchData = res.data.data;
+                    if(!res.data.data.length){
+                        this.vacant = true;
+                    }
+                }
+            })
         }
     }
 
@@ -386,7 +409,15 @@ export default {
             overflow:scroll;
             li{
                 line-height:1.5;
+                padding:20px 0;
+                border-bottom:1px dashed #ccc;
             }
+            
+        }
+        .vacant{
+            line-height:200px;
+            text-align: center;
+            font-size:40px;
         }
         
     }

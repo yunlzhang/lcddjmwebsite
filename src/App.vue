@@ -11,6 +11,7 @@
 import './static/js/util.js';
 import './static/js/copy.js';
 /*  end  */
+import './static/css/animate.css'
 
 import {throttle,returnTop,cacheImg} from './static/js/common';
 import Rain from './components/Rainday';
@@ -76,6 +77,7 @@ export default {
 
 <style lang="scss">
     @import './static/scss/normalize';
+    
     #app {
         // background:rgba(255,255,255,.8);        
         color: #2c3e50;

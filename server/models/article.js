@@ -93,4 +93,23 @@ module.exports = {
 				}
 			});
 	},
+	searchArticle(opts){
+		return Post.find({
+			$or:[{
+					tags:{
+						$in:[new RegExp(opts.key,'ig')]
+					}
+				},
+				{
+					content:{
+						$regex:opts.key
+					}
+				}
+			]
+			
+		})
+		.skip(opts.page ? opts.page * opts.page : 0)		
+		.limit(opts.num ? Number(opts.num) : 5)
+		.lean();
+	}
 };

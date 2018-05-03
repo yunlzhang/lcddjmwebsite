@@ -13,4 +13,5 @@ module.exports = function (app) {
     app.use('/api/article',getPath('article'));
     app.use('/api/upload',getPath('upload'));
     app.use('/api/comment',getPath('./comment'));
+    app.use('/api/search',getPath('./search'));
 };
