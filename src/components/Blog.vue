@@ -77,7 +77,7 @@ export default {
             article:[],
             articleLength:0,
             loading:false,
-            showSearchPage:true,
+            showSearchPage:false,
             searchData:'',
             searchKey:'',
             vacant:false
