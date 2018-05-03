@@ -267,11 +267,6 @@ export default {
 }
 </script>
 <style lang="scss">
-    #app{
-        box-sizing:border-box;
-        padding:0;
-        min-height:100vh;
-    }
     .edit-wrap{
         width:800px;
         margin:0 auto;
