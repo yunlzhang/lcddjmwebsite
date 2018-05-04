@@ -23,8 +23,8 @@ Vue.prototype.$prompt = MessageBox.prompt;
 let GLOBALDATA = {
     imgOrigin:process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : 'https://image.lcddjm.com'
 }
-
-Vue.prototype.GLOBALDATA = GLOBALDATA;
+Vue.prototype.GLOBALDATA = GLOBALDATA; 
+Vue.prototype.HOST =  process.env.NODE_ENV === 'development' ? 'http://localhost:8083' : 'https://api.lcddjm.com';
 
 
 Vue.config.productionTip = false;

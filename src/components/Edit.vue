@@ -131,7 +131,7 @@ export default {
             this.axios({
                 type:'get',
                 method:'get',
-                url:'/api/article/get_article_detail',
+                url:this.HOST + '/api/article/get_article_detail',
                 params:{
                     _id:this.$route.params.id
                 }
@@ -174,7 +174,7 @@ export default {
                     id:this.$route.params.id,
                     tags:this.tags
                 },
-                url:'/api/article/deal_article'
+                url:this.HOST + '/api/article/deal_article'
             })
             .then(res => {
                 if(res.data.code == 200){
@@ -233,7 +233,7 @@ export default {
                 method:'post',
                 data:formData,
                 headers:{'Content-Type':'multipart/form-data'},
-                url:'/api/upload'
+                url:this.HOST + '/api/upload'
             })
             
         },

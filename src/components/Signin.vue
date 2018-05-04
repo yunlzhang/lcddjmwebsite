@@ -61,7 +61,7 @@ export default {
             this.axios({
                 method:'post',
                 data:this.signinData,
-                url:'/api/signin'
+                url:this.HOST + '/api/signin'
             })
             .then(res => {
                 if(res.data.code === 200){

@@ -111,7 +111,7 @@ export default {
             this.axios({
                 method: 'post',
                 data:data,
-                url: '/api/article/get_index_data'
+                url:this.HOST + '/api/article/get_index_data'
             }).then(res=>{
                 if(res.data.code == 200){
                     this.articleLength = res.data.article_length;
@@ -129,7 +129,7 @@ export default {
             this.axios({
                 method:'get',
                 params:data,
-                url:'/api/article/get_article'
+                url:this.HOST + '/api/article/get_article'
             }).then(res=>{
                 if(res.data.code == 200){
                     this.article = res.data.data;
@@ -250,7 +250,7 @@ export default {
                     page,
                     num
                 },
-                url:'/api/search'
+                url:this.HOST + '/api/search'
             })
             .then(res => {
                 if(res.data.code == 200){
