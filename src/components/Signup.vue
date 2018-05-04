@@ -134,7 +134,7 @@
 						this.axios({
 							method: 'post',
 							data: this.signupData,
-							url:this.HOST +  '/api/signup'
+							url:this.HOST +  '/signup'
 						})
 						.then(res => {
 							if (res.data.code === 200) {
@@ -154,7 +154,7 @@
 				this.axios({
 					method: 'post',
 					data: this.signupData,
-					url:this.HOST +  '/api/signup'
+					url:this.HOST +  '/signup'
 				})
 				.then(res => {
 					if (res.data.code === 200) {
@@ -205,7 +205,7 @@
                     method:'post',
                     data:formData,
                     headers:{'Content-Type':'multipart/form-data'},
-                    url:this.HOST + '/api/upload'
+                    url:this.HOST + '/upload'
                 })
             }
 		},

@@ -20,16 +20,19 @@ export default {
     },
     methods:{
         signout(){
-            fetch('/api/signout',{
-                credentials: 'include'
-            }).then(response=>{
-                return response.json();
-            }).then(res=>{
-                if(res.code === 200){
+            this.axios({
+                method:'get',
+                url:this.HOST + '/signout'
+            })
+            .then(res=>{
+                if(res.data.code === 200){
                     localStorage.removeItem('userInfo');
                     location.reload();
                 }else{
-                    alert(res.message);
+                    this.$message({
+                        message: res.data.message,
+                        type: 'info'
+                    });
                 }
             }).catch(err=>{
                 console.log(err);
