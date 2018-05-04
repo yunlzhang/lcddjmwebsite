@@ -95,7 +95,7 @@ app.use(expressWinston.errorLogger({
 }));
 
 // 路由
-routes(app);
+// routes(app);
 
 app.listen(config.port, function () {
 	console.log(`${pkg.name} listening on port ${config.port}`);

@@ -109,8 +109,8 @@ export default {
     methods:{
         getIndexData(data){
             this.axios({
-                method: 'post',
-                data:data,
+                method: 'tet',
+                params:data,
                 url:this.HOST + '/article/get_index_data'
             }).then(res=>{
                 if(res.data.code == 200){

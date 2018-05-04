@@ -52,7 +52,7 @@ export default {
     },
     methods:{
         getUserInfo(){
-            this.axios.get('/api/get_user_info').then(res => {
+            this.axios.get(this.HOST + '/api/get_user_info').then(res => {
                 if(res.data.code === 200){
                     this.isLogin = true;
                     this.GLOBALDATA.isLogin = true; 
