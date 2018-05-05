@@ -8,8 +8,8 @@ const Blog = r => require.ensure([],()=>r(require('@/components/Blog')),'Blog');
 const Notfind = r => require.ensure([],()=>r(require('@/components/Notfind')),'Notfind');
 const Edit = r => require.ensure([],()=>r(require('@/components/Edit')),'Edit');
 const Article = r => require.ensure([],()=>r(require('@/components/Article')),'Article');
+const Me = r => require.ensure([],() =>r(require('@/components/Me')),'Me');
 const About = r => require.ensure([],()=>r(require('@/components/About')),'About'); 
-const Life = r => require.ensure([],() =>r(require('@/components/Life')),'Life');
 
 // router.beforeEach((to, from, next) => {
 // 	if (sessionStorage.getItem('isLogin') && ~['signin', 'signup'].indexOf(to.name)) {
@@ -31,10 +31,6 @@ export function createRouter () {
 			path: '/',
 			name: 'blog',
 			component: Blog
-		},{
-			path: '/life',
-			name: 'life',
-			component: Life
 		}
 		,{
 			path: '/signup',
@@ -57,6 +53,11 @@ export function createRouter () {
 			path:'/article/:id',
 			name:'article',
 			component:Article
+		},
+		{
+			path:'/me',
+			name:'me',
+			component:Me
 		},
 		{
 			path:'/about',

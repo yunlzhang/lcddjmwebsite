@@ -1,6 +1,6 @@
-<tempalte>
+<template>
 
-</tempalte>
+</template>
 <script>
     export default {
         name: 'Life',

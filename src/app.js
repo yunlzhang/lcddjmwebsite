@@ -3,7 +3,15 @@
 import Vue from 'vue'
 import axios from 'axios'
 import App from './App.vue'
-import { Pagination,Message,Select,Option,MessageBox} from 'element-ui'
+import { 
+  Pagination,
+  Message,
+  Select,
+  Option,
+  MessageBox,
+  Collapse,
+  CollapseItem
+} from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import { createRouter } from './router'
 
@@ -12,6 +20,9 @@ Vue.prototype.axios = axios
 Vue.use(Pagination);
 Vue.use(Select);
 Vue.use(Option);
+Vue.use(Collapse);
+Vue.use(CollapseItem);
+
 Vue.prototype.$message = Message;
 Vue.prototype.$msgbox = MessageBox;
 Vue.prototype.$alert = MessageBox.alert;

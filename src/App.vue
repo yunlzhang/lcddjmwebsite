@@ -82,7 +82,21 @@ export default {
 
 <style lang="scss">
     @import './static/scss/normalize';
-    
+    body.article{
+        position: relative;
+        background:#faf7ef url('data:image/jpg;base64,/9j/4AAQSkZJRgABAgAAZABkAAD/7AARRHVja3kAAQAEAAAAWQAA/+4ADkFkb2JlAGTAAAAAAf/bAIQAAQEBAQEBAQEBAQIBAQECAgIBAQICAwICAgICAwMDAwMDAwMDAwQEBAQEAwUFBgYFBQgHBwcICAgICAgICAgICAEBAQEDAgMFAwMFBwYFBgcICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgI/8AAEQgBRgACAwERAAIRAQMRAf/EAGoAAAMAAwAAAAAAAAAAAAAAAAAEBQMJCgEBAQEBAQAAAAAAAAAAAAAAAAECBQYQAQACAgEBCQEAAAAAAAAAAAABE1FhEqHwAlJiA5TVVgcZEQEBAAEFAAAAAAAAAAAAAAAAEQEhoVIDFP/aAAwDAQACEQMRAD8A533jnXAAG63+V3p/Uf0b2EfEuP7O3jtkdX3B1GjFc4UN8dIG65w1A7wjCodrjtAU9XqFD9WupEUKvL1BRq00ihTrqoo16hIKNbSRSrhYKVSlUK9FSqVS0qhVGFSqFc4hRQr0QPVRhYQ7wWoe4SaLDnDu4WMmeMYhVhqufCFZxAAAAAAAAAAAAf/Z') repeat-x;
+    }
+    body.article::after{
+        content:'';
+        display: block;
+        width: 472px;
+        height:166px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 1000;
+        background: url('../src/static/img/header.png') center center / cover no-repeat;
+    }
     #app {
         // background:rgba(255,255,255,.8);        
         color: #2c3e50;

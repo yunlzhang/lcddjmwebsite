@@ -87,7 +87,12 @@ import * as moment from 'moment-timezone';
  */
 let Comment = {
     template:`<div class="comment-area" >
-                        <div class="avatar" v-if="showAvatar"><img v-if="userInfo" :src="userInfo.avatar" alt=""></div>
+                        <div class="avatar" v-if="showAvatar">
+                            <img v-if="userInfo" :src="userInfo.avatar" alt="">
+                            <svg v-else class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-xiugaigerentouxiang-"></use>
+                            </svg>
+                        </div>
                         <textarea :placeholder="placeholder" @click="checkLogin" v-model="content"></textarea>
                         <div class="button">
                             <span class="confirm" @click="submitData">确认</span>
@@ -101,9 +106,15 @@ let Comment = {
             placeholder:'写下你的评论...'
         }
     },
+    beforeCreate(){
+        document.querySelector('body').classList.add('article');
+    },
     mounted(){
         this.comment = this.commentData;
         this.setPlaceholder();
+    },
+    beforeDestroy(){
+        document.querySelector('body').classList.remove('article');
     },
     // updated(){
     //     this.setPlaceholder();        
@@ -374,7 +385,7 @@ export default {
         overflow:hidden;
         .title{
             font-size:30px;
-            margin:20px 0;
+            margin:40px 0 20px;
             font-weight:700;
             line-height:1.75;
         }
@@ -413,6 +424,9 @@ export default {
             border:1px solid #ccc;
             box-sizing: border-box;
             overflow: hidden;
+            text-align: center;
+            line-height:38px;
+            font-size:40px;
         }
         textarea{
             display: block;
@@ -424,6 +438,7 @@ export default {
             box-sizing: border-box;
             border:1px solid #ccc;
             border-radius:5px;
+            background: transparent;
             resize:none;
         }
         .button{
@@ -568,6 +583,9 @@ export default {
     .el-pagination{
         text-align: center;
         margin:40px 0;
+        *{
+            background: none!important;
+        }
     }
 
     
