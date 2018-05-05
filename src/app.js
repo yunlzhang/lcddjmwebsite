@@ -7,8 +7,8 @@ import { Pagination,Message,Select,Option,MessageBox} from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import { createRouter } from './router'
 
+axios.defaults.withCredentials = true;//跨域允许携带cookie
 Vue.prototype.axios = axios
-
 Vue.use(Pagination);
 Vue.use(Select);
 Vue.use(Option);

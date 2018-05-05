@@ -109,7 +109,7 @@ export default {
     methods:{
         getIndexData(data){
             this.axios({
-                method: 'tet',
+                method: 'get',
                 params:data,
                 url:this.HOST + '/article/get_index_data'
             }).then(res=>{
