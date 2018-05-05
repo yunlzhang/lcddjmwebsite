@@ -142,14 +142,17 @@ let Comment = {
         },
         checkLogin(){
             if(!this.GLOBALDATA.isLogin){
-                this.$confirm('尚未登录，是否去登录', '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                this.$confirm('您尚未登录,未登录将已游客身份参与评论', '提示', {
+                    confirmButtonText: '去登陆',
+                    cancelButtonText: '游客评论',
                     type: 'warning'
-                }).then(() => {
+                })
+                .then(() => {
                     // 去登陆
                     this.$router.push('/signin')
-                }).catch(() => {
+                })
+                .catch(() => {
+                    
                 });
             }
         },
@@ -259,8 +262,12 @@ export default {
         },
         comment(data){
             if(typeof data !== 'object') return;
-            data.article_id = this.articleData._id;     
-            data.user = this.userInfo._id;
+            data.article_id = this.articleData._id;  
+            if(!this.userInfo){
+                data.user = '5aee3cacc116b42f8b5845b9';//游客
+            }else{
+                data.user = this.userInfo._id;
+            }   
             this.axios({
                 method:'post',
                 data:data,
