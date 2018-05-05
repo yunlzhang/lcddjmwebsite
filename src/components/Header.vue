@@ -2,7 +2,7 @@
     <nav ref="nav">
         <ul class="nav-inner">
             <li :class="active === 'work' ? 'active' : ''"><router-link to="/">blog</router-link></li>
-            <li :class="active === 'life' ? 'active' : ''"><router-link to="/life">hobby</router-link></li>
+            <li :class="active === 'life' ? 'active' : ''"><a href="//hobby.lcddjm.com" target="_blank">hobby</a></li>
             <li :class="active === 'intro' ? 'active' : ''"><router-link to="/">about me</router-link></li>
             <li :class="active === 'about' ? 'active' : ''"><router-link to="/about">license</router-link></li>            
         </ul>
