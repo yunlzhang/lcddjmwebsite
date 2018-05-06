@@ -55,6 +55,10 @@
         height:60px;
         line-height: 60px;
         box-shadow: 0 1px 0 rgba(12,13,14,0.15), 0 0 0 transparent, 0 0 0 transparent, 0 0 0 transparent;
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translate3d(0,-50%,0);
         .nav-inner{
             li{
                 float:left;

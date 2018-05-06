@@ -281,6 +281,7 @@ export default {
     .main-wrap{
         width:800px;
         position: relative;
+        padding-top:60px;
         margin:0 auto;
         .article-lists{
             text-align:left;
