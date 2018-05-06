@@ -58,7 +58,9 @@
         position: fixed;
         top: 0;
         left: 50%;
-        transform: translate3d(0,-50%,0);
+        background: #f8f8f9;
+        z-index: 1000;
+        transform: translateX(-50%);
         .nav-inner{
             li{
                 float:left;
