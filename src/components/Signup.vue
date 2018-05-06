@@ -250,7 +250,7 @@
 			display: block;
 			outline: none;
 			width: 100%;
-			height: 100%;
+			// height: 100%;
 			box-sizing: border-box;
 			border: none;
 			font-size: 16px;
