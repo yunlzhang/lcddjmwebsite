@@ -80,7 +80,7 @@
                                     ]
                                 },
                                 {
-                                    title:'3、微打赏 (<a href="//wds.modian.com／" target="_blank">https://wds.modian.com</a>)',
+                                    title:'3、微打赏 (<a href="//wds.modian.com" target="_blank">https://wds.modian.com</a>)',
                                     details:[
                                         '项目职责：开发',
                                         '技术栈：原生JS + gulp',
