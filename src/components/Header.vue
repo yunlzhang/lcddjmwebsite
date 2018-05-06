@@ -49,6 +49,7 @@
 <style scope lang="scss">
     nav{
         width:100%;
+        min-width:940px;
         padding:0 40px;
         box-sizing: border-box;
         height:60px;
