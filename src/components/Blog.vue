@@ -279,7 +279,8 @@ export default {
         height:100%;
     }
     .main-wrap{
-        width:800px;
+        max-width:800px;
+        width:100%;
         position: relative;
         padding-top:60px;
         margin:0 auto;

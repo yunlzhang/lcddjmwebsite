@@ -90,7 +90,8 @@ export default {
         height: 100%;
     }
     .signin{
-        width:500px;
+        max-width:500px;
+        width: 100%;
         background:rgba(255,255,255,.4);
         padding:40px 50px;
         border:1px solid #dee0e1;

@@ -128,7 +128,8 @@
     .my-resume{
         font-size:16px;
         line-height:1.75;
-        width:800px;
+        max-width:800px;
+        width: 100%;
         padding:0 40px;
         margin:0 auto;
         a{
@@ -151,5 +152,10 @@
             margin-top:0;
         }
     }
-
+    @media (max-width: 960px){
+        .my-resume{
+            box-sizing: border-box;
+            padding:0 15px;
+        }
+    }
 </style>

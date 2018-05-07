@@ -387,7 +387,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
     .article-wrap{
-        width:800px;
+        max-width:800px;
+        width: 100%;
         margin:0 auto;
         overflow:hidden;
         .title{
@@ -594,7 +595,29 @@ export default {
             background: none!important;
         }
     }
+    @media (max-width: 960px){
+        #app{
+            width:100%;
+            .rich-text{
+                padding:0;
+                border:0;
+            }
+            
+        }
+        body.article::after{
+            display: none;
+            
+        }
+        body{
+            box-sizing: border-box;
+            padding:0 15px;
+            width: 100%;
+        }
+        .article-wrap{
+            max-width: none;
+        }
 
+    }
     
 </style>
 <style lang="scss">
