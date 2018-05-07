@@ -351,7 +351,7 @@ export default {
         top:0;
         left:0;
         background:rgba(0,0,0,.7);
-        z-index: 100;
+        z-index: 2000;
         .close{
             width:80px;
             height:80px;

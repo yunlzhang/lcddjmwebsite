@@ -2,7 +2,7 @@
     <nav ref="nav">
         <ul class="nav-inner">
             <li :class="active === 'work' ? 'active' : ''"><router-link to="/">blog</router-link></li>
-            <li :class="active === 'life' ? 'active' : ''"><a href="//hobby.lcddjm.com" target="_blank">hobby</a></li>
+            <li :class="active === 'life' ? 'active' : ''"><a href="//hobby.lcddjm.com">hobby</a></li>
             <li :class="active === 'intro' ? 'active' : ''"><router-link to="/me">about me</router-link></li>
             <li :class="active === 'about' ? 'active' : ''"><router-link to="/about">license</router-link></li>            
         </ul>
@@ -58,7 +58,7 @@
         position: fixed;
         top: 0;
         left: 50%;
-        background: #f8f8f9;
+        background: #faf7ef;
         z-index: 1000;
         transform: translateX(-50%);
         .nav-inner{
