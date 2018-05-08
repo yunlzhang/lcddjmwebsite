@@ -2,7 +2,6 @@
 
 > 技术栈 vue2 + axios + element-ui + express + mongodb + pm2
 
-注：移动端暂未兼容，体验效果可能会差一点。
 ## 网站功能
 
 - 首页列表展示
@@ -19,18 +18,17 @@
 
 - 搜索
 
-## 快照
+<!-- ## 快照 -->
 
-![](https://image.lcddjm.com/shortcut/WechatIMG159.jpeg)
+<!-- ![](https://image.lcddjm.com/shortcut/WechatIMG159.jpeg) -->
 
 <!-- ![](https://image.lcddjm.com/shortcut/WechatIMG160.jpeg) -->
 
-![](https://image.lcddjm.com/shortcut/WechatIMG162.jpeg)
+<!-- ![](https://image.lcddjm.com/shortcut/WechatIMG162.jpeg) -->
 
-![](https://image.lcddjm.com/shortcut/WechatIMG163.jpeg)
+<!-- ![](https://image.lcddjm.com/shortcut/WechatIMG163.jpeg) -->
 
-![](https://image.lcddjm.com/shortcut/WechatIMG164.jpeg)
-
+<!-- ![](https://image.lcddjm.com/shortcut/WechatIMG164.jpeg) -->
 
 
 ## Build Setup
