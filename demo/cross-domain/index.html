@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试jsonp跨域</title>
+    <style>
+        /* css 无限动画 */
+        .demo{
+            width:200px;
+            background:#f00;
+            /* animation: animate 2s infinite; */
+        }
+        @keyframes animate{
+            0%{
+                height:0;
+            }
+            50%{
+                height:100px;
+            }
+            100%{
+                height:0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo"></div>
+    <script>
+        /* js 无限动画 */ 
+        
+        window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function(callback){
+            return setTimeout(callback,1000/60)
+        }
+        var d = document.querySelector('.demo');
+        var flag = true;
+        var height = 0;
+        function render(){
+            if(height == 0){
+                flag = true;
+            }else if(height == 100){
+                flag = false
+            }
+
+            // height == 0 ? flag = true : height == 100 ? flag = false : '';
+            flag ? (d.style.height = `${height++}px`) : (d.style.height = `${height--}px`);
+            console.log(height)
+        }
+        /* !function animate(){
+            render();
+            requestAnimationFrame(animate);
+        }(); */
+
+
+
+        /* 数组去重 */
+        var arr = [1,1,1,2,3,1,2];
+        // var newArr = Array.from(new Set(arr));
+        // var newArr = [...new Set(arr)];
+        // var newArr = arr.reduce(function(arr,val,index,origina){
+        //     !~arr.indexOf(val) ? arr.push(val) : '';
+        //    // !arr.includes(val) ? arr.push(val) : '';                
+        //     return arr;
+        // },[]) // ～按位取反 相当于（- (val+1)）
+        // var newArr = arr.filter(function(item,index,array){
+        //     return arr.indexOf(item) === index;
+        // })
+
+        // console.log(newArr);
+
+
+        /* 千位加逗号 */
+        //str.replace(/(\d)(?=(?:\d{3})+$)/ig,'$1,');
+        //str.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        
+
+        // var str = '123456789';
+        // var newStrArr= [];   
+        // strArr = str.split('').reverse();         
+        // for(var i = 0,len = Math.ceil(str.length/3);i<len;i++){
+        //     newStrArr.unshift(strArr.splice(0,3).reverse().join(''));
+        // }
+        console.log(newStrArr.join(','))
+    </script>
+</body>
+</html>

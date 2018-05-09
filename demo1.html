@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let shadowCopy = (obj) => {
+            if(typeof obj !== 'object' || obj === null) return;
+            let result = obj instanceof Array ? [] : {};
+            for(let key in obj){
+                result[key] = obj[key]
+            }
+            return result;
+        }
+
+
+
+        let deepCopy = (obj) => {
+            if(typeof obj !== 'object' || obj === null) return;
+            let result = obj instanceof Array ? [] : {};
+            for(let key in obj){
+                if(obj.hasOwnProperty(key)){
+                    if(typeof obj[key] == 'object' && obj !== null ){
+                        result[key] =  deepCopy(obj[key])
+                    }else{
+                        result[key] = obj[key]
+                    }
+                }   
+                
+            }
+        }
+    
+    </script>
+</body>
+</html>

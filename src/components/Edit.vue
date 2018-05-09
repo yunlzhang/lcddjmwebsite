@@ -213,7 +213,7 @@ export default {
                 let data = res.data
                 if (data.img) { 
                     let index = _this.addImgRange != null ? _this.addImgRange.index:0 // 获取插入时的位置索引，如果获取失败，则插入到最前面
-                    _this.$refs.quillEditor.quill.insertEmbed(index , 'image', data.img, Quill.sources.USER)
+                    _this.$refs.quillEditor.quill.insertEmbed(index , 'image',  this.HOST + data.img, Quill.sources.USER)
                     _this.$refs.quillEditor.quill.setSelection(index+1)
                     _this.$refs.quillEditor.quill.focus()
                 } else {
