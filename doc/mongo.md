@@ -58,6 +58,107 @@ export PATH=/usr/local/mongodb/bin:$PATH
 ```
 
 
+
+## mongodb具体使用
+
+服务器搜索mongodb  mongod安装目录
+
+```
+->whereis mongo    ||      whereis mongod  
+
+```
+
+mongodb配置文件
+
+```
+# mongod.conf
+
+# for documentation of all options, see:
+#   http://docs.mongodb.org/manual/reference/configuration-options/
+
+# where to write logging data.
+systemLog:
+  destination: file
+  logAppend: true
+  path: /var/log/mongodb/mongod.log
+
+# Where and how to store data.
+storage:
+  dbPath: /var/lib/mongo
+  journal:
+    enabled: true
+#  engine:
+#  mmapv1:
+#  wiredTiger:
+
+# how the process runs
+processManagement:
+  fork: true  # fork and run in background
+  pidFilePath: /var/run/mongodb/mongod.pid  # location of pidfile
+  timeZoneInfo: /usr/share/zoneinfo
+
+# network interfaces
+net:
+  port: 27017
+  bindIp: 127.0.0.1,(服务器公网Ip)  # Listen to local interface only, comment to listen on all interfaces.
+
+security:
+  authorization: enabled #是否开启验证，不想开启就设成disabled
+
+#operationProfiling:
+
+#replication:
+
+#sharding:
+
+#auditLog:
+
+#snmp:
+
+## Enterprise-Only Options
+
+```
+
+
+## mongodb 启动与关闭
+
+```
+# mongodb已配置文件启动
+
+mongod --config   configPath
+
+# mongodb 关闭  查看mongodb的启动端口号， ps -axu | grep mongo   安全停止mongodb
+
+kill -2 XXXX
+
+kill -4 XXXX
+
+#mongod命令shutdown 方式安全停止
+use admin
+
+db.shudownServer()
+
+
+```
+
+
+## mongdb 忘记账号与密码
+
+```
+（1）kill -2 XXXX 关闭mongo进程
+
+（2）已非验证方式启动mongdb  修改 mongoconfig  security.authenrization:disabled
+
+ (3) use admin
+    db.system.users.find()
+    db.system.users.remove({})
+ (4)创建新的管理员账号
+    db.create({({user:"xxxx",pwd:"xxxxxxxxxxxxxxxxx",roles:[{"role":"userAdminAnyDatabase","db":"admin"}]}})
+
+```
+
+
+
 附：
 
 [mongodb官方地址](https://www.mongodb.com/)
