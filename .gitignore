@@ -22,3 +22,4 @@ static/sitemap.xml
 server/logs/
 server/config.js
 /qnimg
+mongo
