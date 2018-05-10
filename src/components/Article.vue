@@ -79,7 +79,7 @@ import 'quill/dist/quill.snow.css'
 import '../static/css/vs2015.css'
 import '../static/js/highlight.min';
 import {cacheImg} from '../static/js/common';
-import * as moment from 'moment-timezone';
+import moment from 'moment-timezone';
 /**
  * 
  * 评论组件
