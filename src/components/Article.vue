@@ -10,14 +10,6 @@
             <div class="previous" v-if="previous"><router-link :to="'/article/'+previous._id"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-pageup"></use></svg> 上一篇  {{previous.title}}</router-link></div>
             <div class="next" v-if="next"><router-link :to="'/article/'+next._id"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-pagedown"></use></svg> 下一篇  {{next.title}}</router-link></div>
         </div>
-        <!-- <div class="comment-area">
-            <div class="avatar"><img v-if="userInfo"  :src="userInfo.avatar" alt=""></div>
-            <textarea placeholder="期待你的评论...." @focus="setActiveData(articleData)" v-model="commentContent"></textarea>
-            <div class="button">
-                <span class="confirm" @click="comment()">确认</span>
-                <span class="cancel" >取消</span>
-            </div>
-        </div> -->
         <comment :userInfo="userInfo" :showAvatar="1"  v-on:submitData="comment" ></comment>
         <div class="comment" v-if="comments.length">
             <div class="tit">{{articleData.comments_count}}条评论</div>
@@ -26,7 +18,7 @@
                     <div class="avatar"><img :src="item.user.avatar" alt=""></div>
                     <div>
                         <div class="nickname">{{item.user.name}}</div>
-                        <div class="time">{{item.created_at}}</div>
+                        <div class="time">{{dateFormat(item.created_at)}}</div>
                     </div>
                     <div class="comment-btn" @click="showCommentArea(index)"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-comment"></use></svg></div>
                 </div>
@@ -35,7 +27,7 @@
                     <div class="sub-comment-item" v-for="(sub,subIndex) in  item.sub_comments" :key="sub._id">
                         <div class="content"><span>{{sub.user.name}}</span>:<span>@{{sub.to_user.name}}</span> {{sub.content}}</div>
                         <div class="time">
-                            <span>{{sub.created_at}}</span> <span class="reply" @click="showCommentArea(index,subIndex)"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-replycomment"></use></svg> 回复</span>
+                            <span>{{dateFormat(sub.created_at)}}</span> <span class="reply" @click="showCommentArea(index,subIndex)"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-replycomment"></use></svg> 回复</span>
                         </div>
                     </div>
                     <div class="add-comment" v-if="item.sub_comments.length" >
@@ -46,13 +38,6 @@
                     <transition name="fade">
                         <comment v-if="item.show"  :commentData="item.commentData" :index="index" v-on:submitData="comment" v-on:cancel="cancelComment"></comment>
                     </transition>
-                    <!-- <div class="comment-area" v-if="item.show">
-                        <textarea placeholder="写下你的评论...." autofocus v-model="item.commentData.commentContent"></textarea>
-                        <div class="button">
-                            <span class="confirm" @click="comment(index)">确认</span>
-                            <span class="cancel" @click="cancelComment(index)">取消</span>
-                        </div>
-                    </div> -->
                 </div>
             </div>
             <el-pagination
@@ -78,101 +63,8 @@
 import 'quill/dist/quill.snow.css'
 import '../static/css/vs2015.css'
 import '../static/js/highlight.min';
-import {cacheImg} from '../static/js/common';
 import moment from 'moment-timezone';
-/**
- * 
- * 评论组件
- * 
- */
-let Comment = {
-    template:`<div class="comment-area" >
-                        <div class="avatar" v-if="showAvatar">
-                            <img v-if="userInfo" :src="userInfo.avatar" alt="">
-                            <svg v-else class="icon" aria-hidden="true">
-                                <use xlink:href="#icon-xiugaigerentouxiang-"></use>
-                            </svg>
-                        </div>
-                        <textarea :placeholder="placeholder" @click="checkLogin" v-model="content"></textarea>
-                        <div class="button">
-                            <span class="confirm" @click="submitData">确认</span>
-                            <span class="cancel" @click="cancel">取消</span>
-                        </div>
-                    </div>`,
-    data(){
-        return {
-            content:'',
-            comment:{},
-            placeholder:'写下你的评论...'
-        }
-    },
-    beforeCreate(){
-        document.querySelector('body').classList.add('article');
-    },
-    mounted(){
-        this.comment = this.commentData;
-        this.setPlaceholder();
-    },
-    beforeDestroy(){
-        document.querySelector('body').classList.remove('article');
-    },
-    // updated(){
-    //     this.setPlaceholder();        
-    // },
-    props:['commentData','showAvatar','userInfo','index','test'],
-    watch: {
-        commentData:{
-            deep:true,
-            handler:function(val,oldVal){
-                this.setPlaceholder();
-            }
-        }
-    },
-    methods:{
-        submitData(){
-            let data = {};
-            if(this.commentData){
-                //子评论
-                data.parent_id = this.commentData.parent_id ? this.commentData.parent_id : this.commentData._id;
-                data.to_user = this.commentData.user._id;
-            }
-            data.content  = this.content;
-            this.content = '';
-            this.$emit('submitData',data);
-        },
-        checkLogin(){
-            if(!this.GLOBALDATA.isLogin){
-                this.$confirm('您尚未登录,未登录将已游客身份参与评论', '提示', {
-                    confirmButtonText: '去登陆',
-                    cancelButtonText: '游客评论',
-                    type: 'warning'
-                })
-                .then(() => {
-                    // 去登陆
-                    this.$router.push('/signin')
-                })
-                .catch(() => {
-                    
-                });
-            }
-        },
-        cancel(){
-            this.content = '';
-            this.$emit('cancel',this.index)
-        },
-        setPlaceholder(){
-            if(this.commentData){
-                if(this.commentData.parent_id){
-                    this.placeholder = '@' + this.commentData.user.name;
-                }else{
-                    this.placeholder = '写下你的评论...';
-                }
-            }
-        }
-    }
-}
-
-//缓存图片
+import Comment from './Comment';
 
 export default {
     name: 'Article',
@@ -198,10 +90,6 @@ export default {
         }catch(err){
             console.log(err);
         }
-        // let img = cacheImg('/cover/8e9b2930-4b6a-11e8-b5e6-2794361b596e.jpeg')
-        // document.querySelector('body').style.cssText += `background:url(${img}) center top / 100%;background-attchment:fixed;`;
-
-
     },
     beforeRouteUpdate (to,from,next){
         this.articleData = {};
@@ -225,11 +113,7 @@ export default {
                     comments.length ? (
                         comments.forEach((item,index) => {
                             comments[index].commentData = '';
-                            comments[index].created_at = this.dateFormat(item.created_at);
                             if(item.sub_comments.length){
-                                comments[index].sub_comments.forEach((val,idx) =>{
-                                    comments[index].sub_comments[idx].created_at = this.dateFormat(val.created_at);
-                                })
                                 //获取剩余的二级评论
                                 comments[index].last_id =  item.sub_comments[item.sub_comments.length-1]._id;
                                 comments[index].last =  item.sub_comments_count - item.sub_comments.length;
@@ -279,7 +163,6 @@ export default {
                         message: res.data.message,
                         type: 'success'
                     });
-                    res.data.data.created_at = this.dateFormat(res.data.data.created_at);
                     if(!res.data.data.parent_id){
                         this.comments.unshift(res.data.data);
                         this.articleData.comments_count =  ++this.articleData.comments_count;
@@ -318,11 +201,7 @@ export default {
                     let comments = res.data.comments;
                     comments.forEach((item,index) => {
                         comments[index].commentData = '';
-                        comments[index].created_at = this.dateFormat(item.created_at);
                         if(item.sub_comments.length){
-                            comments[index].sub_comments.forEach((val,idx) =>{
-                                comments[index].sub_comments[idx].created_at = this.dateFormat(val.created_at);
-                            })
                             comments[index].last_id =  item.sub_comments[item.sub_comments.length-1]._id;
                         }
                     })
@@ -350,9 +229,6 @@ export default {
             .then(res => {
                 if(res.data.code == 200){
                     let subComments = res.data.sub_comments;
-                    subComments.forEach((item,index) =>{
-                        subComments[index].created_at = this.dateFormat(item.created_at);
-                    })
                     this.comments[index].last = 0;
                     this.comments[index].sub_comments = this.comments[index].sub_comments.concat(subComments);
                 }else{
